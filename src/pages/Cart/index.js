@@ -12,6 +12,10 @@ function Cart() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
          </div>
       </div>
    );
