@@ -1,0 +1,35 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;0,700;0,1000;1,200;1,400;1,700;1,1000&display=swap');
+
+:root {
+   --mainColor: #4396af;
+   --txtColor: #333;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 62.5%;
+}
+
+body {
+   font-family: 'Nunito', sans-serif;
+   font-size: 1.6rem;
+   line-height: 25px;
+   text-rendering: optimizeSpeed;
+}
+
+button,
+input,
+[tabindex] {
+   outline: none;
+   border: none;
+}
+
+a[href] {
+   text-decoration: none;
+}

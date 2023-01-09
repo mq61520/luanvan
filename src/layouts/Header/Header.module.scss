@@ -1,0 +1,46 @@
+.wrapper {
+   width: 100%;
+   height: 80px;
+   display: flex;
+   justify-content: center;
+}
+
+.inner-contents {
+   width: 70%;
+   height: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.header-logo {
+   width: fit-content;
+   height: fit-content;
+   font-size: 6rem;
+   font-weight: 700;
+   color: var(--mainColor);
+   cursor: pointer;
+}
+
+.account {
+   width: 250px;
+}
+
+.account-name {
+   width: fit-content;
+   font-size: 1.8rem;
+   font-weight: 700;
+   user-select: none;
+   cursor: pointer;
+   float: right;
+}
+
+.account-actions {
+   display: flex;
+   justify-content: right;
+}
+
+.action {
+   width: 130px;
+   margin-right: 5px;
+}
