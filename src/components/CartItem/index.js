@@ -10,36 +10,29 @@ const cn = classNames.bind(styles);
 function CartItem() {
    return (
       <div className={cn('wrapper')}>
-         <div className={cn('inner-contents')}>
-            <div className={cn('list-products')}>
-               <div className={cn('product')}>
-                  <div className={cn('check')}>
-                     <input type="checkbox" />
-                  </div>
+         <div className={cn('product')}>
+            <div className={cn('check')}>
+               <input type="checkbox" />
+            </div>
 
-                  <div className={cn('product-img')}>
-                     <img
-                        src="https://thatlungnam.com.vn/wp-content/uploads/2018/06/vi-da-nam-handmade-001-4.jpg"
-                        alt=""
-                     />
-                  </div>
+            <div className={cn('product-img')}>
+               <img src="https://thatlungnam.com.vn/wp-content/uploads/2018/06/vi-da-nam-handmade-001-4.jpg" alt="" />
+            </div>
 
-                  <div className={cn('product-name')}>
-                     <h4>Vi da handmade kiem vi dung the</h4>
-                  </div>
+            <div className={cn('product-name')}>
+               <h4>Vi da handmade kiem vi dung the</h4>
+            </div>
 
-                  <div className={cn('product-amount')}>
-                     <FontAwesomeIcon className={cn('increase-product')} icon={faMinus} />
-                     <span className={cn('amount')}>12</span>
-                     <FontAwesomeIcon className={cn('minus-product')} icon={faPlus} />
-                  </div>
+            <div className={cn('product-amount')}>
+               <FontAwesomeIcon className={cn('increase-product')} icon={faMinus} />
+               <span className={cn('amount')}>12</span>
+               <FontAwesomeIcon className={cn('minus-product')} icon={faPlus} />
+            </div>
 
-                  <h4 className={cn('product-price')}>12.500.488 vnd</h4>
+            <h4 className={cn('product-price')}>12.500.488 vnd</h4>
 
-                  <div className={cn('product-action')}>
-                     <Button onlytext>Xóa</Button>
-                  </div>
-               </div>
+            <div className={cn('product-action')}>
+               <Button onlytext>Xóa</Button>
             </div>
          </div>
       </div>

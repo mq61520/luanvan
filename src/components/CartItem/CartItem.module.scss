@@ -1,19 +1,6 @@
 .wrapper {
-   width: 100%;
-   display: flex;
-   justify-content: center;
-}
-
-.inner-contents {
-   width: 80%;
-   margin-top: 20px;
-   padding: 10px;
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   width: 75%;
    border-radius: 10px;
-}
-
-.list-products {
-   width: 100%;
 }
 
 .product {
@@ -21,9 +8,10 @@
    justify-content: space-between;
    align-items: center;
    padding: 10px;
+   border: 1px solid #777;
    border-radius: 5px;
-   background-color: rgb(204, 243, 255);
-   margin-bottom: 10px;
+   // background-color: rgb(204, 243, 255);
+   margin-bottom: 8px;
 }
 
 .check {
