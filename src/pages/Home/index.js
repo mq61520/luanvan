@@ -25,7 +25,7 @@ function Home() {
                <h1>Tất cả sản phẩm</h1>
 
                <div className={cn('list-products')}>
-                  <Product />
+                  <Product sale />
                   <Product />
                   <Product />
                   <Product />

@@ -9,6 +9,7 @@ function Button({
    primary,
    onlytext,
    border,
+   thinfont,
    to,
    href,
    children,
@@ -41,6 +42,7 @@ function Button({
       primary,
       border,
       onlytext,
+      thinfont,
       disable,
    });
 

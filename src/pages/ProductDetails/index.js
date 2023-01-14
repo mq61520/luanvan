@@ -5,15 +5,11 @@ import { faStar, faMinus, faPlus, faCartShopping } from '@fortawesome/free-solid
 
 import styles from './ProductDetails.module.scss';
 import Button from '~/components/Button';
+import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
 function ProductDetails() {
-   const currencyFormater = new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-   });
-
    const [inStock, setInStock] = useState(true);
 
    return (
@@ -59,7 +55,7 @@ function ProductDetails() {
 
                   <div className={cn('btns')}>
                      <div className={cn('add-to-cart-btn')}>
-                        <Button border lefticon={<FontAwesomeIcon icon={faCartShopping} />}>
+                        <Button border thinfont lefticon={<FontAwesomeIcon icon={faCartShopping} />}>
                            Thêm vào giỏ hàng
                         </Button>
                      </div>
@@ -72,7 +68,7 @@ function ProductDetails() {
             </div>
 
             <div className={cn('product-descriptions')}>
-               <h3>Mo ta san pham</h3>
+               <h3>Mô tả sản phẩm</h3>
 
                <div className={cn('descriptions')}>
                   <p>
