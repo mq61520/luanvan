@@ -34,7 +34,14 @@ function ProductDetails() {
                      <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
                   </div>
 
-                  <h2 className={cn('product-price')}>{currencyFormater.format(1254542)}</h2>
+                  <div className={cn('flex-product-price')}>
+                     <h2 className={cn('product-discount')}>{currencyFormater.format(1254542)}</h2>
+                     <h2 className={cn('product-price')}>{currencyFormater.format(1254542)}</h2>
+
+                     <div className={cn('discount-flag')}>
+                        <span>giảm 90%</span>
+                     </div>
+                  </div>
 
                   <div className={cn('flex-amount')}>
                      <div className={cn('product-amount')}>

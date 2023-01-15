@@ -12,7 +12,7 @@ function Product({ img, name, price, sale }) {
          <div className={cn('inner-contents')}>
             {sale ? (
                <div className={cn('sale-flag')}>
-                  <span>Sale 30%</span>
+                  <span>Giảm 30%</span>
                </div>
             ) : (
                <></>

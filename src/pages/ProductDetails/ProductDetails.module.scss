@@ -55,10 +55,34 @@
    color: darkorange;
 }
 
+.flex-product-price {
+   display: flex;
+   align-items: center;
+   margin-bottom: 40px;
+   padding: 14px;
+   background-color: #eee;
+}
+
+.product-discount {
+   font-size: 2rem;
+   color: #777;
+   text-decoration: line-through;
+   margin-right: 10px;
+   font-weight: 500;
+}
+
 .product-price {
-   height: 50px;
    color: darkorange;
    font-weight: 700;
+}
+
+.discount-flag {
+   margin-left: 20px;
+   background-color: red;
+   padding: 2px 8px;
+   color: white;
+   display: flex;
+   align-items: center;
 }
 
 .flex-amount {
