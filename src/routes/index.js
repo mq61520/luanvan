@@ -9,15 +9,17 @@ import ProductDetails from '~/pages/ProductDetails';
 
 //layouts
 import AdminLayout from '~/layouts/AdminLayout/index';
+import ProductsManager from '~/pages/ProductsManager/index';
 
 export const publicPages = [
    { path: '/', component: Home },
    { path: '/profile', component: Profile },
    { path: '/login', component: Login, layout: null },
    { path: '/register', component: Resgister, layout: null },
-   { path: '/admin', component: Admin, layout: AdminLayout },
    { path: '/cart', component: Cart },
    { path: '/detail/:slug', component: ProductDetails },
+   { path: '/admin', component: Admin, layout: AdminLayout },
+   { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },
 ];
 
 export const privatePages = [];
