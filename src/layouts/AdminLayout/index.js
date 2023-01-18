@@ -12,7 +12,7 @@ function AdminLayout({ children }) {
          <AdminHeader />
          <div className={cn('main-contents')}>
             <Sidebar />
-            {children}
+            <div className={cn('children')}>{children}</div>
          </div>
       </div>
    );

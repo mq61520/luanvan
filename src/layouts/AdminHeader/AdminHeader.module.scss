@@ -1,0 +1,44 @@
+.wrapper {
+   width: 100%;
+   display: flex;
+   justify-content: right;
+}
+
+.inner-contents {
+   width: 100%;
+   height: 100px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.header-logo {
+   font-size: 3rem;
+   padding: 10px;
+
+   &:hover {
+      cursor: pointer;
+   }
+}
+
+.header-actions {
+   max-width: 250px;
+}
+
+.account {
+   display: flex;
+   align-items: center;
+   padding-right: 10px;
+
+   & img {
+      width: 60px;
+   }
+
+   & h4 {
+      margin-right: 10px;
+   }
+
+   &:hover {
+      cursor: pointer;
+   }
+}

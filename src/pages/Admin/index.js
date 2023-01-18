@@ -5,7 +5,13 @@ import styles from './Admin.module.scss';
 const cn = classNames.bind(styles);
 
 function Admin() {
-   return <div className={cn('wrapper')}>Admin</div>;
+   return (
+      <div className={cn('wrapper')}>
+         <div className={cn('inner-contents')}>
+            <h4 className={cn('content-title')}>Quản lý hàng hóa</h4>
+         </div>
+      </div>
+   );
 }
 
 export default Admin;
