@@ -29,19 +29,20 @@ function AdminHeader() {
                {user ? (
                   <Tippy
                      interactive
-                     distance
                      render={(attrs) => (
-                        <Dropdown>
-                           <div className={cn('account-tool')}>
-                              <Button onlytext to={'/profile'}>
-                                 Profile
-                              </Button>
-                           </div>
+                        <div className={cn('content')} tabIndex="-1" {...attrs}>
+                           <Dropdown>
+                              <div className={cn('account-tool')}>
+                                 <Button onlytext to={'/profile'}>
+                                    Profile
+                                 </Button>
+                              </div>
 
-                           <div className={cn('account-tool')}>
-                              <Button onlytext>Logout</Button>
-                           </div>
-                        </Dropdown>
+                              <div className={cn('account-tool')}>
+                                 <Button onlytext>Logout</Button>
+                              </div>
+                           </Dropdown>
+                        </div>
                      )}
                   >
                      <div className={cn('account')}>

@@ -10,7 +10,7 @@ import Dropdown from '~/components/Dropdown';
 const cn = classNames.bind(styles);
 
 function Header() {
-   const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
+   const [currentUser, setCurrentUser] = useState('idsbbvihvuih');
 
    const handerLogout = () => {
       localStorage.removeItem('name');
@@ -29,19 +29,21 @@ function Header() {
                   <Tippy
                      interactive
                      render={(attrs) => (
-                        <Dropdown>
-                           <div className={cn('account-tool')}>
-                              <Button onlytext to={'/profile'}>
-                                 Profile
-                              </Button>
-                           </div>
+                        <div className={cn('content')} tabIndex="-1" {...attrs}>
+                           <Dropdown>
+                              <div className={cn('account-tool')}>
+                                 <Button onlytext to={'/profile'}>
+                                    Profile
+                                 </Button>
+                              </div>
 
-                           <div className={cn('account-tool')}>
-                              <Button onlytext onClick={handerLogout}>
-                                 Logout
-                              </Button>
-                           </div>
-                        </Dropdown>
+                              <div className={cn('account-tool')}>
+                                 <Button onlytext onClick={handerLogout}>
+                                    Logout
+                                 </Button>
+                              </div>
+                           </Dropdown>
+                        </div>
                      )}
                   >
                      <div className={cn('account-name')}>{currentUser}</div>
