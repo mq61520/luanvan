@@ -13,34 +13,24 @@ function Sidebar() {
                <h4 className={cn('sidebar-title')}>Danh mục</h4>
 
                <div className={cn('category-item')}>
-                  <Button border thinfont to={'/admin/productsmanager'}>
+                  <Button border to={'/admin/productsmanager'}>
                      Quản lý hàng hóa
                   </Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border thinfont>
-                     Quản lý hàng hóa
-                  </Button>
+                  <Button border>Quản lý hàng hóa</Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border thinfont>
-                     Quản lý hàng hóa
-                  </Button>
+                  <Button border>Quản lý hàng hóa</Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border thinfont>
-                     Quản lý hàng hóa
-                  </Button>
+                  <Button border>Quản lý hàng hóa</Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border thinfont>
-                     Quản lý hàng hóa
-                  </Button>
+                  <Button border>Quản lý hàng hóa</Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border thinfont>
-                     Quản lý hàng hóa
-                  </Button>
+                  <Button border>Quản lý hàng hóa</Button>
                </div>
             </div>
          </div>
