@@ -1,4 +1,7 @@
 import classNames from 'classnames/bind';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import styles from './Home.module.scss';
 import Product from '~/components/Product/index';
@@ -7,6 +10,8 @@ const cn = classNames.bind(styles);
 
 function Home() {
    document.title = 'Store';
+
+   const slickSettings = { dots: true, arrows: false, infinite: true, speed: 500, slidesToShow: 4 };
 
    return (
       <div className={cn('wrapper')}>
@@ -34,7 +39,20 @@ function Home() {
                </div>
             </div>
 
-            <div className={cn('hot-products')}></div>
+            <div className={cn('hot-products')}>
+               <h1>Sản phẩm nổi bật</h1>
+
+               <Slider {...slickSettings}>
+                  <Product />
+                  <Product />
+                  <Product />
+                  <Product />
+                  <Product />
+                  <Product />
+                  <Product />
+                  <Product />
+               </Slider>
+            </div>
          </div>
       </div>
    );
