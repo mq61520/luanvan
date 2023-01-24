@@ -1,23 +1,19 @@
 import classNames from 'classnames/bind';
-import Slider from 'react-slick';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import 'swiper/scss';
+import 'swiper/scss/pagination';
+import 'swiper/scss/navigation';
 
 import styles from './Home.module.scss';
+import './Home.scss';
 import Product from '~/components/Product/index';
 
 const cn = classNames.bind(styles);
 
 function Home() {
    document.title = 'Store';
-
-   const slickSettings = { dots: true, arrows: false, infinite: true, speed: 500, slidesToShow: 4 };
 
    return (
       <div className={cn('wrapper')}>
@@ -49,23 +45,16 @@ function Home() {
                <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>
 
                <div className={cn('hot-products-list')}>
-                  {/* <Slider {...slickSettings}>
-                     <Product />
-                     <Product />
-                     <Product />
-                     <Product />
-                     <Product />
-                     <Product />
-                     <Product />
-                     <Product />
-                  </Slider> */}
-
                   <Swiper
                      slidesPerView={4}
                      spaceBetween={15}
                      loop={true}
+                     pagination={{
+                        clickable: true,
+                        enabled: false,
+                     }}
                      navigation={true}
-                     modules={[Navigation]}
+                     modules={[Pagination, Navigation]}
                      className="mySwiper"
                   >
                      <SwiperSlide>
