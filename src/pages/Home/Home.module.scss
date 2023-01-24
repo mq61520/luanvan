@@ -32,15 +32,25 @@
    }
 }
 
-.all-product {
-   & h1 {
-      font-size: 3rem;
-      line-height: 30px;
-      color: var(--txtColor);
-      margin: 50px 0;
-      // display: flex;
-      // justify-content: center;
+.title-list {
+   position: relative;
+   font-size: 3rem;
+   line-height: 30px;
+   color: var(--txtColor);
+   padding: 50px 0 10px 10px;
+
+   &::before {
+      position: absolute;
+      content: '';
+      height: 25px;
+      border: 3px solid var(--mainColor);
+      left: 0;
+      bottom: 10px;
    }
+}
+
+.all-product {
+   width: 1245px;
 }
 
 .list-products {
@@ -50,14 +60,9 @@
 }
 
 .hot-products {
-   width: 1248px;
+   width: 1245px;
+}
 
-   & h1 {
-      font-size: 3rem;
-      line-height: 30px;
-      color: var(--txtColor);
-      margin: 50px 0;
-      // display: flex;
-      // justify-content: center;
-   }
+.viewed-products {
+   width: 1245px;
 }

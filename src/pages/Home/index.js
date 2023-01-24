@@ -1,7 +1,13 @@
 import classNames from 'classnames/bind';
 import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 import styles from './Home.module.scss';
 import Product from '~/components/Product/index';
@@ -27,7 +33,7 @@ function Home() {
             </div>
 
             <div className={cn('all-product')}>
-               <h1>Tất cả sản phẩm</h1>
+               <h1 className={cn('title-list')}>Tất cả sản phẩm</h1>
 
                <div className={cn('list-products')}>
                   <Product sale />
@@ -40,18 +46,92 @@ function Home() {
             </div>
 
             <div className={cn('hot-products')}>
-               <h1>Sản phẩm nổi bật</h1>
+               <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>
 
-               <Slider {...slickSettings}>
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
-                  <Product />
-               </Slider>
+               <div className={cn('hot-products-list')}>
+                  {/* <Slider {...slickSettings}>
+                     <Product />
+                     <Product />
+                     <Product />
+                     <Product />
+                     <Product />
+                     <Product />
+                     <Product />
+                     <Product />
+                  </Slider> */}
+
+                  <Swiper
+                     slidesPerView={4}
+                     spaceBetween={15}
+                     loop={true}
+                     navigation={true}
+                     modules={[Navigation]}
+                     className="mySwiper"
+                  >
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                  </Swiper>
+               </div>
+            </div>
+
+            <div className={cn('viewed-products')}>
+               <h1 className={cn('title-list')}>Sản phẩm đã xem</h1>
+
+               <div className={cn('viewed-products-list')}>
+                  <Swiper
+                     slidesPerView={4}
+                     spaceBetween={15}
+                     loop={true}
+                     pagination={{
+                        clickable: true,
+                        enabled: false,
+                     }}
+                     navigation={true}
+                     modules={[Pagination, Navigation]}
+                     className="mySwiper"
+                  >
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                  </Swiper>
+               </div>
             </div>
          </div>
       </div>
