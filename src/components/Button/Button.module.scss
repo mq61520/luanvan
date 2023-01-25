@@ -48,6 +48,17 @@
    }
 }
 
+.borderfill {
+   border: 2px solid transparent;
+   border-radius: 50px;
+   color: #fff;
+   background-color: var(--mainColor);
+
+   &:hover {
+      opacity: 0.9;
+   }
+}
+
 .thinfont {
    font-weight: 400;
 }

@@ -34,7 +34,7 @@ function Home() {
                <div className={cn('list-products')}>
                   <Product sale />
                   <Product />
-                  <Product />
+                  <Product sale />
                   <Product />
                   <Product />
                   <Product />
