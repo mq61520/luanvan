@@ -18,6 +18,9 @@ function Sidebar() {
                   </Button>
                </div>
                <div className={cn('category-item')}>
+                  <Button border>Quản lý đơn hàng</Button>
+               </div>
+               <div className={cn('category-item')}>
                   <Button border to={'/admin/productsmanager'}>
                      Quản lý hàng hóa
                   </Button>

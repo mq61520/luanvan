@@ -1,14 +1,25 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
-import { faPlus } from '@fortawesome/free-solid-svg-icons/index';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons/index';
+import { useState } from 'react';
+import ReactModal from 'react-modal';
 
 import styles from './ProductsManager.module.scss';
+import './Modal.scss';
 import Button from '~/components/Button/index';
 import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
+ReactModal.setAppElement('#root');
+
 function ProductsManager() {
+   const [showModal, setShowModal] = useState(false);
+
+   const handleOpenModal = () => {
+      setShowModal(!showModal);
+   };
+
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
@@ -17,13 +28,56 @@ function ProductsManager() {
             <div className={cn('product-crud')}>
                <div className={cn('crud-btn')}>
                   <div className={cn('add-btn')}>
-                     <Button border>
+                     <Button border onClick={handleOpenModal}>
                         <FontAwesomeIcon className={cn('add-btn-icon')} icon={faPlus} />
                      </Button>
                   </div>
+
+                  <div className={cn('add-product-modal')}>
+                     <ReactModal
+                        isOpen={showModal}
+                        onRequestClose={handleOpenModal}
+                        overlayClassName="overlay-modal"
+                        className="modal-contents"
+                     >
+                        <div className={cn('modal-header')}>
+                           <h3>Thêm sản phẩm mới</h3>
+
+                           <div className={cn('close-modal-btn')}>
+                              <Button onlytext onClick={handleOpenModal}>
+                                 <FontAwesomeIcon icon={faXmark} />
+                              </Button>
+                           </div>
+                        </div>
+
+                        <div className={cn('modal-body')}>
+                           <div className={cn('input-label')}>
+                              <span>Tên sản phẩm</span>
+                              <input className={cn('input-txt')} />
+                           </div>
+
+                           <div className={cn('input-label')}>
+                              <span>Số lượng</span>
+                              <input className={cn('input-txt')} />
+                           </div>
+
+                           <div className={cn('input-label')}>
+                              <span>Giá</span>
+                              <input className={cn('input-txt')} />
+                           </div>
+
+                           <div className={cn('input-label')}>
+                              <span>Ảnh</span>
+                              <input className={cn('input-img')} type="file" />
+                           </div>
+                        </div>
+
+                        <div className={cn('modal-actions')}></div>
+                     </ReactModal>
+                  </div>
                </div>
 
-               <div className={cn('add-product-area')}></div>
+               {/* <div className={cn('add-product-area')}></div> */}
             </div>
 
             <div className={cn('product-table')}>

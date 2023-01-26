@@ -9,10 +9,10 @@ function Admin() {
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
-            <h4 className={cn('content-title')}>Trang chủ</h4>
+            <h4 className={cn('content-title')}>Các đơn hàng chưa duyệt</h4>
 
             <div className={cn('order-header')}>
-               <h4 className={cn('time-order')}>Thời gian</h4>
+               <h4 className={cn('time-order')}>Thời gian đặt hàng</h4>
 
                <h4 className={cn('order-code')}>Mã đơn hàng</h4>
 
@@ -23,6 +23,10 @@ function Admin() {
                <h4 className={cn('price')}>Tổng tiền</h4>
             </div>
 
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
+            <OrderItem></OrderItem>
             <OrderItem></OrderItem>
          </div>
       </div>
