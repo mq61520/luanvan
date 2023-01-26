@@ -9,7 +9,19 @@ function Admin() {
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
-            <h4 className={cn('content-title')}>Trang chu Admin</h4>
+            <h4 className={cn('content-title')}>Trang chủ</h4>
+
+            <div className={cn('order-header')}>
+               <h4 className={cn('time-order')}>Thời gian</h4>
+
+               <h4 className={cn('order-code')}>Mã đơn hàng</h4>
+
+               <h4 className={cn('customer-name')}>Tên khách hàng</h4>
+
+               <h4 className={cn('amount')}>Số sản phẩm</h4>
+
+               <h4 className={cn('price')}>Tổng tiền</h4>
+            </div>
 
             <OrderItem></OrderItem>
          </div>

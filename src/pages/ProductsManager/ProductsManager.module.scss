@@ -4,7 +4,7 @@
 }
 
 .inner-contents {
-   border: 1px solid #777;
+   // border: 1px solid #777;
 }
 
 .content-title {
@@ -35,19 +35,28 @@
 }
 
 .product-table {
-   margin: 10px;
-   border: 1px solid #777;
+   width: 100%;
+   margin-top: 10px;
+   border-top: 1px solid #777;
 }
 
 .table-header {
    display: flex;
    justify-content: space-between;
-   padding: 15px 20px;
+   align-items: center;
+   padding: 15px 0;
    background-color: #eee;
    border-bottom: 1px solid #777;
 
-   & h4 {
-      font-size: 1.8rem;
+   & .product-number,
+   .product-code,
+   .product-name,
+   .product-price,
+   .product-instock,
+   .product-edit,
+   .product-del {
+      font-size: 1.6rem;
+      font-weight: 700;
       text-align: center;
    }
 
@@ -68,11 +77,11 @@
    }
 
    & .product-instock {
-      width: 70px;
+      width: 80px;
    }
 
    & .product-edit {
-      width: 85px;
+      width: 100px;
    }
 
    & .product-del {
@@ -85,14 +94,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
+      padding: 10px 0;
       border-bottom: 1px solid #777;
 
-      &:last-child {
-         border-bottom: none;
+      &:hover {
+         background-color: rgb(230, 250, 255);
       }
 
-      & h4 {
+      & .product-number,
+      .product-code,
+      .product-name,
+      .product-price,
+      .product-instock,
+      .product-edit,
+      .product-del {
          font-size: 1.8rem;
          font-weight: 400;
          text-align: center;
@@ -107,7 +122,10 @@
       }
 
       & .product-name {
+         overflow: hidden;
          width: 300px;
+         text-overflow: ellipsis;
+         white-space: nowrap;
       }
 
       & .product-price {
@@ -115,7 +133,7 @@
       }
 
       & .product-instock {
-         width: 70px;
+         width: 80px;
       }
 
       & .product-edit {

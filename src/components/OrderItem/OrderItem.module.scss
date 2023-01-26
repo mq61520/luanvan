@@ -1,0 +1,151 @@
+.wrapper {
+   width: 100%;
+   border: 1px solid #777;
+   border-radius: 5px;
+   margin-top: 10px;
+   background-color: rgb(230, 250, 255);
+}
+
+.inner-contents {
+   padding-top: 15px;
+}
+
+.order {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.time-order,
+.order-code,
+.customer-name,
+.amount,
+.price {
+   font-size: 1.8rem;
+   font-weight: 400;
+   text-align: center;
+}
+
+.time-order {
+   width: 110px;
+}
+
+.order-code {
+   width: 200px;
+}
+
+.customer-name {
+   width: 210px;
+}
+
+.amount {
+   width: 120px;
+}
+
+.price {
+   width: 110px;
+}
+
+.products-list {
+   border-top: 1px solid #777;
+   border-bottom: 1px solid #777;
+   margin: 15px 0;
+}
+
+.products-list-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid #777;
+   padding: 5px 0;
+
+   & .product-number,
+   .product-name,
+   .product-amount,
+   .product-price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+   }
+
+   & .product-number {
+      width: 50px;
+   }
+
+   & .product-name {
+      width: 385px;
+   }
+
+   & .product-amount {
+      width: 100px;
+   }
+
+   & .product-price {
+      width: 120px;
+   }
+}
+
+.product {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid #777;
+   padding: 5px 0;
+
+   &:last-child {
+      border-bottom: 1px solid transparent;
+   }
+
+   & .product-number,
+   .product-name,
+   .product-amount,
+   .product-price {
+      font-size: 1.6rem;
+      font-weight: 400;
+      text-align: center;
+   }
+
+   & .product-number {
+      width: 50px;
+   }
+
+   & .product-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+         width: 80px;
+         margin-right: 10px;
+      }
+
+      & .product-name {
+         overflow: hidden;
+         white-space: nowrap;
+         text-overflow: ellipsis;
+         width: 300px;
+         text-align: left;
+      }
+   }
+
+   & .product-amount {
+      width: 100px;
+   }
+
+   & .product-price {
+      width: 120px;
+   }
+}
+
+.order-actions {
+   display: flex;
+   justify-content: center;
+}
+
+.detail-btn {
+   width: fit-content;
+}
+
+.detail-btn-icon {
+   font-size: 2.4rem;
+}

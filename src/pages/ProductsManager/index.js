@@ -41,7 +41,7 @@ function ProductsManager() {
                   <div className={cn('table-row')}>
                      <h4 className={cn('product-number')}>1</h4>
                      <h4 className={cn('product-code')}>SP_01</h4>
-                     <h4 className={cn('product-name')}>Ví da handmade kim ví đựng thẻ</h4>
+                     <h4 className={cn('product-name')}>Ví da handmade kim ví đựng thẻ </h4>
                      <h4 className={cn('product-price')}>{currencyFormater.format(1399000)}</h4>
                      <h4 className={cn('product-instock')}>99 cái</h4>
                      <h4 className={cn('product-edit')}>
@@ -55,6 +55,7 @@ function ProductsManager() {
                         </Button>
                      </h4>
                   </div>
+
                   <div className={cn('table-row')}>
                      <h4 className={cn('product-number')}>12</h4>
                      <h4 className={cn('product-code')}>SP_01</h4>

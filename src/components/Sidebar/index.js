@@ -13,7 +13,9 @@ function Sidebar() {
                <h4 className={cn('sidebar-title')}>Danh mục</h4>
 
                <div className={cn('category-item')}>
-                  <Button border>Trang chủ</Button>
+                  <Button border to={'/admin'}>
+                     Trang chủ
+                  </Button>
                </div>
                <div className={cn('category-item')}>
                   <Button border to={'/admin/productsmanager'}>

@@ -1,13 +1,51 @@
 .wrapper {
+   height: 1000px;
    margin-top: 20px;
 }
 
 .inner-contents {
-   border: 1px solid #777;
+   // border: 1px solid #777;
 }
 
 .content-title {
    padding: 5px;
    font-size: 1.8rem;
    background-color: #eee;
+}
+
+.order-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 10px;
+}
+
+.time-order,
+.order-code,
+.customer-name,
+.amount,
+.price {
+   font-size: 1.8rem;
+   font-weight: 700;
+   text-align: center;
+}
+
+.time-order {
+   width: 110px;
+}
+
+.order-code {
+   width: 200px;
+}
+
+.customer-name {
+   width: 210px;
+}
+
+.amount {
+   width: 120px;
+}
+
+.price {
+   width: 110px;
 }

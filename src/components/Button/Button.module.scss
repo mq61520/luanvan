@@ -26,11 +26,11 @@
    min-height: fit-content;
    padding: 0;
    background-color: inherit;
-   color: var(--txtColor);
+   color: var(--mainColor);
 
    &:hover {
       opacity: 1;
-      color: var(--mainColor);
+      color: var(--txtColor);
       text-decoration: underline;
       cursor: pointer;
    }
