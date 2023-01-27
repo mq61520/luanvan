@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons/index';
+import { faPlus, faXmark, faEdit } from '@fortawesome/free-solid-svg-icons/index';
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 
@@ -15,6 +15,9 @@ ReactModal.setAppElement('#root');
 
 function ProductsManager() {
    const [showModal, setShowModal] = useState(false);
+
+   const [img, setImg] = useState([]);
+   console.log(img);
 
    const handleOpenModal = () => {
       setShowModal(!showModal);
@@ -69,28 +72,30 @@ function ProductsManager() {
 
                               <div className={cn('input-label')}>
                                  <span>Ảnh</span>
-                                 {/* <FontAwesomeIcon className={cn('add-icon')} icon={faPlus} /> */}
-                                 <input className={cn('input-img')} type="file" multiple />
+                                 <input
+                                    className={cn('input-img')}
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    multiple
+                                    onChange={(e) => {
+                                       setImg(e.target.files);
+                                    }}
+                                 />
                               </div>
 
-                              <div className={cn('preview-img-list')}>
-                                 <img
-                                    src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                                    alt=""
-                                 />
-                                 <img
-                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
-                                    alt=""
-                                 />
-                                 <img
-                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
-                                    alt=""
-                                 />
-                                 <img
-                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
-                                    alt=""
-                                 />
-                              </div>
+                              {/* {img.length > 0 ? (
+                                 <div className={cn('preview-img-list')}>
+                                    {img.map((index, image) => (
+                                       <img
+                                          key={index}
+                                          src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                                          alt={image}
+                                       />
+                                    ))}
+                                 </div>
+                              ) : (
+                                 <></>
+                              )} */}
                            </div>
 
                            <div className={cn('modal-actions')}>
@@ -126,7 +131,7 @@ function ProductsManager() {
                      <h4 className={cn('product-instock')}>99 cái</h4>
                      <h4 className={cn('product-edit')}>
                         <Button onlytext thinfont>
-                           Chỉnh sửa
+                           <FontAwesomeIcon icon={faEdit} />
                         </Button>
                      </h4>
                      <h4 className={cn('product-del')}>
@@ -144,7 +149,7 @@ function ProductsManager() {
                      <h4 className={cn('product-instock')}>99 cái</h4>
                      <h4 className={cn('product-edit')}>
                         <Button onlytext thinfont>
-                           Chỉnh sửa
+                           <FontAwesomeIcon icon={faEdit} />
                         </Button>
                      </h4>
                      <h4 className={cn('product-del')}>
