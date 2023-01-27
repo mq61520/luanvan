@@ -34,46 +34,72 @@ function ProductsManager() {
                   </div>
 
                   <div className={cn('add-product-modal')}>
-                     <ReactModal
-                        isOpen={showModal}
-                        onRequestClose={handleOpenModal}
-                        overlayClassName="overlay-modal"
-                        className="modal-contents"
-                     >
-                        <div className={cn('modal-header')}>
-                           <h3>Thêm sản phẩm mới</h3>
+                     <form>
+                        <ReactModal
+                           isOpen={showModal}
+                           onRequestClose={handleOpenModal}
+                           overlayClassName="overlay-modal"
+                           className="modal-contents"
+                        >
+                           <div className={cn('modal-header')}>
+                              <h3>Thêm sản phẩm mới</h3>
 
-                           <div className={cn('close-modal-btn')}>
-                              <Button onlytext onClick={handleOpenModal}>
-                                 <FontAwesomeIcon icon={faXmark} />
-                              </Button>
-                           </div>
-                        </div>
-
-                        <div className={cn('modal-body')}>
-                           <div className={cn('input-label')}>
-                              <span>Tên sản phẩm</span>
-                              <input className={cn('input-txt')} />
+                              <div className={cn('close-modal-btn')}>
+                                 <Button onlytext onClick={handleOpenModal}>
+                                    <FontAwesomeIcon icon={faXmark} />
+                                 </Button>
+                              </div>
                            </div>
 
-                           <div className={cn('input-label')}>
-                              <span>Số lượng</span>
-                              <input className={cn('input-txt')} />
+                           <div className={cn('modal-body')}>
+                              <div className={cn('input-label')}>
+                                 <span>Tên sản phẩm</span>
+                                 <input className={cn('input-txt')} />
+                              </div>
+
+                              <div className={cn('input-label')}>
+                                 <span>Số lượng</span>
+                                 <input className={cn('input-txt')} />
+                              </div>
+
+                              <div className={cn('input-label')}>
+                                 <span>Giá</span>
+                                 <input className={cn('input-txt')} />
+                              </div>
+
+                              <div className={cn('input-label')}>
+                                 <span>Ảnh</span>
+                                 {/* <FontAwesomeIcon className={cn('add-icon')} icon={faPlus} /> */}
+                                 <input className={cn('input-img')} type="file" multiple />
+                              </div>
+
+                              <div className={cn('preview-img-list')}>
+                                 <img
+                                    src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                                    alt=""
+                                 />
+                                 <img
+                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
+                                    alt=""
+                                 />
+                                 <img
+                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
+                                    alt=""
+                                 />
+                                 <img
+                                    src="https://vietnamleather.com/wp-content/uploads/2020/01/vi-nam-da-bo-2.jpg"
+                                    alt=""
+                                 />
+                              </div>
                            </div>
 
-                           <div className={cn('input-label')}>
-                              <span>Giá</span>
-                              <input className={cn('input-txt')} />
+                           <div className={cn('modal-actions')}>
+                              <div className={cn('add-product-btn')}>
+                                 <Button borderfill>Thêm</Button>
+                              </div>
                            </div>
-
-                           <div className={cn('input-label')}>
-                              <span>Ảnh</span>
-                              <input className={cn('input-img')} type="file" />
-                           </div>
-                        </div>
-
-                        <div className={cn('modal-actions')}></div>
-                     </ReactModal>
+                        </ReactModal>
+                     </form>
                   </div>
                </div>
 

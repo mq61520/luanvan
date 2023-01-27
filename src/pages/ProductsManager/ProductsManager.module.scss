@@ -49,6 +49,11 @@
       font-weight: 700;
       padding-left: 12px;
    }
+
+   & .close-modal-btn {
+      width: fit-content;
+      margin-right: 6px;
+   }
 }
 
 .modal-body {
@@ -56,6 +61,7 @@
    flex-direction: column;
 
    & .input-label {
+      position: relative;
       padding: 10px 10px;
       font-size: 1.8rem;
       font-weight: 400;
@@ -67,10 +73,9 @@
    }
 
    & .input-txt {
-      width: 300px;
+      width: 100%;
       height: 40px;
       border-bottom: 1px solid #ccc;
-      margin-left: 5px;
       padding: 0 8px;
       font-size: 1.8rem;
       font-weight: 300;
@@ -79,11 +84,34 @@
          border-bottom: 1px solid #555;
       }
    }
+
+   & .input-img {
+   }
+
+   // & .add-icon {
+   // }
+
+   & .preview-img-list {
+      display: flex;
+      justify-content: center;
+      padding: 0 5px;
+
+      & img {
+         width: 160px;
+         padding: 5px;
+         object-fit: cover;
+      }
+   }
 }
 
-.close-modal-btn {
-   width: fit-content;
-   margin-right: 6px;
+.modal-actions {
+   padding: 10px;
+   display: flex;
+   justify-content: center;
+
+   & .add-product-btn {
+      width: fit-content;
+   }
 }
 
 .product-table {
