@@ -42,7 +42,7 @@ function ProductDetails() {
                         }}
                         navigation={true}
                         modules={[Pagination, Navigation]}
-                        className="mySwiper"
+                        className="product-detail-swiper"
                      >
                         <SwiperSlide>
                            <img
