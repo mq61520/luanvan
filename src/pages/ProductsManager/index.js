@@ -84,10 +84,13 @@ function ProductsManager() {
 
                               {img.length > 0 ? (
                                  <div className={cn('preview-img-list')}>
-                                    {console.log(img)}
-                                    {Array.from(img).map((image) => (
-                                       <img key={image.name} src={image.name} alt={image.name} />
-                                    ))}
+                                    {console.log()}
+
+                                    {Array.from(img).map((image) => {
+                                       return (
+                                          <img key={image.name} src={URL.createObjectURL(image)} alt={image.name} />
+                                       );
+                                    })}
                                  </div>
                               ) : (
                                  <></>
