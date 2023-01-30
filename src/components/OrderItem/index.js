@@ -21,7 +21,7 @@ function OrderItem() {
    };
 
    return (
-      <div className={cn('wrapper')}>
+      <div className={cn('wrapper')} id="wrapper">
          <div className={cn('inner-contents')}>
             <div className={cn('order')}>
                <h4 className={cn('time-order')}>
@@ -35,8 +35,11 @@ function OrderItem() {
                <h4 className={cn('amount')}>99 sản phẩm</h4>
 
                <h4 className={cn('price')}>{currencyFormater.format(1545000)}</h4>
-            </div>
 
+               <div className={cn('check')}>
+                  <Button onlytext>Duyệt</Button>
+               </div>
+            </div>
             {showDetail ? (
                <div className={cn('products-list')}>
                   <div className={cn('products-list-header')}>
@@ -109,7 +112,6 @@ function OrderItem() {
             ) : (
                <></>
             )}
-
             <div className={cn('order-actions')}>
                <div className={cn('detail-btn')}>
                   <Button onlytext thinfont onClick={handleShowDetail}>

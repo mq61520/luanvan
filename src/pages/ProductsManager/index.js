@@ -16,8 +16,7 @@ ReactModal.setAppElement('#root');
 function ProductsManager() {
    const [showModal, setShowModal] = useState(false);
 
-   const [img, setImg] = useState([]);
-   console.log(img);
+   const [img, setImg] = useState('');
 
    const handleOpenModal = () => {
       setShowModal(!showModal);
@@ -83,19 +82,17 @@ function ProductsManager() {
                                  />
                               </div>
 
-                              {/* {img.length > 0 ? (
+                              {img.length > 0 ? (
                                  <div className={cn('preview-img-list')}>
-                                    {img.map((index, image) => (
-                                       <img
-                                          key={index}
-                                          src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                                          alt={image}
-                                       />
-                                    ))}
+                                    {console.log(img)}
+
+                                    {/* {img.map((index, image) => (
+                                       <img key={index} src={image.name} alt={image} />
+                                    ))} */}
                                  </div>
                               ) : (
                                  <></>
-                              )} */}
+                              )}
                            </div>
 
                            <div className={cn('modal-actions')}>

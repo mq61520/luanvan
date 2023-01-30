@@ -46,10 +46,17 @@
    width: 110px;
 }
 
+.check {
+   width: 90px;
+}
+
 .products-list {
-   border-top: 1px solid #777;
-   border-bottom: 1px solid #777;
+   border: 1px solid #777;
+   border-radius: 5px;
+   // border-top: 1px solid #777;
+   // border-bottom: 1px solid #777;
    margin: 15px 20px;
+   background-color: #fefefe;
 }
 
 .products-list-header {

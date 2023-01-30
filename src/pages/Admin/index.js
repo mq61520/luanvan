@@ -21,6 +21,8 @@ function Admin() {
                <h4 className={cn('amount')}>Số sản phẩm</h4>
 
                <h4 className={cn('price')}>Tổng tiền</h4>
+
+               <h4 className={cn('check')}>Duyệt đơn</h4>
             </div>
 
             <OrderItem></OrderItem>

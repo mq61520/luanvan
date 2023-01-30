@@ -161,6 +161,39 @@ function ProductDetails() {
                      nhắn,...
                   </p>
                </div>
+
+               <div className={cn('img-list')}>
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+                  <img
+                     className={cn('slide-img')}
+                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                     alt=""
+                  />
+               </div>
             </div>
          </div>
       </div>

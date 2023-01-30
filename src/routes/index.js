@@ -6,6 +6,7 @@ import Resgister from '~/pages/Resgister';
 import Admin from '~/pages/Admin';
 import Cart from '~/pages/Cart';
 import ProductDetails from '~/pages/ProductDetails';
+import OrderManager from '~/pages/OrderManager';
 
 //layouts
 import AdminLayout from '~/layouts/AdminLayout/index';
@@ -20,6 +21,7 @@ export const publicPages = [
    { path: '/detail/:slug', component: ProductDetails },
    { path: '/admin', component: Admin, layout: AdminLayout },
    { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },
+   { path: '/admin/ordermanager', component: OrderManager, layout: AdminLayout },
 ];
 
 export const privatePages = [];

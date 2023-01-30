@@ -24,7 +24,8 @@
 .order-code,
 .customer-name,
 .amount,
-.price {
+.price,
+.check {
    font-size: 1.8rem;
    font-weight: 700;
    text-align: center;
@@ -48,4 +49,8 @@
 
 .price {
    width: 110px;
+}
+
+.check {
+   width: 90px;
 }
