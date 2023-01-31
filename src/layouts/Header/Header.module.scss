@@ -6,7 +6,7 @@
 }
 
 .inner-contents {
-   width: 70%;
+   width: 1245px;
    height: 100%;
    display: flex;
    justify-content: space-between;
@@ -22,8 +22,36 @@
    cursor: pointer;
 }
 
+.flex-right-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.cart {
+   width: 100px;
+   display: flex;
+   justify-content: center;
+   position: relative;
+
+   & .cart-btn {
+      width: fit-content;
+   }
+
+   & .cart-icon {
+      font-size: 3rem;
+   }
+
+   & .cart-flag {
+      width: fit-content;
+      padding: 3px;
+      background-color: #eee;
+      border-radius: 50%;
+   }
+}
+
 .account {
-   width: 250px;
+   // width: 250px;
 }
 
 .account-name {
