@@ -18,6 +18,7 @@ const cn = classNames.bind(styles);
 
 function ProductDetails() {
    document.title = 'Chi tiết....';
+   window.scrollTo(0, 0);
 
    const [inStock, setInStock] = useState(true);
 

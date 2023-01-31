@@ -33,8 +33,9 @@ function Header() {
                         <div className={cn('cart-btn')}>
                            <Button onlytext to={'/cart'}>
                               <FontAwesomeIcon className={cn('cart-icon')} icon={faBagShopping} />
-                              <div className={cn('cart-flag')}>99</div>
                            </Button>
+
+                           <div className={cn('cart-flag')}>1</div>
                         </div>
                      </>
                   ) : (

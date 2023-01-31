@@ -39,14 +39,22 @@
    }
 
    & .cart-icon {
-      font-size: 3rem;
+      font-size: 4rem;
    }
 
    & .cart-flag {
-      width: fit-content;
-      padding: 3px;
-      background-color: #eee;
-      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      font-size: 1.4rem;
+      color: white;
+      background-color: red;
+      border-radius: 50px;
+      position: absolute;
+      top: -6px;
+      right: 9px;
    }
 }
 
