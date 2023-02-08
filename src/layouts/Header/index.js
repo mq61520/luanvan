@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
-import { faBagShopping } from '@fortawesome/free-solid-svg-icons/index';
+import { faCartShopping, faArrowUp } from '@fortawesome/free-solid-svg-icons/index';
 
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
@@ -14,7 +14,11 @@ const cn = classNames.bind(styles);
 function Header() {
    const [currentUser, setCurrentUser] = useState('sadvsdv');
 
-   const handerLogout = () => {
+   const toTop = () => {
+      window.scrollTo(0, 0);
+   };
+
+   const handleLogout = () => {
       localStorage.removeItem('name');
       setCurrentUser('');
    };
@@ -32,10 +36,10 @@ function Header() {
                      <>
                         <div className={cn('cart-btn')}>
                            <Button onlytext to={'/cart'}>
-                              <FontAwesomeIcon className={cn('cart-icon')} icon={faBagShopping} />
+                              <FontAwesomeIcon className={cn('cart-icon')} icon={faCartShopping} />
                            </Button>
 
-                           <div className={cn('cart-flag')}>1</div>
+                           <div className={cn('cart-flag')}>12</div>
                         </div>
                      </>
                   ) : (
@@ -57,7 +61,7 @@ function Header() {
                                  </div>
 
                                  <div className={cn('account-tool')}>
-                                    <Button onlytext onClick={handerLogout}>
+                                    <Button onlytext onClick={handleLogout}>
                                        Logout
                                     </Button>
                                  </div>
@@ -84,6 +88,12 @@ function Header() {
                   )}
                </div>
             </div>
+         </div>
+
+         <div className={cn('to-top-btn')}>
+            <Button onlytext onClick={toTop}>
+               <FontAwesomeIcon className={cn('to-top-btn-icon')} icon={faArrowUp} />
+            </Button>
          </div>
       </div>
    );
