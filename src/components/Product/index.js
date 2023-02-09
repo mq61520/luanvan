@@ -19,7 +19,7 @@ function Product({ img, name, price, sale }) {
                <></>
             )}
 
-            <img src="https://thatlungnam.com.vn/wp-content/uploads/2018/06/vi-da-nam-handmade-001-4.jpg" alt="img" />
+            <img src="https://cf.shopee.vn/file/54d12bf3a6c20c9995f826ef8bb50f06" alt="img" />
 
             <div className={cn('product-title')}>
                <h3>Ví Da Nam Handmade Kiêm Ví Đựng Thẻ</h3>

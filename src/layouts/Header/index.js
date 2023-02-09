@@ -69,7 +69,15 @@ function Header() {
                            </div>
                         )}
                      >
-                        <div className={cn('account-name')}>{currentUser}</div>
+                        <div className={cn('account-info')}>
+                           <div className={cn('account-name')}>{currentUser}</div>
+
+                           <img
+                              className={cn('account-avatar')}
+                              src="https://i.pinimg.com/originals/f0/74/dc/f074dc9f568075e9b025c683c6599760.png"
+                              alt="Avatar"
+                           />
+                        </div>
                      </Tippy>
                   ) : (
                      <div className={cn('account-actions')}>

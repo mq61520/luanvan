@@ -2,5 +2,7 @@
 .swiper-button-prev {
    text-rendering: auto;
    font-weight: bold;
-   color: white;
+   color: var(--mainColor);
+   // background-color: var(--mainColor);
+   font-size: 2rem;
 }
