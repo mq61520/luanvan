@@ -55,7 +55,7 @@ function Home() {
                      }}
                      navigation={true}
                      modules={[Pagination, Navigation]}
-                     className="mySwiper"
+                     className="hot-product-list-swiper"
                   >
                      <SwiperSlide>
                         <Product />
@@ -96,7 +96,7 @@ function Home() {
                      }}
                      navigation={true}
                      modules={[Pagination, Navigation]}
-                     className="mySwiper"
+                     className="viewed-product-list-swiper"
                   >
                      <SwiperSlide>
                         <Product />
