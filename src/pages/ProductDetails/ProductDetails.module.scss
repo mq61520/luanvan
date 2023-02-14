@@ -180,3 +180,37 @@
       padding: 5px 0;
    }
 }
+
+.more-detail-btn {
+   display: flex;
+   justify-content: center;
+   margin-top: 10px;
+
+   & .btn {
+      width: fit-content;
+   }
+}
+
+.recommend-products {
+   width: 1245px;
+   margin-top: 30px;
+   margin-left: -77px;
+
+   & .title-list {
+      position: relative;
+      font-size: 3rem;
+      line-height: 30px;
+      color: var(--txtColor);
+      padding: 0 0 10px 10.5px;
+      margin-bottom: 5px;
+
+      &::before {
+         position: absolute;
+         content: '';
+         height: 25px;
+         border: 3.5px solid var(--mainColor);
+         left: 0;
+         bottom: 10px;
+      }
+   }
+}

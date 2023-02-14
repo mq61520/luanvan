@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import classNames from 'classnames/bind';
@@ -13,18 +13,27 @@ import styles from './ProductDetails.module.scss';
 import './Swiper.ProductDetail.scss';
 import Button from '~/components/Button';
 import currencyFormater from '~/common/formatCurrency';
+import Product from '~/components/Product/index';
 
 const cn = classNames.bind(styles);
 
 function ProductDetails() {
    document.title = 'Chi tiết....';
-   window.scrollTo(0, 0);
 
    const [inStock, setInStock] = useState(true);
+   const [moreDetail, setMoreDetail] = useState(false);
 
    const handlePreview = (e) => {
       document.querySelector('#preview-img').src = e.target.src;
    };
+
+   const handleMoreDetail = () => {
+      setMoreDetail(!moreDetail);
+   };
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
 
    return (
       <div className={cn('wrapper')}>
@@ -169,31 +178,87 @@ function ProductDetails() {
                      src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
                      alt=""
                   />
-                  <img
-                     className={cn('slide-img')}
-                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                     alt=""
-                  />
-                  <img
-                     className={cn('slide-img')}
-                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                     alt=""
-                  />
-                  <img
-                     className={cn('slide-img')}
-                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                     alt=""
-                  />
-                  <img
-                     className={cn('slide-img')}
-                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                     alt=""
-                  />
-                  <img
-                     className={cn('slide-img')}
-                     src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
-                     alt=""
-                  />
+
+                  {moreDetail ? (
+                     <>
+                        <img
+                           className={cn('slide-img')}
+                           src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                           alt=""
+                        />
+                        <img
+                           className={cn('slide-img')}
+                           src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                           alt=""
+                        />
+                        <img
+                           className={cn('slide-img')}
+                           src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                           alt=""
+                        />
+                        <img
+                           className={cn('slide-img')}
+                           src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                           alt=""
+                        />
+                        <img
+                           className={cn('slide-img')}
+                           src="https://sovani.vn/wp-content/uploads/2020/03/vi-da-vachetta-handmade19.jpg"
+                           alt=""
+                        />
+                     </>
+                  ) : (
+                     <></>
+                  )}
+               </div>
+            </div>
+
+            <div className={cn('more-detail-btn')}>
+               <div className={cn('btn')}>
+                  <Button onlytext onClick={handleMoreDetail}>
+                     {moreDetail ? 'Thu gọn' : 'Xem thêm'}
+                  </Button>
+               </div>
+            </div>
+
+            <div className={cn('recommend-products')}>
+               <h1 className={cn('title-list')}>Có thể bạn cũng thích</h1>
+
+               <div className={cn('recommend-list')}>
+                  <Swiper
+                     slidesPerView={4}
+                     spaceBetween={15}
+                     loop={true}
+                     pagination={{
+                        clickable: true,
+                        enabled: false,
+                     }}
+                     navigation={true}
+                     modules={[Pagination, Navigation]}
+                     className="hot-product-list-swiper"
+                  >
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                     <SwiperSlide>
+                        <Product />
+                     </SwiperSlide>
+                  </Swiper>
                </div>
             </div>
          </div>
