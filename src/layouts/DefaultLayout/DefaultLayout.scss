@@ -1,0 +1,27 @@
+@keyframes sideIn {
+   from {
+      right: -30px;
+   }
+   to {
+      right: 30px;
+   }
+}
+
+.to-top-btn {
+   position: fixed;
+   bottom: 150px;
+   right: 30px;
+
+   & .to-top-btn-icon {
+      font-size: 3rem;
+   }
+}
+
+.show {
+   display: block;
+   animation: sideIn 0.5s ease;
+}
+
+.disable {
+   display: none;
+}

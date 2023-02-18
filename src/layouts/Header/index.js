@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
-import { faCartShopping, faArrowUp } from '@fortawesome/free-solid-svg-icons/index';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons/index';
 
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
@@ -13,10 +13,6 @@ const cn = classNames.bind(styles);
 
 function Header() {
    const [currentUser, setCurrentUser] = useState('sadvsdv');
-
-   const toTop = () => {
-      window.scrollTo(0, 0);
-   };
 
    const handleLogout = () => {
       localStorage.removeItem('name');
@@ -96,12 +92,6 @@ function Header() {
                   )}
                </div>
             </div>
-         </div>
-
-         <div className={cn('to-top-btn')}>
-            <Button onlytext onClick={toTop}>
-               <FontAwesomeIcon className={cn('to-top-btn-icon')} icon={faArrowUp} />
-            </Button>
          </div>
       </div>
    );
