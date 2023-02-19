@@ -28,6 +28,9 @@ function ProductDetails() {
    };
 
    const handleMoreDetail = () => {
+      if (moreDetail) {
+         window.scrollTo(0, 650);
+      }
       setMoreDetail(!moreDetail);
    };
 

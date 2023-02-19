@@ -1,0 +1,41 @@
+.wrapper {
+   margin-top: 20px;
+   height: 1000px;
+}
+
+// .inner-contents {
+// }
+
+.content-title {
+   padding: 5px;
+   font-size: 1.8rem;
+   background-color: #eee;
+}
+
+.accounts {
+   margin-top: 5px;
+}
+
+.customer-accounts,
+.admin-accounts {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+
+   & .title-list {
+      font-weight: 700;
+      color: var(--txtColor);
+   }
+
+   & .account-list {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 215px 215px 215px 215px 215px;
+      gap: 15px;
+   }
+}
+
+.admin-accounts {
+   margin-top: 30px;
+}

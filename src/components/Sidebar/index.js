@@ -28,7 +28,9 @@ function Sidebar() {
                   </Button>
                </div>
                <div className={cn('category-item')}>
-                  <Button border>Quản lý khách hàng</Button>
+                  <Button border to={'/admin/accountsmanager'}>
+                     Quản lý tài khoản
+                  </Button>
                </div>
                <div className={cn('category-item')}>
                   <Button border>Thống kê hàng hóa</Button>

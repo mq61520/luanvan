@@ -16,6 +16,7 @@ function DefaultLayout({ children }) {
       const showHideToTop = (e) => {
          if (window.scrollY > 100) setShow('to-top-btn show');
          if (window.scrollY < 100) setShow('to-top-btn disable');
+         // console.log(window.scrollY);
       };
 
       window.addEventListener('scroll', showHideToTop);
