@@ -51,6 +51,12 @@ function Header() {
                            <div className={cn('content')} tabIndex="-1" {...attrs}>
                               <Dropdown>
                                  <div className={cn('account-tool')}>
+                                    <Button onlytext to={'/orders'}>
+                                       Đơn mua
+                                    </Button>
+                                 </div>
+
+                                 <div className={cn('account-tool')}>
                                     <Button onlytext to={'/profile'}>
                                        Profile
                                     </Button>
