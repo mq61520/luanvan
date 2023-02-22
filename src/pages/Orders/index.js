@@ -70,42 +70,14 @@ function Orders() {
                   <h3 className={cn('order-total')}>
                      <i>Thành tiền:</i> {currencyFormater.format('99900000')}
                   </h3>
-               </div>
 
-               <div className={cn('order')}>
-                  <div className={cn('order-header')}>
-                     <h3 className={cn('order-code')}>JKIG-65435-HUYFGV</h3>
-                     <h3 className={cn('order-status')}>ĐANG GIAO</h3>
-                  </div>
-
-                  <div className={cn('products-list')}>
-                     <div className={cn('product')}>
-                        <div className={cn('flex')}>
-                           <img
-                              src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/01/kinh-mat-gentle-monster-momati-01-or-mau-den-cam-63b3fc57d174f-03012023165847.jpg"
-                              alt="Ảnh sản phẩm"
-                           />
-
-                           <div className={cn('flex-info')}>
-                              <h3 className={cn('product-name')}>
-                                 Mắt kính Gentle Monster hàng limeted edition iasdvk asdhviouahbwiosd sqa visabd
-                                 wsidvbisv saivbsakb skvbsidbvk
-                              </h3>
-
-                              <h3 className={cn('product-amount')}>x100</h3>
-                           </div>
-                        </div>
-
-                        <div className={cn('price')}>
-                           <h3 className={cn('old-price')}>{currencyFormater.format('99900000')}</h3>
-                           <h3 className={cn('current-price')}>{currencyFormater.format('99900000')}</h3>
-                        </div>
+                  <div className={cn('order-actions')}>
+                     <div className={cn('cancel-order-btn')}>
+                        <Button border thinfont>
+                           Hủy đơn
+                        </Button>
                      </div>
                   </div>
-
-                  <h3 className={cn('order-total')}>
-                     <i>Thành tiền:</i> {currencyFormater.format('99900000')}
-                  </h3>
                </div>
             </div>
          </div>

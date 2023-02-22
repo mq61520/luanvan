@@ -34,37 +34,11 @@
    flex-direction: column;
    align-items: center;
    position: absolute;
-   top: -5px;
-   left: 3px;
+   top: 20px;
+   left: 0;
    padding: 0 6px 0 6px;
    background-color: red;
    color: white;
-
-   &::before {
-      position: absolute;
-      content: '';
-      width: 0;
-      height: 0;
-      z-index: 1;
-      right: -5px;
-      border-left: 2.5px solid rgb(185, 0, 0);
-      border-bottom: 2.5px solid rgb(185, 0, 0);
-      border-top: 2.5px solid transparent;
-      border-right: 2.5px solid transparent;
-   }
-
-   &::after {
-      position: absolute;
-      content: '';
-      width: 0;
-      height: 0;
-      z-index: 1;
-      bottom: -5px;
-      border-left: 25px solid red;
-      border-right: 25px solid red;
-      border-top: 0px solid transparent;
-      border-bottom: 5px solid transparent;
-   }
 }
 
 .product-title {

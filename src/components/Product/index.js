@@ -12,17 +12,19 @@ function Product({ img, name, price, sale }) {
          <div className={cn('inner-contents')}>
             {sale ? (
                <div className={cn('sale-flag')}>
-                  <p>30%</p>
-                  <p>Giảm</p>
+                  <p>-30%</p>
                </div>
             ) : (
                <></>
             )}
 
-            <img src="https://cf.shopee.vn/file/54d12bf3a6c20c9995f826ef8bb50f06" alt="img" />
+            <img
+               src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/12/gong-kinh-nu-versace-0ve3327u-gb155-i-mau-den-vang-63a413c357835-22122022152227.jpg"
+               alt="img"
+            />
 
             <div className={cn('product-title')}>
-               <h3>Ví Da Nam Handmade Kiêm Ví Đựng Thẻ</h3>
+               <h3>Gọng Kính Nữ Versace 0VE3327U GB155.I Màu Đen Vàng</h3>
 
                <div>
                   {sale ? <h4 className={cn('sale-price')}>{currencyFormater.format(1596000)}</h4> : <></>}

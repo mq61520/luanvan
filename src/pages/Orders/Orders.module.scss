@@ -121,3 +121,13 @@
       margin-right: 5px;
    }
 }
+
+.order-actions {
+   display: flex;
+   justify-content: end;
+   margin: 10px 10px;
+
+   & .cancel-order-btn {
+      width: fit-content;
+   }
+}

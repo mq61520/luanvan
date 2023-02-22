@@ -1,8 +1,19 @@
+@keyframes nav {
+   from {
+      opacity: 0.2;
+      transform: translateX(-30px);
+   }
+   to {
+      opacity: 1;
+   }
+}
+
 .wrapper {
    width: 100%;
    height: 80px;
    display: flex;
    justify-content: center;
+   align-items: center;
 
    position: relative;
 }
@@ -18,10 +29,51 @@
 .header-logo {
    width: fit-content;
    height: fit-content;
-   font-size: 6rem;
+   font-size: 4rem;
    font-weight: 700;
+   font-family: 'Pacifico', cursive;
    color: var(--mainColor);
    cursor: pointer;
+}
+
+.nav {
+   flex: 1;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   padding: 0 50px;
+
+   & .nav-item {
+      width: fit-content;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      padding: 0 10px;
+      position: relative;
+
+      &:hover {
+         cursor: pointer;
+
+         &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+            height: 2px;
+            background-color: var(--mainColor);
+            animation: nav 0.3s ease;
+         }
+      }
+   }
+}
+
+.brand-list {
+   & .brand {
+   }
 }
 
 .flex-right-header {
@@ -41,7 +93,7 @@
    }
 
    & .cart-icon {
-      font-size: 3rem;
+      font-size: 2.5rem;
    }
 
    & .cart-flag {
@@ -74,7 +126,7 @@
 .account-name {
    width: fit-content;
    font-size: 1.8rem;
-   font-weight: 700;
+   font-weight: 400;
    user-select: none;
    float: right;
 }

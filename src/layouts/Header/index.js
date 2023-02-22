@@ -23,7 +23,59 @@ function Header() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('header-logo')} onClick={() => window.open('http://localhost:3000/', '_self')}>
-               2hand Store
+               goodEYE
+            </div>
+
+            <div className={cn('nav')}>
+               <div className={cn('nav-item')} onClick={() => window.open('http://localhost:3000/', '_self')}>
+                  <span>Trang chủ</span>
+               </div>
+
+               <Tippy
+                  interactive
+                  render={(attrs) => (
+                     <div className={cn('content')} tabIndex="-1" {...attrs}>
+                        <Dropdown>
+                           <div className={cn('brands-list')}>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Dior
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Versace
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Lacoste
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Calvin Klein
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Gucci
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Docle & Gabbana
+                                 </Button>
+                              </div>
+                           </div>
+                        </Dropdown>
+                     </div>
+                  )}
+               >
+                  <div className={cn('nav-item')}>
+                     <span>Thương hiệu</span>
+                  </div>
+               </Tippy>
             </div>
 
             <div className={cn('flex-right-header')}>
@@ -51,19 +103,19 @@ function Header() {
                            <div className={cn('content')} tabIndex="-1" {...attrs}>
                               <Dropdown>
                                  <div className={cn('account-tool')}>
-                                    <Button onlytext to={'/orders'}>
+                                    <Button onlytext thinfont to={'/orders'}>
                                        Đơn mua
                                     </Button>
                                  </div>
 
                                  <div className={cn('account-tool')}>
-                                    <Button onlytext to={'/profile'}>
+                                    <Button onlytext thinfont to={'/profile'}>
                                        Profile
                                     </Button>
                                  </div>
 
                                  <div className={cn('account-tool')}>
-                                    <Button onlytext onClick={handleLogout}>
+                                    <Button onlytext thinfont onClick={handleLogout}>
                                        Logout
                                     </Button>
                                  </div>

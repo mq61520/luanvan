@@ -19,16 +19,19 @@ function Home() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('home-banner')}>
-               <h1>Ví Handmade</h1>
+               <h1>Mắt kính</h1>
 
                <div
                   style={{
-                     backgroundImage: 'url(https://sovani.vn/wp-content/uploads/2020/03/xuong-san-xuat-vi-da.jpg)',
+                     backgroundImage:
+                        'url(https://img.freepik.com/premium-photo/woman-hand-holding-eyeglasses-optical-store-glasses-selection-eye-test-vision-examination-optician-fashion-accessories-concept-top-view-flat-lay_72402-4814.jpg?w=2000)',
                   }}
                ></div>
             </div>
 
-            <div className={cn('all-product')}>
+            {/* <div className={cn('product-brands')}></div> */}
+
+            {/* <div className={cn('all-product')}>
                <h1 className={cn('title-list')}>Tất cả sản phẩm</h1>
 
                <div className={cn('list-products')}>
@@ -39,7 +42,7 @@ function Home() {
                   <Product />
                   <Product />
                </div>
-            </div>
+            </div> */}
 
             <div className={cn('hot-products')}>
                <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>
@@ -58,13 +61,13 @@ function Home() {
                      className="hot-product-list-swiper"
                   >
                      <SwiperSlide>
-                        <Product />
+                        <Product sale />
                      </SwiperSlide>
                      <SwiperSlide>
                         <Product />
                      </SwiperSlide>
                      <SwiperSlide>
-                        <Product />
+                        <Product sale />
                      </SwiperSlide>
                      <SwiperSlide>
                         <Product />
@@ -102,10 +105,10 @@ function Home() {
                         <Product />
                      </SwiperSlide>
                      <SwiperSlide>
-                        <Product />
+                        <Product sale />
                      </SwiperSlide>
                      <SwiperSlide>
-                        <Product />
+                        <Product sale />
                      </SwiperSlide>
                      <SwiperSlide>
                         <Product />
