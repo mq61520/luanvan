@@ -12,7 +12,7 @@ import Dropdown from '~/components/Dropdown';
 const cn = classNames.bind(styles);
 
 function Header() {
-   const [currentUser, setCurrentUser] = useState('sadvsdv');
+   const [currentUser, setCurrentUser] = useState('sdsdfgdfb');
 
    const handleLogout = () => {
       localStorage.removeItem('name');
@@ -30,6 +30,47 @@ function Header() {
                <div className={cn('nav-item')} onClick={() => window.open('http://localhost:3000/', '_self')}>
                   <span>Trang chủ</span>
                </div>
+
+               <Tippy
+                  interactive
+                  render={(attrs) => (
+                     <div className={cn('content')} tabIndex="-1" {...attrs}>
+                        <Dropdown>
+                           <div className={cn('brands-list')}>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Kính nam
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Kính nữ
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Unisex
+                                 </Button>
+                              </div>
+                              <div className={cn('brand-item')}>
+                                 <Button onlytext thinfont to={'brand'}>
+                                    Trẻ em
+                                 </Button>
+                              </div>
+                           </div>
+                        </Dropdown>
+                     </div>
+                  )}
+               >
+                  <div
+                     className={cn('nav-item')}
+                     onClick={() => {
+                        window.open('http://localhost:3000/products', '_self');
+                     }}
+                  >
+                     <span>Sản phẩm</span>
+                  </div>
+               </Tippy>
 
                <Tippy
                   interactive
@@ -72,7 +113,12 @@ function Header() {
                      </div>
                   )}
                >
-                  <div className={cn('nav-item')}>
+                  <div
+                     className={cn('nav-item')}
+                     onClick={() => {
+                        window.open('http://localhost:3000/brand', '_self');
+                     }}
+                  >
                      <span>Thương hiệu</span>
                   </div>
                </Tippy>

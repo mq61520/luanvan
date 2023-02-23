@@ -8,6 +8,7 @@ import Cart from '~/pages/Cart';
 import ProductDetails from '~/pages/ProductDetails';
 import Orders from '~/pages/Orders';
 import Brand from '~/pages/Brand';
+import Products from '~/pages/Products';
 
 //admin
 import Admin from '~/pages/Admin';
@@ -25,6 +26,7 @@ export const publicPages = [
    { path: '/register', component: Resgister, layout: null },
    { path: '/cart', component: Cart },
    { path: '/brand', component: Brand },
+   { path: '/products', component: Products },
    { path: '/orders', component: Orders },
    { path: '/detail/:slug', component: ProductDetails },
    { path: '/admin', component: Admin, layout: AdminLayout },

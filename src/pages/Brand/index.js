@@ -8,6 +8,7 @@ import 'swiper/scss/navigation';
 
 import styles from './Brand.module.scss';
 import BrandItem from '~/components/BrandItem';
+import Product from '~/components/Product/index';
 
 const cn = classNames.bind(styles);
 
@@ -62,6 +63,23 @@ function Brand() {
                      <BrandItem />
                   </SwiperSlide>
                </Swiper>
+            </div>
+
+            <h3 className={cn('title-list')}>
+               Tất cả sản phẩm của <b>'Docle & Gabbana'</b>
+            </h3>
+            <div className={cn('products-list')}>
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
+               <Product />
             </div>
          </div>
       </div>
