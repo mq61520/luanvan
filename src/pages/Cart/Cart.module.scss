@@ -5,28 +5,68 @@
 }
 
 .inner-contents {
-   width: 100%;
+   width: 85%;
    position: relative;
-   margin-top: 50px;
+}
+
+.header-list {
+   display: flex;
+   justify-content: space-between;
+   padding: 5px 20px;
+   margin-bottom: 10px;
+
+   & h4 {
+      font-size: 1.8rem;
+      font-weight: 400;
+   }
+
+   & .product-info {
+      flex: 1;
+      text-align: center;
+      width: 550px;
+   }
+
+   & .product-price {
+      width: 268px;
+      text-align: center;
+   }
+
+   & .product-amount {
+      width: 117px;
+      text-align: center;
+   }
+
+   & .product-total-price {
+      width: 162px;
+      text-align: center;
+   }
+
+   & .action {
+      width: 47px;
+      text-align: center;
+   }
 }
 
 .no-product {
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
 
    & .message {
       text-align: center;
+      font-weight: 400;
    }
 
    & .go-shop {
       width: fit-content;
+      margin-top: 10px;
    }
 }
 
 .title {
-   margin-left: 180px;
-   margin-bottom: 30px;
+   padding: 30px 0;
+   font-weight: 400;
 }
 
 .list-products {
@@ -42,7 +82,7 @@
 }
 
 .total {
-   width: 75%;
+   width: 100%;
    display: flex;
    justify-content: space-between;
    color: var(--txtColor);
@@ -50,8 +90,10 @@
    font-size: 2.4rem;
 }
 
-// .amount {
-// }
+.amount {
+   font-weight: 400;
+   color: var(--txtColor);
+}
 
 .total-price {
    display: flex;
@@ -59,16 +101,20 @@
 
    & h4 {
       margin-left: 10px;
+      font-weight: 400;
+   }
+
+   &:last-child {
+      color: orange;
    }
 }
 
 .btn-flex {
    display: flex;
-   justify-content: right;
+   justify-content: flex-end;
+   margin-top: 30px;
 }
 
 .pay-btn {
-   width: 300px;
-   margin-top: 30px;
-   margin-right: 180px;
+   width: fit-content;
 }

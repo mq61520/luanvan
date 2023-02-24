@@ -4,6 +4,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons/index';
 
 import styles from './CartItem.module.scss';
 import Button from '../Button/index';
+import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
@@ -15,12 +16,23 @@ function CartItem() {
                <input type="checkbox" />
             </div>
 
-            <div className={cn('product-img')}>
-               <img src="https://thatlungnam.com.vn/wp-content/uploads/2018/06/vi-da-nam-handmade-001-4.jpg" alt="" />
+            <div className={cn('flex-info')}>
+               <div className={cn('product-img')}>
+                  <img
+                     src="https://thatlungnam.com.vn/wp-content/uploads/2018/06/vi-da-nam-handmade-001-4.jpg"
+                     alt=""
+                  />
+               </div>
+
+               <div className={cn('product-name')}>
+                  <h4>Kính Mát Gentle Monster Momati 01(OR) Màu Đen Cam</h4>
+               </div>
             </div>
 
-            <div className={cn('product-name')}>
-               <h4>Vi da handmade kiem vi dung the</h4>
+            <div className={cn('price')}>
+               <h4 className={cn('old-price')}>{currencyFormater.format(12500488)}</h4>
+
+               <h4 className={cn('current-price')}>{currencyFormater.format(12500488)}</h4>
             </div>
 
             <div className={cn('product-amount')}>
@@ -29,10 +41,12 @@ function CartItem() {
                <FontAwesomeIcon className={cn('minus-product')} icon={faPlus} />
             </div>
 
-            <h4 className={cn('product-price')}>12.500.488 vnd</h4>
+            <h4 className={cn('product-prices')}>{currencyFormater.format(12500488)}</h4>
 
             <div className={cn('product-action')}>
-               <Button onlytext>Xóa</Button>
+               <Button onlytext thinfont>
+                  Xóa
+               </Button>
             </div>
          </div>
       </div>
