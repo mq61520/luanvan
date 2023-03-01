@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, Navigation, Autoplay } from 'swiper';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
@@ -19,14 +19,62 @@ function Home() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('home-banner')}>
-               <h1>Mắt kính</h1>
+               {/* <h1>Mắt kính</h1> */}
 
-               <div
-                  style={{
-                     backgroundImage:
-                        'url(https://img.freepik.com/premium-photo/woman-hand-holding-eyeglasses-optical-store-glasses-selection-eye-test-vision-examination-optician-fashion-accessories-concept-top-view-flat-lay_72402-4814.jpg?w=2000)',
+               <Swiper
+                  slidesPerView={1}
+                  loop={true}
+                  autoplay={{
+                     delay: 2500,
+                     disableOnInteraction: false,
                   }}
-               ></div>
+                  pagination={{
+                     enabled: true,
+                  }}
+                  modules={[Pagination, Autoplay]}
+                  className="banner-swiper"
+               >
+                  <SwiperSlide>
+                     <div
+                        style={{
+                           backgroundImage:
+                              'url(https://img.freepik.com/premium-photo/woman-hand-holding-eyeglasses-optical-store-glasses-selection-eye-test-vision-examination-optician-fashion-accessories-concept-top-view-flat-lay_72402-4814.jpg?w=2000)',
+                        }}
+                     ></div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <div
+                        style={{
+                           backgroundImage:
+                              'url(https://images.squarespace-cdn.com/content/v1/5c080ff2f93fd43687689336/1567035645808-9ZEPU5I428NBIP0MGUJT/Fitz-site-banner-frames.jpg?format=1500w)',
+                        }}
+                     ></div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <div
+                        style={{
+                           backgroundImage:
+                              'url(https://thumbs.dreamstime.com/b/banner-fashinable-woman-glasses-beautiful-black-woman-wearing-eye-glasses-banner-fashion-eyewear-concept-129148377.jpg)',
+                        }}
+                     ></div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <div
+                        style={{
+                           backgroundImage:
+                              'url(https://img.freepik.com/premium-photo/woman-hand-holding-eyeglasses-optical-store-glasses-selection-eye-test-vision-examination-optician-fashion-accessories-concept-top-view-flat-lay_72402-4814.jpg?w=2000)',
+                        }}
+                     ></div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <div
+                        style={{
+                           backgroundImage:
+                              'url(https://thumbs.dreamstime.com/b/banner-fashinable-woman-glasses-beautiful-black-woman-wearing-eye-glasses-banner-fashion-eyewear-concept-129148377.jpg)',
+                        }}
+                     ></div>
+                  </SwiperSlide>
+               </Swiper>
             </div>
 
             {/* <div className={cn('product-brands')}></div> */}
@@ -52,10 +100,7 @@ function Home() {
                      slidesPerView={4}
                      spaceBetween={15}
                      loop={true}
-                     pagination={{
-                        clickable: true,
-                        enabled: false,
-                     }}
+                     pagination={true}
                      navigation={true}
                      modules={[Pagination, Navigation]}
                      className="hot-product-list-swiper"

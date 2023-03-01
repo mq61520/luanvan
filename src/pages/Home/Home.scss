@@ -6,3 +6,9 @@
    // background-color: var(--mainColor);
    font-size: 2rem;
 }
+
+.banner-swiper {
+   & .swiper-pagination {
+      bottom: -320px;
+   }
+}
