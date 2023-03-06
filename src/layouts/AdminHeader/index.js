@@ -10,10 +10,16 @@ import Dropdown from '~/components/Dropdown/index';
 const cn = classNames.bind(styles);
 
 function AdminHeader() {
-   const [user, setUser] = useState(true);
+   const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
 
    const handleReturnHome = () => {
       window.open('http://localhost:3000/admin', '_self');
+   };
+
+   const handleLogout = () => {
+      window.open('http://localhost:3000', '_self');
+      localStorage.removeItem('name');
+      setCurrentUser('');
    };
 
    return (
@@ -26,7 +32,7 @@ function AdminHeader() {
             </div>
 
             <div className={cn('header-actions')}>
-               {user ? (
+               {currentUser ? (
                   <Tippy
                      interactive
                      render={(attrs) => (
@@ -39,14 +45,16 @@ function AdminHeader() {
                               </div>
 
                               <div className={cn('account-tool')}>
-                                 <Button onlytext>Logout</Button>
+                                 <Button onlytext onClick={handleLogout}>
+                                    Logout
+                                 </Button>
                               </div>
                            </Dropdown>
                         </div>
                      )}
                   >
                      <div className={cn('account')}>
-                        <h4>Nguyen Minh Quan</h4>
+                        <h4>{currentUser}</h4>
 
                         <img src="https://cdn-icons-png.flaticon.com/512/863/863817.png" alt="Admin avatar" />
                      </div>

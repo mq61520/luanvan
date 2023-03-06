@@ -12,7 +12,7 @@ import Dropdown from '~/components/Dropdown';
 const cn = classNames.bind(styles);
 
 function Header() {
-   const [currentUser, setCurrentUser] = useState('sdsdfgdfb');
+   const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
 
    const handleLogout = () => {
       localStorage.removeItem('name');

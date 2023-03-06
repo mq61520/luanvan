@@ -3,6 +3,7 @@ import axios from 'axios';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faKey, faUser } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 import styles from './Login.module.scss';
 import Button from '~/components/Button';
@@ -12,41 +13,49 @@ const cn = classNames.bind(styles);
 function Login() {
    document.title = 'Login';
 
-   const emailRef = useRef();
+   const loginNameRef = useRef();
    const errRef = useRef();
 
-   const [email, setEmail] = useState('');
+   const [loginName, setLoginName] = useState('');
    const [pwd, setPwd] = useState('');
 
    const [showPwd, setShowPwd] = useState('password');
 
-   const [errMsg, setErrMsg] = useState('');
+   // const [errMsg, setErrMsg] = useState('');
 
    const handlerLogin = async (e) => {
       e.preventDefault();
 
-      if (email.length === 0) {
-         setErrMsg('Enter your Email!');
+      if (loginName.length === 0) {
+         toast.error('Enter your Email!', { position: 'top-center' });
+         // setErrMsg('Enter your Email!');
          return;
       } else if (pwd.length === 0) {
-         setErrMsg('Enter your Password!');
+         toast.error('Enter your Password!', { position: 'top-center' });
+         // setErrMsg('Enter your Password!');
          return;
       }
 
       try {
-         const response = await axios.post(`http://localhost:4000/user`, {
-            e: email,
-            p: pwd,
+         const response = await axios.post(`http://localhost:4000/account`, {
+            loginname: loginName,
+            loginpwd: pwd,
          });
 
-         if (response.data[0].isHas === 1) {
-            window.open('http://localhost:3000/', '_self');
-            localStorage.setItem('name', response.data[0].isHas);
+         if (response.data[0].exist === 1) {
+            if (response.data[0].nd_role === 1) {
+               window.open('http://localhost:3000/admin', '_self');
+               localStorage.setItem('name', response.data[0].nd_hoten);
+            } else {
+               window.open('http://localhost:3000/', '_self');
+               localStorage.setItem('name', response.data[0].nd_hoten);
+            }
          } else {
-            setErrMsg('Username or password are not corrects!');
-            setEmail('');
+            toast.error('Username or password are not corrects!', { position: 'top-center' });
+            // setErrMsg('Username or password are not corrects!');
+            setLoginName('');
             setPwd('');
-            emailRef.current.focus();
+            loginNameRef.current.focus();
          }
       } catch (err) {
          console.log(err);
@@ -65,13 +74,13 @@ function Login() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('login-form')}>
-               {errMsg ? (
+               {/* {errMsg ? (
                   <div ref={errRef} className={cn('notifications')}>
                      <p>{errMsg}</p>
                   </div>
                ) : (
                   <></>
-               )}
+               )} */}
 
                <div className={cn('title')}>
                   <span>Login</span>
@@ -84,10 +93,11 @@ function Login() {
                            <div className={cn('input-field-item')}>
                               <FontAwesomeIcon className={cn('input-field-icon')} icon={faUser} />
                               <input
-                                 ref={emailRef}
+                                 ref={loginNameRef}
                                  className={cn('input-txt')}
-                                 placeholder="Email"
-                                 onChange={(e) => setEmail(e.target.value)}
+                                 placeholder="Login name"
+                                 onChange={(e) => setLoginName(e.target.value)}
+                                 value={loginName}
                               />
                            </div>
 
@@ -98,6 +108,7 @@ function Login() {
                                  type={showPwd}
                                  placeholder="Password"
                                  onChange={(e) => setPwd(e.target.value)}
+                                 value={pwd}
                               />
 
                               {pwd.length >= 1 ? (
