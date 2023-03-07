@@ -14,6 +14,8 @@ const cn = classNames.bind(styles);
 function Header() {
    const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
 
+   const avatar_img = localStorage.getItem('avatar_name');
+
    const handleLogout = () => {
       localStorage.removeItem('name');
       setCurrentUser('');
@@ -174,7 +176,11 @@ function Header() {
 
                            <img
                               className={cn('account-avatar')}
-                              src="https://i.pinimg.com/originals/f0/74/dc/f074dc9f568075e9b025c683c6599760.png"
+                              src={
+                                 avatar_img
+                                    ? `http://localhost:4000/${avatar_img}`
+                                    : 'https://i.pinimg.com/originals/f0/74/dc/f074dc9f568075e9b025c683c6599760.png'
+                              }
                               alt="Avatar"
                            />
                         </div>

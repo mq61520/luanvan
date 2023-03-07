@@ -14,7 +14,7 @@ function Login() {
    document.title = 'Login';
 
    const loginNameRef = useRef();
-   const errRef = useRef();
+   // const errRef = useRef();
 
    const [loginName, setLoginName] = useState('');
    const [pwd, setPwd] = useState('');
@@ -43,6 +43,9 @@ function Login() {
          });
 
          if (response.data[0].exist === 1) {
+            localStorage.setItem('current_user', response.data[0].nd_id);
+            localStorage.setItem('avatar_name', response.data[0].nd_avatar);
+
             if (response.data[0].nd_role === 1) {
                window.open('http://localhost:3000/admin', '_self');
                localStorage.setItem('name', response.data[0].nd_hoten);
