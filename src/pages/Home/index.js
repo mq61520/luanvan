@@ -100,7 +100,7 @@ function Home() {
                      slidesPerView={4}
                      spaceBetween={15}
                      loop={true}
-                     pagination={true}
+                     pagination={{ clickable: true, enabled: false }}
                      navigation={true}
                      modules={[Pagination, Navigation]}
                      className="hot-product-list-swiper"

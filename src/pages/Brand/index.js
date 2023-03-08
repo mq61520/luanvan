@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
@@ -13,6 +15,35 @@ import Product from '~/components/Product/index';
 const cn = classNames.bind(styles);
 
 function Brand() {
+   var brand_id_in_path = window.location.pathname.toString().slice(7);
+
+   const [listBrands, setListBrands] = useState('');
+
+   const handleLoadBrands = async () => {
+      const response = await axios.get('http://localhost:4000/brands');
+
+      if (response.data) {
+         setListBrands(response.data);
+      }
+   };
+
+   const handleLoadProducts = async () => {
+      var res_products;
+
+      if (brand_id_in_path !== 'all') {
+         res_products = await axios.get(`http://localhost:4000/brands_id/${brand_id_in_path}`);
+      } else {
+         res_products = await axios.get(`http://localhost:4000/brands`);
+      }
+
+      console.log(res_products.data);
+   };
+
+   useEffect(() => {
+      handleLoadBrands();
+      handleLoadProducts();
+   }, []);
+
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
@@ -29,45 +60,34 @@ function Brand() {
                   modules={[Pagination, Navigation]}
                   className="brands-list-swiper"
                >
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                     <BrandItem />
-                  </SwiperSlide>
+                  {listBrands ? (
+                     listBrands.map((brand) => {
+                        return (
+                           <SwiperSlide key={brand.th_id}>
+                              <BrandItem
+                                 brandname={brand.th_ten}
+                                 logo={brand.th_image}
+                                 onClick={() => {
+                                    window.location.pathname = `/brand/${brand.th_link}`;
+                                 }}
+                              />
+                           </SwiperSlide>
+                        );
+                     })
+                  ) : (
+                     <></>
+                  )}
                </Swiper>
             </div>
 
-            <h3 className={cn('title-list')}>
-               Tất cả sản phẩm của <b>'Docle & Gabbana'</b>
-            </h3>
+            {brand_id_in_path !== 'all' ? (
+               <h3 className={cn('title-list')}>
+                  Tất cả sản phẩm của <b>'{brand_id_in_path.toUpperCase()}'</b>
+               </h3>
+            ) : (
+               <h3 className={cn('title-list')}>Tất cả sản phẩm</h3>
+            )}
+
             <div className={cn('products-list')}>
                <Product />
                <Product />

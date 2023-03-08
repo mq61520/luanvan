@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
@@ -13,13 +14,26 @@ const cn = classNames.bind(styles);
 
 function Header() {
    const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
+   const [listBrands, setListBrands] = useState('');
 
-   const avatar_img = localStorage.getItem('avatar_name');
+   // const avatar_img = localStorage.getItem('avatar_name');
 
    const handleLogout = () => {
       localStorage.removeItem('name');
       setCurrentUser('');
    };
+
+   const handleLoadBrands = async () => {
+      const response = await axios.get('http://localhost:4000/brands');
+
+      if (response.data) {
+         setListBrands(response.data);
+      }
+   };
+
+   useEffect(() => {
+      handleLoadBrands();
+   }, []);
 
    return (
       <div className={cn('wrapper')}>
@@ -33,7 +47,7 @@ function Header() {
                   <span>Trang chủ</span>
                </div>
 
-               <Tippy
+               {/* <Tippy
                   interactive
                   render={(attrs) => (
                      <div className={cn('content')} tabIndex="-1" {...attrs}>
@@ -63,16 +77,16 @@ function Header() {
                         </Dropdown>
                      </div>
                   )}
+               > */}
+               <div
+                  className={cn('nav-item')}
+                  onClick={() => {
+                     window.open('http://localhost:3000/products/all', '_self');
+                  }}
                >
-                  <div
-                     className={cn('nav-item')}
-                     onClick={() => {
-                        window.open('http://localhost:3000/products', '_self');
-                     }}
-                  >
-                     <span>Sản phẩm</span>
-                  </div>
-               </Tippy>
+                  <span>Sản phẩm</span>
+               </div>
+               {/* </Tippy> */}
 
                <Tippy
                   interactive
@@ -80,36 +94,25 @@ function Header() {
                      <div className={cn('content')} tabIndex="-1" {...attrs}>
                         <Dropdown>
                            <div className={cn('brands-list')}>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Dior
-                                 </Button>
-                              </div>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Versace
-                                 </Button>
-                              </div>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Lacoste
-                                 </Button>
-                              </div>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Calvin Klein
-                                 </Button>
-                              </div>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Gucci
-                                 </Button>
-                              </div>
-                              <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
-                                    Docle & Gabbana
-                                 </Button>
-                              </div>
+                              {listBrands ? (
+                                 listBrands.map((brand) => {
+                                    return (
+                                       <div key={brand.th_id} className={cn('brand-item')}>
+                                          <Button
+                                             onlytext
+                                             thinfont
+                                             onClick={() => {
+                                                window.open(`http://localhost:3000/brand/${brand.th_link}`, '_self');
+                                             }}
+                                          >
+                                             {brand.th_ten}
+                                          </Button>
+                                       </div>
+                                    );
+                                 })
+                              ) : (
+                                 <></>
+                              )}
                            </div>
                         </Dropdown>
                      </div>
@@ -118,7 +121,7 @@ function Header() {
                   <div
                      className={cn('nav-item')}
                      onClick={() => {
-                        window.open('http://localhost:3000/brand', '_self');
+                        window.open(`http://localhost:3000/brand/all`, '_self');
                      }}
                   >
                      <span>Thương hiệu</span>
@@ -174,7 +177,7 @@ function Header() {
                         <div className={cn('account-info')}>
                            <div className={cn('account-name')}>{currentUser}</div>
 
-                           <img
+                           {/* <img
                               className={cn('account-avatar')}
                               src={
                                  avatar_img
@@ -182,7 +185,7 @@ function Header() {
                                     : 'https://i.pinimg.com/originals/f0/74/dc/f074dc9f568075e9b025c683c6599760.png'
                               }
                               alt="Avatar"
-                           />
+                           /> */}
                         </div>
                      </Tippy>
                   ) : (
