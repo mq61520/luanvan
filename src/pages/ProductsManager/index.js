@@ -1,7 +1,8 @@
+import { useState } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import { faPlus, faXmark, faEdit } from '@fortawesome/free-solid-svg-icons/index';
-import { useState } from 'react';
 import ReactModal from 'react-modal';
 
 import styles from './ProductsManager.module.scss';
@@ -16,10 +17,63 @@ ReactModal.setAppElement('#root');
 function ProductsManager() {
    const [showModal, setShowModal] = useState(false);
 
-   const [img, setImg] = useState('');
+   const [maSp, setMaSp] = useState('');
+   const [tenSp, setTenSp] = useState('');
+   const [slSp, setSlSp] = useState('');
+   const [giaSp, setGiaSp] = useState('');
+   const [motaSp, setMotaSp] = useState('');
+   const [imgSp, setImgSp] = useState([]);
 
    const handleOpenModal = () => {
       setShowModal(!showModal);
+      setImgSp([]);
+      setMaSp('');
+      setTenSp('');
+      setSlSp('');
+      setGiaSp('');
+      setMotaSp('');
+   };
+
+   const handleAddProduct = async (e) => {
+      e.preventDefault();
+
+      try {
+         const add_product_res = await axios.post('http://localhost:4000/product', {
+            ma_sp: maSp,
+            anh_sp: imgSp[0].name,
+            ten: tenSp,
+            sl: slSp,
+            gia: giaSp,
+            mota: motaSp,
+         });
+
+         var add_images_res;
+         for (let i = 0; i < imgSp.length; i++) {
+            const postData = new FormData();
+            postData.append('product_images', imgSp[i]);
+            postData.append('ma_sp', maSp);
+
+            add_images_res = await axios({
+               method: 'POST',
+               url: 'http://localhost:4000/product_images',
+               data: postData,
+               headers: {
+                  'Content-Type': 'multipart/form-data',
+               },
+            });
+         }
+
+         console.log('product response:' + add_product_res.data);
+         console.log('image response:' + add_images_res.data);
+
+         if (add_product_res.data === 'Success product' && add_images_res.data === 'Success img') {
+            console.log('Them thanh cong');
+         } else {
+            console.log('Them khong thanh cong');
+         }
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    return (
@@ -36,13 +90,13 @@ function ProductsManager() {
                   </div>
 
                   <div className={cn('add-product-modal')}>
-                     <form>
-                        <ReactModal
-                           isOpen={showModal}
-                           onRequestClose={handleOpenModal}
-                           overlayClassName="overlay-modal"
-                           className="modal-contents"
-                        >
+                     <ReactModal
+                        isOpen={showModal}
+                        onRequestClose={handleOpenModal}
+                        overlayClassName="overlay-modal"
+                        className="modal-contents"
+                     >
+                        <form onSubmit={handleAddProduct} encType="multipart/form-data">
                            <div className={cn('modal-header')}>
                               <h3>Thêm sản phẩm mới</h3>
 
@@ -55,38 +109,67 @@ function ProductsManager() {
 
                            <div className={cn('modal-body')}>
                               <div className={cn('input-label')}>
+                                 <span>Mã sản phẩm</span>
+                                 <input
+                                    className={cn('input-txt')}
+                                    value={maSp}
+                                    onChange={(e) => setMaSp(e.target.value)}
+                                 />
+                              </div>
+
+                              <div className={cn('input-label')}>
                                  <span>Tên sản phẩm</span>
-                                 <input className={cn('input-txt')} />
+                                 <input
+                                    className={cn('input-txt')}
+                                    value={tenSp}
+                                    onChange={(e) => setTenSp(e.target.value)}
+                                 />
                               </div>
 
                               <div className={cn('input-label')}>
                                  <span>Số lượng</span>
-                                 <input className={cn('input-txt')} />
+                                 <input
+                                    className={cn('input-txt')}
+                                    value={slSp}
+                                    onChange={(e) => setSlSp(e.target.value)}
+                                 />
                               </div>
 
                               <div className={cn('input-label')}>
                                  <span>Giá</span>
-                                 <input className={cn('input-txt')} />
+                                 <input
+                                    className={cn('input-txt')}
+                                    value={giaSp}
+                                    onChange={(e) => setGiaSp(e.target.value)}
+                                 />
                               </div>
 
                               <div className={cn('input-label')}>
-                                 <span>Ảnh</span>
+                                 <span>Mô tả</span>
+                                 {/* <input type="text-area" className={cn('input-txt')} /> */}
+                                 <textarea
+                                    className={cn('textarea-txt')}
+                                    value={motaSp}
+                                    onChange={(e) => setMotaSp(e.target.value)}
+                                 ></textarea>
+                              </div>
+
+                              <div className={cn('input-label')}>
+                                 <span>Ảnh đại diện sản phẩm</span>
                                  <input
                                     className={cn('input-img')}
                                     type="file"
                                     accept=".jpg, .jpeg, .png"
                                     multiple
                                     onChange={(e) => {
-                                       setImg(e.target.files);
+                                       setImgSp(e.target.files);
                                     }}
                                  />
                               </div>
 
-                              {img.length > 0 ? (
+                              {imgSp.length > 0 ? (
                                  <div className={cn('preview-img-list')}>
-                                    {console.log()}
-
-                                    {Array.from(img).map((image) => {
+                                    {Array.from(imgSp).map((image) => {
                                        return (
                                           <img key={image.name} src={URL.createObjectURL(image)} alt={image.name} />
                                        );
@@ -99,11 +182,13 @@ function ProductsManager() {
 
                            <div className={cn('modal-actions')}>
                               <div className={cn('add-product-btn')}>
-                                 <Button borderfill>Thêm</Button>
+                                 <Button borderfill thinfont>
+                                    Thêm
+                                 </Button>
                               </div>
                            </div>
-                        </ReactModal>
-                     </form>
+                        </form>
+                     </ReactModal>
                   </div>
                </div>
 

@@ -86,6 +86,7 @@ function Profile() {
                      <input
                         className={cn('change-avatar-btn')}
                         type="file"
+                        accept=".jpg, .jpeg, .png"
                         onChange={(e) => {
                            setAvatarUpload(e.target.files);
                         }}
