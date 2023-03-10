@@ -58,7 +58,12 @@
 
 .modal-body {
    display: flex;
-   flex-direction: column;
+   justify-content: space-between;
+
+   & .left-side,
+   .right-side {
+      width: 540px;
+   }
 
    & .input-label {
       position: relative;
@@ -107,21 +112,22 @@
 
    & .preview-img-list {
       display: grid;
-      grid-template-columns: 160px 160px 160px 160px;
+      grid-template-columns: 100px 100px 100px 100px 100px;
       gap: 5px;
       padding: 0 10px;
 
       & img {
-         width: 160px;
+         width: 100px;
          object-fit: cover;
       }
    }
 }
 
 .modal-actions {
-   padding: 10px;
    display: flex;
-   justify-content: center;
+   justify-content: flex-end;
+   padding: 10px 20px;
+   margin-top: 20px;
 
    & .add-product-btn {
       width: fit-content;
@@ -216,8 +222,9 @@
       }
 
       & .product-name {
-         overflow: hidden;
          width: 300px;
+         text-align: left;
+         overflow: hidden;
          text-overflow: ellipsis;
          white-space: nowrap;
       }
@@ -237,5 +244,12 @@
       & .product-del {
          width: 70px;
       }
+   }
+
+   & .no-product {
+      font-size: 2.2rem;
+      font-weight: 400;
+      text-align: center;
+      margin-top: 20px;
    }
 }

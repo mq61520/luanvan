@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import { faPlus, faXmark, faEdit } from '@fortawesome/free-solid-svg-icons/index';
 import ReactModal from 'react-modal';
+import { toast } from 'react-toastify';
 
 import styles from './ProductsManager.module.scss';
 import './Modal.scss';
@@ -16,6 +17,8 @@ ReactModal.setAppElement('#root');
 
 function ProductsManager() {
    const [showModal, setShowModal] = useState(false);
+
+   const [products, setProducts] = useState([]);
 
    const [maSp, setMaSp] = useState('');
    const [tenSp, setTenSp] = useState('');
@@ -35,7 +38,7 @@ function ProductsManager() {
    };
 
    const handleAddProduct = async (e) => {
-      e.preventDefault();
+      // e.preventDefault();
 
       try {
          const add_product_res = await axios.post('http://localhost:4000/product', {
@@ -68,13 +71,40 @@ function ProductsManager() {
 
          if (add_product_res.data === 'Success product' && add_images_res.data === 'Success img') {
             console.log('Them thanh cong');
+            toast.success('Thêm thành công!', { position: 'top-center' });
+
+            setImgSp([]);
+            setMaSp('');
+            setTenSp('');
+            setSlSp('');
+            setGiaSp('');
+            setMotaSp('');
          } else {
             console.log('Them khong thanh cong');
+            toast.success('Thêm không thành công!', { position: 'top-center' });
          }
       } catch (error) {
          console.log(error);
       }
    };
+
+   const handleGetProductList = async () => {
+      try {
+         const product_list = await axios.get('http://localhost:4000/products');
+
+         if (product_list) {
+            setProducts(product_list.data);
+         } else {
+            console.log('Get sản phẩm thất bại!');
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   useEffect(() => {
+      handleGetProductList();
+   }, []);
 
    return (
       <div className={cn('wrapper')}>
@@ -108,76 +138,88 @@ function ProductsManager() {
                            </div>
 
                            <div className={cn('modal-body')}>
-                              <div className={cn('input-label')}>
-                                 <span>Mã sản phẩm</span>
-                                 <input
-                                    className={cn('input-txt')}
-                                    value={maSp}
-                                    onChange={(e) => setMaSp(e.target.value)}
-                                 />
-                              </div>
-
-                              <div className={cn('input-label')}>
-                                 <span>Tên sản phẩm</span>
-                                 <input
-                                    className={cn('input-txt')}
-                                    value={tenSp}
-                                    onChange={(e) => setTenSp(e.target.value)}
-                                 />
-                              </div>
-
-                              <div className={cn('input-label')}>
-                                 <span>Số lượng</span>
-                                 <input
-                                    className={cn('input-txt')}
-                                    value={slSp}
-                                    onChange={(e) => setSlSp(e.target.value)}
-                                 />
-                              </div>
-
-                              <div className={cn('input-label')}>
-                                 <span>Giá</span>
-                                 <input
-                                    className={cn('input-txt')}
-                                    value={giaSp}
-                                    onChange={(e) => setGiaSp(e.target.value)}
-                                 />
-                              </div>
-
-                              <div className={cn('input-label')}>
-                                 <span>Mô tả</span>
-                                 {/* <input type="text-area" className={cn('input-txt')} /> */}
-                                 <textarea
-                                    className={cn('textarea-txt')}
-                                    value={motaSp}
-                                    onChange={(e) => setMotaSp(e.target.value)}
-                                 ></textarea>
-                              </div>
-
-                              <div className={cn('input-label')}>
-                                 <span>Ảnh đại diện sản phẩm</span>
-                                 <input
-                                    className={cn('input-img')}
-                                    type="file"
-                                    accept=".jpg, .jpeg, .png"
-                                    multiple
-                                    onChange={(e) => {
-                                       setImgSp(e.target.files);
-                                    }}
-                                 />
-                              </div>
-
-                              {imgSp.length > 0 ? (
-                                 <div className={cn('preview-img-list')}>
-                                    {Array.from(imgSp).map((image) => {
-                                       return (
-                                          <img key={image.name} src={URL.createObjectURL(image)} alt={image.name} />
-                                       );
-                                    })}
+                              <div className={cn('left-side')}>
+                                 <div className={cn('input-label')}>
+                                    <span>Mã sản phẩm</span>
+                                    <input
+                                       className={cn('input-txt')}
+                                       value={maSp}
+                                       onChange={(e) => setMaSp(e.target.value)}
+                                       required
+                                    />
                                  </div>
-                              ) : (
-                                 <></>
-                              )}
+
+                                 <div className={cn('input-label')}>
+                                    <span>Tên sản phẩm</span>
+                                    <input
+                                       className={cn('input-txt')}
+                                       value={tenSp}
+                                       onChange={(e) => setTenSp(e.target.value)}
+                                       required
+                                    />
+                                 </div>
+
+                                 <div className={cn('input-label')}>
+                                    <span>Số lượng</span>
+                                    <input
+                                       className={cn('input-txt')}
+                                       value={slSp}
+                                       onChange={(e) => setSlSp(e.target.value)}
+                                       required
+                                       type="number"
+                                    />
+                                 </div>
+
+                                 <div className={cn('input-label')}>
+                                    <span>Giá</span>
+                                    <input
+                                       className={cn('input-txt')}
+                                       value={giaSp}
+                                       onChange={(e) => setGiaSp(e.target.value)}
+                                       required
+                                       type="number"
+                                    />
+                                 </div>
+                              </div>
+
+                              <div className={cn('right-side')}>
+                                 <div className={cn('input-label')}>
+                                    <span>Mô tả sản phẩm</span>
+                                    {/* <input type="text-area" className={cn('input-txt')} /> */}
+                                    <textarea
+                                       className={cn('textarea-txt')}
+                                       value={motaSp}
+                                       onChange={(e) => setMotaSp(e.target.value)}
+                                       required
+                                    ></textarea>
+                                 </div>
+
+                                 <div className={cn('input-label')}>
+                                    <span>Ảnh đại diện sản phẩm</span>
+                                    <input
+                                       className={cn('input-img')}
+                                       type="file"
+                                       accept=".jpg, .jpeg, .png"
+                                       multiple
+                                       onChange={(e) => {
+                                          setImgSp(e.target.files);
+                                       }}
+                                       required
+                                    />
+                                 </div>
+
+                                 {imgSp.length > 0 ? (
+                                    <div className={cn('preview-img-list')}>
+                                       {Array.from(imgSp).map((image) => {
+                                          return (
+                                             <img key={image.name} src={URL.createObjectURL(image)} alt={image.name} />
+                                          );
+                                       })}
+                                    </div>
+                                 ) : (
+                                    <></>
+                                 )}
+                              </div>
                            </div>
 
                            <div className={cn('modal-actions')}>
@@ -207,41 +249,49 @@ function ProductsManager() {
                </div>
 
                <div className={cn('table-body')}>
-                  <div className={cn('table-row')}>
-                     <h4 className={cn('product-number')}>1</h4>
-                     <h4 className={cn('product-code')}>SP_01</h4>
-                     <h4 className={cn('product-name')}>Ví da handmade kim ví đựng thẻ </h4>
-                     <h4 className={cn('product-price')}>{currencyFormater.format(1399000)}</h4>
-                     <h4 className={cn('product-instock')}>99 cái</h4>
-                     <h4 className={cn('product-edit')}>
-                        <Button onlytext thinfont>
-                           <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                     </h4>
-                     <h4 className={cn('product-del')}>
-                        <Button onlytext thinfont>
-                           Xóa
-                        </Button>
-                     </h4>
-                  </div>
+                  {products.length > 0 ? (
+                     products.map((product) => {
+                        return (
+                           <div key={product.sp_id} className={cn('table-row')}>
+                              <h4 className={cn('product-number')}>1</h4>
+                              <h4 className={cn('product-code')}>{product.sp_ma}</h4>
+                              <h4 className={cn('product-name')}>{product.sp_ten}</h4>
+                              <h4 className={cn('product-price')}>{currencyFormater.format(product.sp_gia)}</h4>
+                              <h4 className={cn('product-instock')}>{product.sp_tonkho}</h4>
+                              <h4 className={cn('product-edit')}>
+                                 <Button onlytext thinfont>
+                                    <FontAwesomeIcon icon={faEdit} />
+                                 </Button>
+                              </h4>
+                              <h4 className={cn('product-del')}>
+                                 <Button
+                                    onlytext
+                                    thinfont
+                                    onClick={async () => {
+                                       try {
+                                          const delete_product = await axios.post('http://localhost:4000/product_del', {
+                                             ma_sp: product.sp_ma,
+                                          });
 
-                  <div className={cn('table-row')}>
-                     <h4 className={cn('product-number')}>12</h4>
-                     <h4 className={cn('product-code')}>SP_01</h4>
-                     <h4 className={cn('product-name')}>Ví da handmade kim ví đựng thẻ</h4>
-                     <h4 className={cn('product-price')}>{currencyFormater.format(1399000)}</h4>
-                     <h4 className={cn('product-instock')}>99 cái</h4>
-                     <h4 className={cn('product-edit')}>
-                        <Button onlytext thinfont>
-                           <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                     </h4>
-                     <h4 className={cn('product-del')}>
-                        <Button onlytext thinfont>
-                           Xóa
-                        </Button>
-                     </h4>
-                  </div>
+                                          if (delete_product.data === 'Delete done') {
+                                             console.log('Delete done');
+                                          } else {
+                                             console.log('Delete fail');
+                                          }
+                                       } catch (error) {
+                                          console.log(error);
+                                       }
+                                    }}
+                                 >
+                                    Xóa
+                                 </Button>
+                              </h4>
+                           </div>
+                        );
+                     })
+                  ) : (
+                     <h1 className={cn('no-product')}>Không có sản phẩm</h1>
+                  )}
                </div>
             </div>
          </div>

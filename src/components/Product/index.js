@@ -6,7 +6,9 @@ import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
-function Product({ img, name, price, sale }) {
+function Product({ img, product_name, price, sale }) {
+   var newimg = 'http://localhost:4000/' + img;
+
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
@@ -18,17 +20,14 @@ function Product({ img, name, price, sale }) {
                <></>
             )}
 
-            <img
-               src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/12/gong-kinh-nu-versace-0ve3327u-gb155-i-mau-den-vang-63a413c357835-22122022152227.jpg"
-               alt="img"
-            />
+            <img src={newimg} alt="Product imgae" />
 
             <div className={cn('product-title')}>
-               <h3>Gọng Kính Nữ Versace 0VE3327U GB155.I Màu Đen Vàng</h3>
+               <h3>{product_name}</h3>
 
                <div>
                   {sale ? <h4 className={cn('sale-price')}>{currencyFormater.format(1596000)}</h4> : <></>}
-                  <h4 className={cn('product-price')}>{currencyFormater.format(1596000)}</h4>
+                  <h4 className={cn('product-price')}>{currencyFormater.format(price)}</h4>
                </div>
             </div>
 
