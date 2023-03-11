@@ -21,13 +21,18 @@ function Header() {
    const handleLogout = () => {
       localStorage.removeItem('name');
       setCurrentUser('');
+      window.open('http://localhost:3000/', '_self');
    };
 
    const handleLoadBrands = async () => {
-      const response = await axios.get('http://localhost:4000/brands');
+      try {
+         const response = await axios.get('http://localhost:4000/brands');
 
-      if (response.data) {
-         setListBrands(response.data);
+         if (response.data) {
+            setListBrands(response.data);
+         }
+      } catch (error) {
+         console.log(error);
       }
    };
 

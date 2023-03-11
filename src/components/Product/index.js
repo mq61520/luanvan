@@ -6,8 +6,10 @@ import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
-function Product({ img, product_name, price, sale }) {
-   var newimg = 'http://localhost:4000/' + img;
+function Product({ ma_sp, img, product_name, price, sale }) {
+   if (img) {
+      var newimg = 'http://localhost:4000/' + img;
+   }
 
    return (
       <div className={cn('wrapper')}>
@@ -32,7 +34,13 @@ function Product({ img, product_name, price, sale }) {
             </div>
 
             <div className={cn('product-btn')}>
-               <Button onlytext thinfont to={'/detail/1'}>
+               <Button
+                  onlytext
+                  thinfont
+                  onClick={() => {
+                     window.location.pathname = `/detail/${ma_sp}`;
+                  }}
+               >
                   Chi tiết
                </Button>
             </div>

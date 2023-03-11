@@ -100,6 +100,7 @@ function Products() {
                      return (
                         <Product
                            key={product.sp_ma}
+                           ma_sp={product.sp_ma}
                            img={product.sp_image}
                            product_name={product.sp_ten}
                            price={product.sp_gia}
