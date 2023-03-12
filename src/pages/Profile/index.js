@@ -112,9 +112,11 @@ function Profile() {
                <h3 className={cn('gender', 'mt')}>
                   <b>Email:</b> {email}
                </h3>
+
                <h3 className={cn('address', 'mt')}>
                   <b>Địa chỉ:</b> {diaChi}
                </h3>
+
                <h3 className={cn('phone', 'mt')}>
                   <b>Số điện thoại:</b> {phone}
                </h3>

@@ -68,7 +68,7 @@ function ProductDetails() {
                   <div className={cn('img-slide')}>
                      <Swiper
                         direction={'vertical'}
-                        slidesPerView={productImgaes.length}
+                        slidesPerView={4}
                         spaceBetween={7}
                         loop={true}
                         pagination={{

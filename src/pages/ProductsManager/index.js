@@ -38,7 +38,7 @@ function ProductsManager() {
    };
 
    const handleAddProduct = async (e) => {
-      // e.preventDefault();
+      e.preventDefault();
 
       try {
          const add_product_res = await axios.post('http://localhost:4000/product', {
@@ -50,6 +50,7 @@ function ProductsManager() {
             mota: motaSp,
          });
 
+         console.log(imgSp);
          var add_images_res;
          for (let i = 0; i < imgSp.length; i++) {
             const postData = new FormData();
@@ -126,110 +127,116 @@ function ProductsManager() {
                         overlayClassName="overlay-modal"
                         className="modal-contents"
                      >
-                        <form onSubmit={handleAddProduct} encType="multipart/form-data">
-                           <div className={cn('modal-header')}>
-                              <h3>Thêm sản phẩm mới</h3>
+                        <section>
+                           <form onSubmit={handleAddProduct} encType="multipart/form-data">
+                              <div className={cn('modal-header')}>
+                                 <h3>Thêm sản phẩm mới</h3>
 
-                              <div className={cn('close-modal-btn')}>
-                                 <Button onlytext onClick={handleOpenModal}>
-                                    <FontAwesomeIcon icon={faXmark} />
-                                 </Button>
-                              </div>
-                           </div>
-
-                           <div className={cn('modal-body')}>
-                              <div className={cn('left-side')}>
-                                 <div className={cn('input-label')}>
-                                    <span>Mã sản phẩm</span>
-                                    <input
-                                       className={cn('input-txt')}
-                                       value={maSp}
-                                       onChange={(e) => setMaSp(e.target.value)}
-                                       required
-                                    />
-                                 </div>
-
-                                 <div className={cn('input-label')}>
-                                    <span>Tên sản phẩm</span>
-                                    <input
-                                       className={cn('input-txt')}
-                                       value={tenSp}
-                                       onChange={(e) => setTenSp(e.target.value)}
-                                       required
-                                    />
-                                 </div>
-
-                                 <div className={cn('input-label')}>
-                                    <span>Số lượng</span>
-                                    <input
-                                       className={cn('input-txt')}
-                                       value={slSp}
-                                       onChange={(e) => setSlSp(e.target.value)}
-                                       required
-                                       type="number"
-                                    />
-                                 </div>
-
-                                 <div className={cn('input-label')}>
-                                    <span>Giá</span>
-                                    <input
-                                       className={cn('input-txt')}
-                                       value={giaSp}
-                                       onChange={(e) => setGiaSp(e.target.value)}
-                                       required
-                                       type="number"
-                                    />
+                                 <div className={cn('close-modal-btn')}>
+                                    <Button onlytext onClick={handleOpenModal}>
+                                       <FontAwesomeIcon icon={faXmark} />
+                                    </Button>
                                  </div>
                               </div>
 
-                              <div className={cn('right-side')}>
-                                 <div className={cn('input-label')}>
-                                    <span>Mô tả sản phẩm</span>
-                                    {/* <input type="text-area" className={cn('input-txt')} /> */}
-                                    <textarea
-                                       className={cn('textarea-txt')}
-                                       value={motaSp}
-                                       onChange={(e) => setMotaSp(e.target.value)}
-                                       required
-                                    ></textarea>
-                                 </div>
-
-                                 <div className={cn('input-label')}>
-                                    <span>Ảnh đại diện sản phẩm</span>
-                                    <input
-                                       className={cn('input-img')}
-                                       type="file"
-                                       accept=".jpg, .jpeg, .png"
-                                       multiple
-                                       onChange={(e) => {
-                                          setImgSp(e.target.files);
-                                       }}
-                                       required
-                                    />
-                                 </div>
-
-                                 {imgSp.length > 0 ? (
-                                    <div className={cn('preview-img-list')}>
-                                       {Array.from(imgSp).map((image) => {
-                                          return (
-                                             <img key={image.name} src={URL.createObjectURL(image)} alt={image.name} />
-                                          );
-                                       })}
+                              <div className={cn('modal-body')}>
+                                 <div className={cn('left-side')}>
+                                    <div className={cn('input-label')}>
+                                       <span>Mã sản phẩm</span>
+                                       <input
+                                          className={cn('input-txt')}
+                                          value={maSp.toUpperCase()}
+                                          onChange={(e) => setMaSp(e.target.value)}
+                                          required
+                                       />
                                     </div>
-                                 ) : (
-                                    <></>
-                                 )}
-                              </div>
-                           </div>
 
-                           <div className={cn('modal-actions')}>
-                              <div className={cn('add-product-btn')}>
-                                 <Button borderfill thinfont>
-                                    Thêm
-                                 </Button>
+                                    <div className={cn('input-label')}>
+                                       <span>Tên sản phẩm</span>
+                                       <input
+                                          className={cn('input-txt')}
+                                          value={tenSp}
+                                          onChange={(e) => setTenSp(e.target.value)}
+                                          required
+                                       />
+                                    </div>
+
+                                    <div className={cn('input-label')}>
+                                       <span>Số lượng</span>
+                                       <input
+                                          className={cn('input-txt')}
+                                          value={slSp}
+                                          onChange={(e) => setSlSp(e.target.value)}
+                                          required
+                                          type="number"
+                                       />
+                                    </div>
+
+                                    <div className={cn('input-label')}>
+                                       <span>Giá</span>
+                                       <input
+                                          className={cn('input-txt')}
+                                          value={giaSp}
+                                          onChange={(e) => setGiaSp(e.target.value)}
+                                          required
+                                          type="number"
+                                       />
+                                    </div>
+                                 </div>
+
+                                 <div className={cn('right-side')}>
+                                    <div className={cn('input-label')}>
+                                       <span>Mô tả sản phẩm</span>
+                                       {/* <input type="text-area" className={cn('input-txt')} /> */}
+                                       <textarea
+                                          className={cn('textarea-txt')}
+                                          value={motaSp}
+                                          onChange={(e) => setMotaSp(e.target.value)}
+                                          required
+                                       ></textarea>
+                                    </div>
+
+                                    <div className={cn('input-label')}>
+                                       <span>Ảnh đại diện sản phẩm</span>
+                                       <input
+                                          className={cn('input-img')}
+                                          type="file"
+                                          accept=".jpg, .jpeg, .png"
+                                          multiple
+                                          onChange={(e) => {
+                                             setImgSp(e.target.files);
+                                          }}
+                                          required
+                                       />
+                                    </div>
+
+                                    {imgSp.length > 0 ? (
+                                       <div className={cn('preview-img-list')}>
+                                          {Array.from(imgSp).map((image) => {
+                                             return (
+                                                <img
+                                                   key={image.name}
+                                                   src={URL.createObjectURL(image)}
+                                                   alt={image.name}
+                                                />
+                                             );
+                                          })}
+                                       </div>
+                                    ) : (
+                                       <></>
+                                    )}
+                                 </div>
                               </div>
-                           </div>
-                        </form>
+
+                              <div className={cn('modal-actions')}>
+                                 <div className={cn('add-product-btn')}>
+                                    <Button borderfill thinfont>
+                                       Thêm
+                                    </Button>
+                                 </div>
+                              </div>
+                           </form>
+                        </section>
                      </ReactModal>
                   </div>
                </div>
