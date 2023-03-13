@@ -7,12 +7,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import GlobalStyles from './components/GlobalStyles';
+import { default as CartCount } from './globalState/Provider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <React.StrictMode>
       <GlobalStyles>
-         <App />
+         <CartCount>
+            <App />
+         </CartCount>
 
          <ToastContainer />
       </GlobalStyles>

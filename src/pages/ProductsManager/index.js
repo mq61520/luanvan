@@ -7,7 +7,7 @@ import ReactModal from 'react-modal';
 import { toast } from 'react-toastify';
 
 import styles from './ProductsManager.module.scss';
-import './Modal.scss';
+import './ProductsManagerModal.scss';
 import Button from '~/components/Button/index';
 import currencyFormater from '~/common/formatCurrency';
 

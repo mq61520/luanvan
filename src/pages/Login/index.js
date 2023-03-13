@@ -51,7 +51,7 @@ function Login() {
                localStorage.setItem('name', response.data[0].nd_hoten);
             } else {
                window.open('http://localhost:3000/', '_self');
-               localStorage.setItem('name', response.data[0].nd_hoten);
+               localStorage.setItem('user_name', response.data[0].nd_hoten);
             }
          } else {
             toast.error('Username or password are not corrects!', { position: 'top-center' });

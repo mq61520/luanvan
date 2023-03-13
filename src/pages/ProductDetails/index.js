@@ -1,30 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMinus, faPlus, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import ReactModal from 'react-modal';
+import { toast } from 'react-toastify';
 
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 
 import styles from './ProductDetails.module.scss';
+import './ProductDetailModal.scss';
 import './Swiper.ProductDetail.scss';
 import Button from '~/components/Button';
 import currencyFormater from '~/common/formatCurrency';
 import Product from '~/components/Product/index';
+import CartContext from '~/globalState/Context';
 
 const cn = classNames.bind(styles);
 
 function ProductDetails() {
-   document.title = 'Chi tiết....';
+   const [cartAmount, setCartAmount] = useContext(CartContext);
 
    var ma_sp = window.location.pathname.slice(8).toString();
 
    const [amount, setAmount] = useState(1);
    const [moreDetail, setMoreDetail] = useState(false);
+   const [showModal, setShowModal] = useState(false);
 
    const [productInfo, setProductInfo] = useState('');
    const [productImgaes, setProductImages] = useState([]);
@@ -44,6 +49,26 @@ function ProductDetails() {
       }
    };
 
+   const handleAddCart = async () => {
+      try {
+         const add_cart_response = await axios.post('http://localhost:4000/cart', {
+            user_id: localStorage.getItem('current_user'),
+            ma_sp: productInfo.sp_ma,
+            sl_sp: amount,
+         });
+
+         if (add_cart_response.data === 'Add success') {
+            console.log('Them thanh cong');
+            setCartAmount(cartAmount + 1);
+            toast.success('Thêm vào giỏ hàng thành công', { position: 'top-center' });
+         } else {
+            console.log('Them khong thanh cong');
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    const handlePreview = (e) => {
       document.querySelector('#preview-img').src = e.target.src;
    };
@@ -55,10 +80,16 @@ function ProductDetails() {
       setMoreDetail(!moreDetail);
    };
 
+   const handleShowModal = () => {
+      setShowModal(!showModal);
+   };
+
    useEffect(() => {
       window.scrollTo(0, 0);
       handleGetProductInfo();
    }, []);
+
+   document.title = productInfo.sp_ten;
 
    return (
       <div className={cn('wrapper')}>
@@ -103,7 +134,91 @@ function ProductDetails() {
                      id="preview-img"
                      src={productInfo.sp_image ? 'http://localhost:4000/' + productInfo.sp_image : ''}
                      alt="Hình ảnh sản phẩm"
+                     onClick={handleShowModal}
                   />
+
+                  {/* <div className={cn('zoom-images')}>
+                     <ReactModal
+                        isOpen={showModal}
+                        onRequestClose={handleShowModal}
+                        overlayClassName="overlay-modal"
+                        className="modal-contents"
+                     >
+                        <div className={cn('detail-images')}>
+                           <img
+                              className={cn('main-image')}
+                              id="main-image"
+                              src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                              alt="Ảnh sản phẩm"
+                           />
+
+                           <div className={cn('slide-detail-images')}>
+                              <Swiper
+                                 slidesPerView={4}
+                                 spaceBetween={7}
+                                 loop={true}
+                                 pagination={{
+                                    clickable: true,
+                                    enabled: false,
+                                 }}
+                                 navigation={true}
+                                 modules={[Pagination, Navigation]}
+                                 className="preview-detail-swiper"
+                              >
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                                 <SwiperSlide>
+                                    <img
+                                       className={cn('preview-slide-image')}
+                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
+                                       alt="Ảnh sản phẩm"
+                                    />
+                                 </SwiperSlide>
+                              </Swiper>
+                           </div>
+                        </div>
+                     </ReactModal>
+                  </div> */}
                </div>
 
                <div className={cn('product-info')}>
@@ -147,24 +262,34 @@ function ProductDetails() {
                            className={cn('minus-product')}
                            icon={faPlus}
                            onClick={() => {
-                              setAmount(amount + 1);
+                              if (amount === productInfo.sp_tonkho) {
+                                 toast.warn('Vượt quá số lương tồn kho!', { position: 'top-center' });
+                                 return;
+                              } else {
+                                 setAmount(amount + 1);
+                              }
                            }}
                         />
                      </div>
 
                      <div className={cn('product-instock')}>
-                        <span>Kho: </span>
+                        <span>Tồn kho: </span>
                         {productInfo.sp_trangthai > 0 ? (
-                           <span className={cn('stocking')}>Còn hàng</span>
+                           <span className={cn('stocking')}>{productInfo.sp_tonkho}</span>
                         ) : (
-                           <span className={cn('out-of-stock')}>Tạm hết</span>
+                           <></>
                         )}
                      </div>
                   </div>
 
                   <div className={cn('btns')}>
                      <div className={cn('add-to-cart-btn')}>
-                        <Button border thinfont lefticon={<FontAwesomeIcon icon={faCartShopping} />}>
+                        <Button
+                           border
+                           thinfont
+                           lefticon={<FontAwesomeIcon icon={faCartShopping} />}
+                           onClick={handleAddCart}
+                        >
                            Thêm vào giỏ hàng
                         </Button>
                      </div>

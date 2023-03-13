@@ -1,0 +1,21 @@
+.overlay-modal {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+
+   background-color: rgba(#ececec, 0.7);
+}
+
+.modal-contents {
+   min-width: fit-content;
+   height: fit-content;
+   background-color: rgb(255, 255, 255);
+   border: 1px solid #777 !important;
+   border-radius: 5px;
+}

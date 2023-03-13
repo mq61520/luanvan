@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 
 import styles from './Cart.module.scss';
@@ -11,18 +12,49 @@ const cn = classNames.bind(styles);
 function Cart() {
    document.title = 'Giỏ hàng';
 
-   const [listProducts, setListProducts] = useState(true);
+   const [listProducts, setListProducts] = useState([]);
+   const [product, setProduct] = useState();
+
+   const handleGetCart = async () => {
+      try {
+         var user_id = localStorage.getItem('current_user');
+         const get_cart_response = await axios.get('http://localhost:4000/cart_products/' + user_id);
+
+         if (get_cart_response.data.length > 0) {
+            setListProducts(get_cart_response.data);
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const handelGetProduct = async (ma_sp) => {
+      try {
+         const get_product_response = await axios.get('http://localhost:4000/product_id/' + ma_sp);
+
+         if (get_product_response.data.length > 0) {
+            console.log(get_product_response.data[0]);
+            setProduct(get_product_response.data[0]);
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    const goShop = () => {
       window.open('http://localhost:3000/', '_self');
    };
+
+   useEffect(() => {
+      handleGetCart();
+   }, []);
 
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <h1 className={cn('title')}>Giỏ hàng</h1>
 
-            {listProducts ? (
+            {listProducts.length > 0 ? (
                <>
                   <div className={cn('header-list')}>
                      <h4 className={cn('product-info')}>Sản phẩm</h4>
@@ -33,13 +65,13 @@ function Cart() {
 
                      <h4 className={cn('product-total-price')}>Thành tiền</h4>
 
-                     <h4 className={cn('action')}>Xóa</h4>
+                     <h4 className={cn('action')}>Thao tác</h4>
                   </div>
 
                   <div className={cn('list-products')}>
-                     <CartItem />
-                     <CartItem />
-                     <CartItem />
+                     {listProducts.map((p) => {
+                        return <CartItem key={p.gh_id} />;
+                     })}
                   </div>
 
                   <div className={cn('actions')}>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
@@ -9,11 +9,14 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons/index';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
 import Dropdown from '~/components/Dropdown';
+import CartContext from '~/globalState/Context';
 
 const cn = classNames.bind(styles);
 
 function Header() {
-   const [currentUser, setCurrentUser] = useState(localStorage.getItem('name'));
+   const [cartAmount, setCartAmount] = useContext(CartContext);
+
+   const [currentUser, setCurrentUser] = useState(localStorage.getItem('user_name'));
    const [listBrands, setListBrands] = useState('');
 
    // const avatar_img = localStorage.getItem('avatar_name');
@@ -143,7 +146,7 @@ function Header() {
                               <FontAwesomeIcon className={cn('cart-icon')} icon={faCartShopping} />
                            </Button>
 
-                           <div className={cn('cart-flag')}>12</div>
+                           <div className={cn('cart-flag')}>{cartAmount}</div>
                         </div>
                      </>
                   ) : (
