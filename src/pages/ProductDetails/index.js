@@ -57,10 +57,23 @@ function ProductDetails() {
             sl_sp: amount,
          });
 
-         if (add_cart_response.data === 'Add success') {
-            console.log('Them thanh cong');
-            setCartAmount(cartAmount + 1);
-            toast.success('Thêm vào giỏ hàng thành công', { position: 'top-center' });
+         const update_product_amount_response = await axios.post('http://localhost:4000/product_update_amount', {
+            ma_sp: productInfo.sp_ma,
+            sl: productInfo.sp_tonkho - amount,
+         });
+
+         console.log(add_cart_response.data.status, add_cart_response.data.type);
+
+         if (
+            add_cart_response.data.status === 'Add success' &&
+            update_product_amount_response.data === 'UpdateAmountSuccess'
+         ) {
+            if (add_cart_response.data.type === 'New') {
+               setCartAmount(cartAmount + 1);
+            } else if (add_cart_response.data.type === 'Update') {
+            }
+
+            toast.success('Thêm thành công', { position: 'top-center' });
          } else {
             console.log('Them khong thanh cong');
          }

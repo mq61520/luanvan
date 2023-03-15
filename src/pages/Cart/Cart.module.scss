@@ -12,6 +12,7 @@
 .header-list {
    display: flex;
    justify-content: space-between;
+   align-items: center;
    padding: 5px 20px;
    margin-bottom: 10px;
 
@@ -21,28 +22,28 @@
    }
 
    & .product-info {
-      flex: 1;
+      // flex: 1;
       text-align: left;
-      width: 550px;
+      width: 500px;
    }
 
    & .product-price {
-      width: 268px;
+      width: 270px;
       text-align: center;
    }
 
    & .product-amount {
-      width: 117px;
+      width: 140px;
       text-align: center;
    }
 
    & .product-total-price {
-      width: 162px;
+      width: 200px;
       text-align: center;
    }
 
    & .action {
-      width: 47px;
+      width: 100px;
       text-align: center;
    }
 }

@@ -13,7 +13,8 @@ function Cart() {
    document.title = 'Giỏ hàng';
 
    const [listProducts, setListProducts] = useState([]);
-   const [product, setProduct] = useState();
+
+   const [product, setProduct] = useState([]);
 
    const handleGetCart = async () => {
       try {
@@ -22,24 +23,62 @@ function Cart() {
 
          if (get_cart_response.data.length > 0) {
             setListProducts(get_cart_response.data);
+            console.log('list product:', get_cart_response.data);
+
+            var id_product = [];
+
+            for (let i = 0; i < get_cart_response.data.length; i++) {
+               try {
+                  var product_info_response;
+
+                  if (get_cart_response.data[i] !== undefined) {
+                     product_info_response = await axios.get(
+                        'http://localhost:4000/product_id/' + get_cart_response.data[i].sp_ma,
+                     );
+                  }
+
+                  if (product_info_response.data.length > 0) {
+                     id_product.push({
+                        sl_sp: get_cart_response.data[i].gh_soluong,
+                        info: product_info_response.data[0],
+                     });
+                  }
+               } catch (error) {
+                  console.log('loi info', error);
+               }
+            }
+
+            // console.log('id_product', id_product);
+
+            setProduct(id_product);
          }
       } catch (error) {
          console.log(error);
       }
    };
+   console.log('product info:', product);
 
-   const handelGetProduct = async (ma_sp) => {
-      try {
-         const get_product_response = await axios.get('http://localhost:4000/product_id/' + ma_sp);
+   // const getIdProducts = (list) => {
+   //    console.log('product list:', list);
 
-         if (get_product_response.data.length > 0) {
-            console.log(get_product_response.data[0]);
-            setProduct(get_product_response.data[0]);
-         }
-      } catch (error) {
-         console.log(error);
-      }
-   };
+   //    list.map((c) => {
+   //       id_product.push({ ma_sp: c.sp_ma, sl_sp: c.gh_soluong });
+   //    });
+
+   //    console.log('id product list:', id_product);
+   // };
+
+   // const getProductsInfo = async (ma_sp) => {
+   //    try {
+   //       const product_info_response = await axios.get('http://localhost:4000/product_id/' + ma_sp);
+
+   //       if (product_info_response.data.length > 0) {
+   //          setProduct(product_info_response.data);
+   //       }
+   //    } catch (error) {
+   //       console.log(error);
+   //    }
+   // };
 
    const goShop = () => {
       window.open('http://localhost:3000/', '_self');
@@ -69,8 +108,17 @@ function Cart() {
                   </div>
 
                   <div className={cn('list-products')}>
-                     {listProducts.map((p) => {
-                        return <CartItem key={p.gh_id} />;
+                     {product.map((p) => {
+                        return (
+                           <CartItem
+                              key={p.info.sp_id}
+                              ma_sp={p.info.sp_ma}
+                              ten_sp={p.info.sp_ten}
+                              image={p.info.sp_image}
+                              sl_sp={p.sl_sp}
+                              gia_sp={p.info.sp_gia}
+                           />
+                        );
                      })}
                   </div>
 
@@ -88,7 +136,6 @@ function Cart() {
                   <div className={cn('btn-flex')}>
                      <div className={cn('pay-btn')}>
                         <Button borderfill thinfont to={'/pay'}>
-                           {' '}
                            Tiến hành thanh toán
                         </Button>
                      </div>

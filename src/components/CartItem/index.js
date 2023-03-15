@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons/index';
@@ -8,17 +10,26 @@ import currencyFormater from '~/common/formatCurrency';
 
 const cn = classNames.bind(styles);
 
-function CartItem({ anh_sp, ten_sp, gia_sp, sl_sp }) {
-   var new_image = 'http://localhost:4000/' + anh_sp;
+function CartItem({ ma_sp, image, ten_sp, sl_sp, gia_sp }) {
+   var new_image = 'http://localhost:4000/' + image;
+
+   const handleDeleteProductformCart = async () => {
+      const delete_response = axios.post('http://localhost:4000/cart_delete', {
+         user_id: localStorage.getItem('current_user'),
+         ma_sp: ma_sp,
+      });
+
+      console.log(delete_response.data);
+   };
 
    return (
       <div className={cn('wrapper')}>
          <div className={cn('product')}>
-            <div className={cn('check')}>
-               <input type="checkbox" />
-            </div>
-
             <div className={cn('flex-info')}>
+               <div className={cn('check')}>
+                  <input type="checkbox" />
+               </div>
+
                <div className={cn('product-img')}>
                   <img src={new_image} alt="Ảnh sản phẩm" />
                </div>
@@ -43,7 +54,7 @@ function CartItem({ anh_sp, ten_sp, gia_sp, sl_sp }) {
             <h4 className={cn('product-prices')}>{currencyFormater.format(sl_sp * gia_sp)}</h4>
 
             <div className={cn('product-action')}>
-               <Button onlytext thinfont>
+               <Button onlytext thinfont onClick={handleDeleteProductformCart}>
                   Xóa
                </Button>
             </div>

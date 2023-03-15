@@ -22,7 +22,9 @@ function Header() {
    // const avatar_img = localStorage.getItem('avatar_name');
 
    const handleLogout = () => {
-      localStorage.removeItem('name');
+      localStorage.removeItem('user_name');
+      localStorage.removeItem('current_user');
+      localStorage.removeItem('avatar_name');
       setCurrentUser('');
       window.open('http://localhost:3000/', '_self');
    };
@@ -142,7 +144,12 @@ function Header() {
                   {currentUser ? (
                      <>
                         <div className={cn('cart-btn')}>
-                           <Button onlytext to={'/cart'}>
+                           <Button
+                              onlytext
+                              onClick={() => {
+                                 window.open(`http://localhost:3000/cart`, '_self');
+                              }}
+                           >
                               <FontAwesomeIcon className={cn('cart-icon')} icon={faCartShopping} />
                            </Button>
 
