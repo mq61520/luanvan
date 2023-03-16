@@ -43,9 +43,12 @@
    margin-bottom: 62px;
    color: var(--txtColor);
 
+   & h3 {
+      padding: 10px 0;
+   }
+
    & .mt {
       width: fit-content;
-      margin-top: 8px;
       font-weight: 400;
    }
 
@@ -55,4 +58,16 @@
    //    }
    //    &.phone {
    //    }
+}
+
+.info-item {
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+
+   & .update-address-btn,
+   .update-phone-btn {
+      width: fit-content;
+      margin-left: 20px;
+   }
 }

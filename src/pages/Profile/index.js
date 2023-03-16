@@ -62,6 +62,42 @@ function Profile() {
       }
    };
 
+   const handleUpdateAddress = async () => {
+      const new_address = prompt('Địa chỉ mới:');
+      if (new_address == null) {
+         return;
+      } else {
+         const address_response = await axios.post('http://localhost:4000/profile_address', {
+            address: new_address,
+            user_id: user_id,
+         });
+         if (address_response.data === 'UpdateSuccess') {
+            alert('Cập nhật thành công');
+            handleLoadInfo();
+         } else {
+            alert('Cập nhật không thành công');
+         }
+      }
+   };
+
+   const handleUpdatePhone = async () => {
+      const new_phone = prompt('Địa chỉ mới:');
+      if (new_phone == null) {
+         return;
+      } else {
+         const phone_response = await axios.post('http://localhost:4000/profile_phone', {
+            phone: new_phone,
+            user_id: user_id,
+         });
+         if (phone_response.data === 'UpdateSuccess') {
+            alert('Cập nhật thành công');
+            handleLoadInfo();
+         } else {
+            alert('Cập nhật không thành công');
+         }
+      }
+   };
+
    useEffect(() => {
       handleLoadInfo();
    });
@@ -92,7 +128,7 @@ function Profile() {
                         }}
                      />
 
-                     <button type="button">Upload</button>
+                     {/* <button type="button">Upload</button> */}
 
                      {/* {avatarUpload ? ( */}
                      {/* <div className={cn('upload-btn')}>
@@ -109,17 +145,32 @@ function Profile() {
 
             <div className={cn('info-field')}>
                <h2 className={cn('name')}>{name}</h2>
-               <h3 className={cn('gender', 'mt')}>
+
+               <h3 className={cn('email', 'mt')}>
                   <b>Email:</b> {email}
                </h3>
 
-               <h3 className={cn('address', 'mt')}>
-                  <b>Địa chỉ:</b> {diaChi}
-               </h3>
+               <div className={cn('info-item')}>
+                  <h3 className={cn('address', 'mt')}>
+                     <b>Địa chỉ:</b> {diaChi}
+                  </h3>
+                  <div className={cn('update-address-btn')}>
+                     <Button onlytext thinfont onClick={handleUpdateAddress}>
+                        Cập nhật
+                     </Button>
+                  </div>
+               </div>
 
-               <h3 className={cn('phone', 'mt')}>
-                  <b>Số điện thoại:</b> {phone}
-               </h3>
+               <div className={cn('info-item')}>
+                  <h3 className={cn('phone', 'mt')}>
+                     <b>Số điện thoại:</b> {phone}
+                  </h3>
+                  <div className={cn('update-phone-btn')}>
+                     <Button onlytext thinfont onClick={handleUpdatePhone}>
+                        Cập nhật
+                     </Button>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

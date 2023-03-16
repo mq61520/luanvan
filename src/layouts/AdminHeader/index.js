@@ -18,7 +18,9 @@ function AdminHeader() {
 
    const handleLogout = () => {
       window.open('http://localhost:3000', '_self');
-      localStorage.removeItem('name');
+      localStorage.removeItem('user_name');
+      localStorage.removeItem('current_user');
+      localStorage.removeItem('avatar_name');
       setCurrentUser('');
    };
 
@@ -26,9 +28,7 @@ function AdminHeader() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('header-logo')} onClick={handleReturnHome}>
-               <h1>
-                  <i>Admin</i>
-               </h1>
+               <h1>goodEYE</h1>
             </div>
 
             <div className={cn('header-actions')}>
@@ -39,13 +39,13 @@ function AdminHeader() {
                         <div className={cn('content')} tabIndex="-1" {...attrs}>
                            <Dropdown>
                               <div className={cn('account-tool')}>
-                                 <Button onlytext to={'/profile'}>
+                                 <Button onlytext thinfont to={'/profile'}>
                                     Profile
                                  </Button>
                               </div>
 
                               <div className={cn('account-tool')}>
-                                 <Button onlytext onClick={handleLogout}>
+                                 <Button onlytext thinfont onClick={handleLogout}>
                                     Logout
                                  </Button>
                               </div>
@@ -56,7 +56,7 @@ function AdminHeader() {
                      <div className={cn('account')}>
                         <h4>{currentUser}</h4>
 
-                        <img src="https://cdn-icons-png.flaticon.com/512/863/863817.png" alt="Admin avatar" />
+                        {/* <img src={'http://localhost:4000/' + localStorage.getItem('avatar_name')} alt="Admin avatar" /> */}
                      </div>
                   </Tippy>
                ) : (

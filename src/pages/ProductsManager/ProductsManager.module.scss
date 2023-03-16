@@ -25,6 +25,11 @@
 
 .add-btn {
    width: fit-content;
+
+   & span {
+      font-weight: 400;
+      font-size: 2.2rem;
+   }
 }
 
 .add-btn-icon {

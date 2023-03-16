@@ -28,6 +28,11 @@ function Sidebar() {
                   </Button>
                </div>
                <div className={cn('category-item')}>
+                  <Button border to={'/admin/promotion'}>
+                     Khuyến mãi
+                  </Button>
+               </div>
+               <div className={cn('category-item')}>
                   <Button border to={'/admin/accountsmanager'}>
                      Quản lý tài khoản
                   </Button>

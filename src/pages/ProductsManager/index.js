@@ -107,6 +107,8 @@ function ProductsManager() {
       handleGetProductList();
    }, []);
 
+   var stt = 0;
+
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
@@ -117,6 +119,7 @@ function ProductsManager() {
                   <div className={cn('add-btn')}>
                      <Button border onClick={handleOpenModal}>
                         <FontAwesomeIcon className={cn('add-btn-icon')} icon={faPlus} />
+                        <span>Thêm Sản Phẩm</span>
                      </Button>
                   </div>
 
@@ -258,9 +261,10 @@ function ProductsManager() {
                <div className={cn('table-body')}>
                   {products.length > 0 ? (
                      products.map((product) => {
+                        stt++;
                         return (
                            <div key={product.sp_id} className={cn('table-row')}>
-                              <h4 className={cn('product-number')}>1</h4>
+                              <h4 className={cn('product-number')}>{stt}</h4>
                               <h4 className={cn('product-code')}>{product.sp_ma}</h4>
                               <h4 className={cn('product-name')}>{product.sp_ten}</h4>
                               <h4 className={cn('product-price')}>{currencyFormater.format(product.sp_gia)}</h4>

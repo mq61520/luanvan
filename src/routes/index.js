@@ -10,6 +10,7 @@ import ProductDetails from '~/pages/ProductDetails';
 import Orders from '~/pages/Orders';
 import Brand from '~/pages/Brand';
 import Products from '~/pages/Products';
+import Promotion from '~/pages/Promotion/index';
 
 //admin
 import Admin from '~/pages/Admin';
@@ -35,6 +36,7 @@ export const publicPages = [
    { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },
    { path: '/admin/ordermanager', component: OrderManager, layout: AdminLayout },
    { path: '/admin/accountsmanager', component: AccountsManager, layout: AdminLayout },
+   { path: '/admin/promotion', component: Promotion, layout: AdminLayout },
 ];
 
 export const privatePages = [];
