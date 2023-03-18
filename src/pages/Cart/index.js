@@ -81,7 +81,7 @@ function Cart() {
    // };
 
    const goShop = () => {
-      window.open('http://localhost:3000/', '_self');
+      window.open('http://localhost:3000/product/all', '_self');
    };
 
    useEffect(() => {

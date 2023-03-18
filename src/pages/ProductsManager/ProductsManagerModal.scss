@@ -1,4 +1,13 @@
-.overlay-modal {
+@keyframes top_down {
+   from {
+      top: -200px;
+   }
+   to {
+      top: 0;
+   }
+}
+
+.add-product-overlay-modal {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -12,10 +21,44 @@
    background-color: rgba(#ececec, 0.7);
 }
 
-.modal-contents {
-   min-width: 570px;
+.add-product-modal-contents {
+   width: fit-content;
    height: fit-content;
+
+   position: absolute;
+   top: 0;
+
    background-color: rgb(255, 255, 255);
    border: 1px solid #777 !important;
    border-radius: 5px;
+
+   animation: top_down 0.4s ease;
+}
+
+.update-promotion-overlay-modal {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+
+   background-color: rgba(#ececec, 0.1);
+}
+
+.update-promotion-modal-contents {
+   width: fit-content;
+   height: fit-content;
+
+   position: absolute;
+   top: 0;
+
+   background-color: rgb(255, 255, 255);
+   border: 1px solid #777 !important;
+   border-radius: 5px;
+
+   animation: top_down 0.4s ease;
 }

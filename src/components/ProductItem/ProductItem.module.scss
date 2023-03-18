@@ -1,0 +1,118 @@
+.table-row {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 0;
+   border-bottom: 1px solid #777;
+
+   &:hover {
+      background-color: rgb(230, 250, 255);
+   }
+
+   & .product-number,
+   .product-code,
+   .product-name,
+   .product-price,
+   .product-instock,
+   .product-edit,
+   .product-del {
+      font-size: 1.8rem;
+      font-weight: 400;
+      text-align: center;
+   }
+
+   & .product-number {
+      width: 50px;
+   }
+
+   & .product-code {
+      width: 80px;
+   }
+
+   & .product-name {
+      width: 300px;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
+
+   & .product-price {
+      width: 110px;
+   }
+
+   & .product-instock {
+      width: 80px;
+   }
+
+   & .product-promotion {
+      width: 100px;
+   }
+
+   & .product-del {
+      width: 70px;
+   }
+}
+
+// Update promotion modal
+.update-promotion-modal-container {
+   padding: 10px;
+
+   & .update-promotion-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & h4 {
+         font-size: 2rem;
+         cursor: pointer;
+      }
+   }
+
+   & .update-promotion-modal-body {
+      margin-top: 20px;
+
+      & .list-title {
+         font-size: 2rem;
+         font-weight: 400;
+         padding: 5px 4px;
+         background-color: #eee;
+      }
+
+      & .promotion-list {
+         & .promotion {
+            width: 410px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            margin: 5px 0;
+            background-color: #fff8dc;
+
+            & .promotion-value {
+               width: 75px;
+               font-size: 2.6rem;
+               color: orange;
+            }
+
+            & .promotion-date {
+               flex: 1;
+               display: flex;
+               flex-direction: column;
+               align-items: flex-start;
+               padding-left: 5px;
+
+               & .promotion-date-start {
+               }
+
+               & .promotion-date-end {
+               }
+            }
+
+            & .promotion-action {
+               width: fit-content;
+            }
+         }
+      }
+   }
+}

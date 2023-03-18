@@ -57,29 +57,53 @@ function Header() {
                   <span>Trang chủ</span>
                </div>
 
-               {/* <Tippy
+               <Tippy
                   interactive
                   render={(attrs) => (
                      <div className={cn('content')} tabIndex="-1" {...attrs}>
                         <Dropdown>
                            <div className={cn('brands-list')}>
                               <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
+                                 <Button
+                                    onlytext
+                                    thinfont
+                                    onClick={() => {
+                                       window.open('http://localhost:3000/products/kinh-nam', '_self');
+                                    }}
+                                 >
                                     Kính nam
                                  </Button>
                               </div>
                               <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
+                                 <Button
+                                    onlytext
+                                    thinfont
+                                    onClick={() => {
+                                       window.open('http://localhost:3000/products/kinh-nu', '_self');
+                                    }}
+                                 >
                                     Kính nữ
                                  </Button>
                               </div>
                               <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
+                                 <Button
+                                    onlytext
+                                    thinfont
+                                    onClick={() => {
+                                       window.open('http://localhost:3000/products/unisex', '_self');
+                                    }}
+                                 >
                                     Unisex
                                  </Button>
                               </div>
                               <div className={cn('brand-item')}>
-                                 <Button onlytext thinfont to={'brand'}>
+                                 <Button
+                                    onlytext
+                                    thinfont
+                                    onClick={() => {
+                                       window.open('http://localhost:3000/products/kinh-tre-em', '_self');
+                                    }}
+                                 >
                                     Trẻ em
                                  </Button>
                               </div>
@@ -87,16 +111,16 @@ function Header() {
                         </Dropdown>
                      </div>
                   )}
-               > */}
-               <div
-                  className={cn('nav-item')}
-                  onClick={() => {
-                     window.open('http://localhost:3000/products/all', '_self');
-                  }}
                >
-                  <span>Sản phẩm</span>
-               </div>
-               {/* </Tippy> */}
+                  <div
+                     className={cn('nav-item')}
+                     onClick={() => {
+                        window.open('http://localhost:3000/products/all', '_self');
+                     }}
+                  >
+                     <span>Sản phẩm</span>
+                  </div>
+               </Tippy>
 
                <Tippy
                   interactive
@@ -176,13 +200,13 @@ function Header() {
 
                                  <div className={cn('account-tool')}>
                                     <Button onlytext thinfont to={'/profile'}>
-                                       Profile
+                                       Trang cá nhân
                                     </Button>
                                  </div>
 
                                  <div className={cn('account-tool')}>
                                     <Button onlytext thinfont onClick={handleLogout}>
-                                       Logout
+                                       Đăng xuất
                                     </Button>
                                  </div>
                               </Dropdown>

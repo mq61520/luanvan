@@ -30,6 +30,7 @@ function ProductDetails() {
    const [amount, setAmount] = useState(1);
    const [moreDetail, setMoreDetail] = useState(false);
    const [showModal, setShowModal] = useState(false);
+   const [promotion, setPromotion] = useState('');
 
    const [productInfo, setProductInfo] = useState('');
    const [productImgaes, setProductImages] = useState([]);
@@ -42,7 +43,9 @@ function ProductDetails() {
          setProductInfo(product_info.data[0]);
          setProductImages(product_imgaes.data);
 
-         console.log('get product oke');
+         handleGetPromotion(product_info.data[0].sp_khuyenmai);
+
+         // console.log('get product oke');
          // console.log(product_info.data[0]);
       } else {
          console.log('get product fail');
@@ -76,6 +79,18 @@ function ProductDetails() {
             toast.success('Thêm thành công', { position: 'top-center' });
          } else {
             console.log('Them khong thanh cong');
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const handleGetPromotion = async (km_id) => {
+      try {
+         const promotion_info_response = await axios.get('http://localhost:4000/promotion_id/' + km_id);
+
+         if (promotion_info_response.data.length > 0) {
+            setPromotion(promotion_info_response.data[0].km_value);
          }
       } catch (error) {
          console.log(error);
@@ -247,14 +262,18 @@ function ProductDetails() {
                   </div>
 
                   <div className={cn('flex-product-price')}>
-                     <h2 className={cn('product-discount')}>{currencyFormater.format(1254542)}</h2>
-                     <h2 className={cn('product-price')}>{currencyFormater.format(productInfo.sp_gia)}</h2>
+                     <h2 className={cn('product-discount')}>{currencyFormater.format(productInfo.sp_gia)}</h2>
+                     <h2 className={cn('product-price')}>
+                        {currencyFormater.format(productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100)}
+                     </h2>
 
-                     {/* {
+                     {promotion ? (
                         <div className={cn('discount-flag')}>
-                           <span>giảm 90%</span>
+                           <span>giảm {promotion}%</span>
                         </div>
-                     } */}
+                     ) : (
+                        <></>
+                     )}
                   </div>
 
                   <div className={cn('flex-amount')}>

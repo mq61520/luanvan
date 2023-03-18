@@ -9,14 +9,36 @@ import Product from '~/components/Product';
 const cn = classNames.bind(styles);
 
 function Products() {
+   var type_product = window.location.pathname.slice(10).toString();
+
    const [products, setProducts] = useState([]);
 
    const handleGetProductList = async () => {
       try {
-         const product_list = await axios.get('http://localhost:4000/products');
+         var product_list;
+         if (type_product === 'all') {
+            product_list = await axios.get('http://localhost:4000/products');
+         } else {
+            product_list = await axios.get('http://localhost:4000/product/category/' + type_product);
+         }
 
-         if (product_list) {
-            setProducts(product_list.data);
+         var list = [];
+         if (product_list.data.length > 0) {
+            for (let i = 0; i < product_list.data.length; i++) {
+               const promotion_response = await axios.get(
+                  'http://localhost:4000/promotion_id/' + product_list.data[i].sp_khuyenmai,
+               );
+
+               if (promotion_response.data.length > 0) {
+                  list.push({ km: promotion_response.data[0].km_value, product: product_list.data[i] });
+               } else {
+                  list.push({ km: null, product: product_list.data[i] });
+               }
+
+               // console.log(list);
+            }
+
+            setProducts(list);
          } else {
             console.log('Get sản phẩm thất bại!');
          }
@@ -33,7 +55,7 @@ function Products() {
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
             <div className={cn('categories')}>
-               <h3>Danh mục</h3>
+               <h3>Danh mục:</h3>
 
                <div className={cn('category-item')}>
                   <Button
@@ -99,16 +121,17 @@ function Products() {
                   products.map((product) => {
                      return (
                         <Product
-                           key={product.sp_ma}
-                           ma_sp={product.sp_ma}
-                           img={product.sp_image}
-                           product_name={product.sp_ten}
-                           price={product.sp_gia}
+                           key={product.product.sp_ma}
+                           ma_sp={product.product.sp_ma}
+                           img={product.product.sp_image}
+                           name={product.product.sp_ten}
+                           price={product.product.sp_gia}
+                           km={product.km}
                         />
                      );
                   })
                ) : (
-                  <></>
+                  <div style={{ fontSize: '1.8rem' }}>Không có sản phẩm</div>
                )}
             </div>
          </div>
