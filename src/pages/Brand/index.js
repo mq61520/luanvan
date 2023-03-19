@@ -15,9 +15,10 @@ import Product from '~/components/Product/index';
 const cn = classNames.bind(styles);
 
 function Brand() {
-   var brand_id_in_path = window.location.pathname.toString().slice(7);
+   var brand_name = window.location.pathname.toString().slice(7);
 
    const [listBrands, setListBrands] = useState('');
+   const [products, setProducts] = useState([]);
 
    const handleLoadBrands = async () => {
       const response = await axios.get('http://localhost:4000/brands');
@@ -27,21 +28,43 @@ function Brand() {
       }
    };
 
-   const handleLoadProducts = async () => {
-      var res_products;
+   const handleGetProductList = async () => {
+      try {
+         var product_list;
+         if (brand_name === 'all') {
+            product_list = await axios.get('http://localhost:4000/products');
+         } else {
+            product_list = await axios.get('http://localhost:4000/product/brand/' + brand_name);
+         }
 
-      if (brand_id_in_path !== 'all') {
-         res_products = await axios.get(`http://localhost:4000/brands_id/${brand_id_in_path}`);
-      } else {
-         res_products = await axios.get(`http://localhost:4000/brands`);
+         var list = [];
+         if (product_list.data.length > 0) {
+            for (let i = 0; i < product_list.data.length; i++) {
+               const promotion_response = await axios.get(
+                  'http://localhost:4000/promotion_id/' + product_list.data[i].sp_khuyenmai,
+               );
+
+               if (promotion_response.data.length > 0) {
+                  list.push({ km: promotion_response.data[0].km_value, product: product_list.data[i] });
+               } else {
+                  list.push({ km: null, product: product_list.data[i] });
+               }
+
+               // console.log(list);
+            }
+
+            setProducts(list);
+         } else {
+            console.log('Get sản phẩm thất bại!');
+         }
+      } catch (error) {
+         console.log(error);
       }
-
-      console.log(res_products.data);
    };
 
    useEffect(() => {
       handleLoadBrands();
-      handleLoadProducts();
+      handleGetProductList();
    }, []);
 
    return (
@@ -80,26 +103,31 @@ function Brand() {
                </Swiper>
             </div>
 
-            {brand_id_in_path !== 'all' ? (
+            {brand_name !== 'all' ? (
                <h3 className={cn('title-list')}>
-                  Tất cả sản phẩm của <b>'{brand_id_in_path.toUpperCase()}'</b>
+                  Tất cả sản phẩm của <b>{brand_name.toUpperCase()}</b>
                </h3>
             ) : (
                <h3 className={cn('title-list')}>Tất cả sản phẩm</h3>
             )}
 
             <div className={cn('products-list')}>
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
-               <Product />
+               {products.length > 0 ? (
+                  products.map((product) => {
+                     return (
+                        <Product
+                           key={product.product.sp_ma}
+                           ma_sp={product.product.sp_ma}
+                           img={product.product.sp_image}
+                           name={product.product.sp_ten}
+                           price={product.product.sp_gia}
+                           km={product.km}
+                        />
+                     );
+                  })
+               ) : (
+                  <div style={{ fontSize: '1.8rem' }}>Không có sản phẩm</div>
+               )}
             </div>
          </div>
       </div>

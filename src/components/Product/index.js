@@ -1,5 +1,5 @@
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 
 import styles from './Product.module.scss';
@@ -16,7 +16,7 @@ function Product({ ma_sp, img, name, price, km }) {
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
-            {km ? (
+            {km > 0 ? (
                <div className={cn('sale-flag')}>
                   <p>-{km}%</p>
                </div>
