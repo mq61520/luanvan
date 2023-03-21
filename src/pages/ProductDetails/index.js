@@ -18,7 +18,7 @@ import './Swiper.ProductDetail.scss';
 import Button from '~/components/Button';
 import currencyFormater from '~/common/formatCurrency';
 import Product from '~/components/Product/index';
-import CartContext from '~/globalState/Context';
+import { CartContext } from '~/globalState/Context';
 
 const cn = classNames.bind(styles);
 

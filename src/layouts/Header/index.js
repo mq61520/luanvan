@@ -9,7 +9,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons/index';
 import styles from './Header.module.scss';
 import Button from '~/components/Button';
 import Dropdown from '~/components/Dropdown';
-import CartContext from '~/globalState/Context';
+import { CartContext } from '~/globalState/Context';
 
 const cn = classNames.bind(styles);
 
@@ -177,7 +177,7 @@ function Header() {
                               <FontAwesomeIcon className={cn('cart-icon')} icon={faCartShopping} />
                            </Button>
 
-                           <div className={cn('cart-flag')}>{cartAmount}</div>
+                           <div className={cn('cart-flag')}>{cartAmount.cartCount}</div>
                         </div>
                      </>
                   ) : (

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import CartContext from './Context';
+import { CartContext } from './Context';
 
 function Provider({ children }) {
-   const [cartCount, setCartCount] = useState(0);
+   const [cartCount, setCartCount] = useState({ cartCount: 0, listPay: [] });
 
    const handleGetAmountCart = async () => {
       try {
@@ -14,7 +14,8 @@ function Provider({ children }) {
 
          if (amount_cart_response.data) {
             // console.log(amount_cart_response.data);
-            setCartCount(amount_cart_response.data[0].amount_cart);
+            // setCartCount(amount_cart_response.data[0].amount_cart);
+            setCartCount({ ...cartCount, cartCount: amount_cart_response.data[0].amount_cart });
          }
       } catch (error) {
          console.log(error);

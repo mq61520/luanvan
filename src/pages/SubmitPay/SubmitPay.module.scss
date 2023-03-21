@@ -80,7 +80,7 @@
    .header-total-price {
       font-size: 1.8rem;
       font-weight: 400;
-      color: #999;
+      color: #888;
       text-align: center;
    }
 
@@ -109,18 +109,21 @@
    & .product {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0 10px;
+      margin: 10px 0;
 
       & .product-info {
          width: 800px;
          display: flex;
-         align-items: flex-start;
+         align-items: center;
          justify-content: flex-start;
 
          & img {
             width: 80px;
             height: 80px;
             object-fit: cover;
+            border: 1px solid #999;
          }
 
          & .product-name {
@@ -261,5 +264,101 @@
    & .submit-pay-btn {
       width: fit-content;
       margin-top: 30px;
+   }
+}
+
+.no-product {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   & .message {
+      text-align: center;
+      font-weight: 400;
+   }
+
+   & .go-shop {
+      width: fit-content;
+      margin-top: 10px;
+   }
+}
+
+//change address modal scss
+.change-address-modal-container {
+   padding: 10px;
+
+   & .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & h4 {
+         font-size: 2.2rem;
+      }
+   }
+
+   & .modal-body {
+      margin-top: 20px;
+
+      & h4 {
+         font-size: 1.8rem;
+         font-weight: 400;
+      }
+
+      & .input-item {
+         margin-bottom: 20px;
+      }
+
+      & input {
+         height: 40px;
+         font-size: 1.8rem;
+         font-weight: 400;
+         padding: 0 8px;
+         border-bottom: 1px solid #777;
+      }
+
+      & textarea {
+         width: 100%;
+         font-size: 1.8rem;
+         font-weight: 400;
+         padding: 8px 8px;
+      }
+   }
+
+   & .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+
+      & .submit-change-btn {
+         width: fit-content;
+      }
+   }
+}
+
+//change ship modal css
+.change-ship-modal-container {
+   padding: 10px;
+
+   & .ship {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+
+      & h4 {
+         font-size: 1.8rem;
+         font-weight: 400;
+      }
+
+      & span {
+         min-width: 70px;
+         font-size: 1.8rem;
+         font-weight: 400;
+      }
+
+      & .ship-btn {
+         width: fit-content;
+      }
    }
 }

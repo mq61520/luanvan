@@ -83,6 +83,9 @@
 
 .product-amount {
    width: 140px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
    border: 1px solid #999;
    padding: 5px 0;
    text-align: center;
