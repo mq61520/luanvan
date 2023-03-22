@@ -34,6 +34,7 @@ function ProductDetails() {
 
    const [productInfo, setProductInfo] = useState('');
    const [productImgaes, setProductImages] = useState([]);
+
    const handleGetProductInfo = async () => {
       const product_info = await axios.get('http://localhost:4000/product_id/' + ma_sp);
 
@@ -44,6 +45,8 @@ function ProductDetails() {
          setProductImages(product_imgaes.data);
 
          handleGetPromotion(product_info.data[0].sp_khuyenmai);
+
+         document.title = product_info.data[0].sp_ten;
 
          // console.log('get product oke');
          // console.log(product_info.data[0]);
@@ -72,7 +75,7 @@ function ProductDetails() {
             update_product_amount_response.data === 'UpdateAmountSuccess'
          ) {
             if (add_cart_response.data.type === 'New') {
-               setCartAmount(cartAmount + 1);
+               setCartAmount({ ...cartAmount, cartCount: cartAmount.cartCount + 1 });
             } else if (add_cart_response.data.type === 'Update') {
             }
 
@@ -84,6 +87,24 @@ function ProductDetails() {
          console.log(error);
       }
    };
+
+   const handleOrderNow = async () => {
+      var gia_km = productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100;
+      var gia_tong = amount * gia_km;
+      var list = [];
+      list.push({
+         ma_sp: productInfo.sp_ma,
+         sl: amount,
+         don_gia: productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100,
+         gia: gia_tong,
+         location: 'NotCart',
+         ton_kho: productInfo.sp_tonkho - amount,
+      });
+
+      setCartAmount({ ...cartAmount, listPay: cartAmount.listPay.concat(list) });
+   };
+
+   // console.log(cartAmount.listPay);
 
    const handleGetPromotion = async (km_id) => {
       try {
@@ -115,9 +136,8 @@ function ProductDetails() {
    useEffect(() => {
       window.scrollTo(0, 0);
       handleGetProductInfo();
+      setCartAmount({ ...cartAmount, listPay: [] });
    }, []);
-
-   document.title = productInfo.sp_ten;
 
    return (
       <div className={cn('wrapper')}>
@@ -327,7 +347,7 @@ function ProductDetails() {
                      </div>
 
                      <div className={cn('buy-now-btn')}>
-                        <Button borderfill thinfont>
+                        <Button borderfill thinfont to={'/pay'} onClick={handleOrderNow}>
                            Mua ngay
                         </Button>
                      </div>

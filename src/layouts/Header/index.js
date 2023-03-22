@@ -193,7 +193,7 @@ function Header() {
                            <div className={cn('content')} tabIndex="-1" {...attrs}>
                               <Dropdown>
                                  <div className={cn('account-tool')}>
-                                    <Button onlytext thinfont to={'/orders'}>
+                                    <Button onlytext thinfont to={'/orders/all'}>
                                        Đơn mua
                                     </Button>
                                  </div>

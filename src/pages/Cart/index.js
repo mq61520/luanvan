@@ -158,7 +158,13 @@ function Cart() {
                                     setTotal(total + e.gia);
 
                                     var list = [];
-                                    list.push({ ma_sp: e.ma_sp, sl: e.sl, gia: e.gia, don_gia: e.don_gia });
+                                    list.push({
+                                       ma_sp: e.ma_sp,
+                                       sl: e.sl,
+                                       gia: e.gia,
+                                       don_gia: e.don_gia,
+                                       location: 'Cart',
+                                    });
                                     setSelectedList(selectedList.concat(list));
 
                                     setProductCount(productCount + 1);

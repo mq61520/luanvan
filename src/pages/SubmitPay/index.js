@@ -11,6 +11,7 @@ import './SubmitPay.modal.scss';
 import Button from '~/components/Button';
 import currencyFormater from '~/common/formatCurrency';
 import { CartContext } from '~/globalState/Context';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 const cn = classNames.bind(styles);
 
@@ -31,14 +32,16 @@ function SubmitPay() {
    const [phoneNum, setPhoneNum] = useState('');
    const [address, setAddress] = useState('');
    const [orderNote, setOrederNote] = useState('');
+   const [payment, setPayment] = useState('COD');
 
    const handleOrder = async () => {
       try {
-         const order_res = await axios.post('http://localhost:4000/order', {
+         const order_res = await axios.post('http://localhost:4000/order/add', {
             user_id: current_user_id,
-            ngay_lap: new Date().toLocaleString('en-GB'),
+            ngay_lap: new Date().toISOString().slice(0, 10),
             dia_chi: address,
             sdt: phoneNum,
+            sl_sp: listProducts.length,
             tong_tien: total + ship.gia,
             htgh: ship.ten,
             httt: 'COD',
@@ -46,12 +49,30 @@ function SubmitPay() {
             ds_sp: listProducts,
          });
 
-         // if (order_res.data === 'InsertSuccess') {
-         //    setOrderStatus(false);
-         //    toast.success('Đặt hàng thành công!', { position: 'top-center' });
-         // } else {
-         //    toast.success('Đặt hàng không thành công!', { position: 'top-center' });
-         // }
+         if (listPay.listPay[0].location === 'NotCart') {
+            const update_res = await axios.post('http://localhost:4000/product_update_amount', {
+               ma_sp: listPay.listPay[0].ma_sp,
+               sl: listPay.listPay[0].ton_kho,
+            });
+
+            if (update_res.data === 'UpdateAmountSuccess') {
+               console.log('UpdateAmountSuccess');
+            } else {
+               console.log('UpdateAmountFail');
+            }
+         } else if (listPay.listPay.location === 'Cart') {
+         }
+
+         if (order_res.data === 'InsertSuccess') {
+            setOrderStatus(false);
+            setListPay({
+               ...listPay,
+               cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
+            });
+            toast.success('Đặt hàng thành công!', { position: 'top-center' });
+         } else {
+            toast.success('Đặt hàng không thành công!', { position: 'top-center' });
+         }
       } catch (error) {
          console.log(error);
       }
@@ -84,12 +105,16 @@ function SubmitPay() {
    };
 
    const handelGetUserInfo = async () => {
-      const user_info_res = await axios.get('http://localhost:4000/account_id/' + current_user_id);
+      try {
+         const user_info_res = await axios.get('http://localhost:4000/account_id/' + current_user_id);
 
-      if (user_info_res.data.length > 0) {
-         setUserInfo(user_info_res.data[0]);
-         setAddress(user_info_res.data[0].nd_diachi);
-         setPhoneNum(user_info_res.data[0].nd_sdt);
+         if (user_info_res.data.length > 0) {
+            setUserInfo(user_info_res.data[0]);
+            setAddress(user_info_res.data[0].nd_diachi);
+            setPhoneNum(user_info_res.data[0].nd_sdt);
+         }
+      } catch (error) {
+         console.log(error);
       }
    };
 
@@ -111,6 +136,19 @@ function SubmitPay() {
       }
    };
 
+   const handleUpdateProductAmount = async (ma_sp, sl_sp) => {
+      const update_res = await axios.post('http://localhost:4000/product_update_amount', {
+         ma_sp: ma_sp,
+         sl: sl_sp,
+      });
+
+      if (update_res.data === 'UpdateAmountSuccess') {
+         console.log('UpdateAmountSuccess');
+      } else {
+         console.log('UpdateAmountFail');
+      }
+   };
+
    const handleOpenChangeAddress = () => {
       setOpenChangeAddress(!openChangeAddress);
       setPhoneNum('');
@@ -125,6 +163,8 @@ function SubmitPay() {
       handelGetUserInfo();
       handleGetProductInfo();
    }, []);
+
+   console.log(payment);
 
    return (
       <div className={cn('wrapper')}>
@@ -220,7 +260,7 @@ function SubmitPay() {
                      {listProducts.length > 0 ? (
                         listProducts.map((p) => {
                            return (
-                              <div key={p.sp_ma} className={cn('product')}>
+                              <div key={p.info.sp_ma} className={cn('product')}>
                                  <div className={cn('product-info')}>
                                     <img src={'http://localhost:4000/' + p.info.sp_image} alt="Anh san pham" />
 
@@ -299,19 +339,54 @@ function SubmitPay() {
                   </div>
 
                   <div className={cn('order-total')}>
-                     Tổng số tiền: {total > 0 ? <h3>{currencyFormater.format(total + ship.gia)}</h3> : <></>}
+                     <div className={cn('order-total-note')}>
+                        <h4>Ghi chú:</h4>
+                        <textarea rows="2" value={orderNote} onChange={(e) => setOrederNote(e.target.value)}></textarea>
+                     </div>
+
+                     <div className={cn('order-total-price')}>
+                        Tổng số tiền: {total > 0 ? <h3>{currencyFormater.format(total + ship.gia)}</h3> : <></>}
+                     </div>
                   </div>
                </div>
 
                <div className={cn('payment-methods')}>
                   <h4>Phương thức thanh toán</h4>
 
-                  <div className={cn('method')}>
-                     <h4>Thanh toán khi nhận hàng (COD)</h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                     <div className={cn('methods')}>
+                        <div className={cn('method-item')} style={{ marginRight: '50px' }}>
+                           <input
+                              className={cn('choose-payment-radio')}
+                              type="radio"
+                              checked={payment === 'COD'}
+                              value="COD"
+                              onChange={(e) => setPayment(e.target.value)}
+                           />
+                           <span>Thanh toán khi nhận hàng (COD)</span>
+                        </div>
 
-                     <div className={cn('payment-method-btn')}>
-                        <Button onlytext>Thay đổi</Button>
+                        <div className={cn('method-item')}>
+                           <input
+                              className={cn('choose-payment-radio')}
+                              type="radio"
+                              checked={payment === 'Paypal'}
+                              value="Paypal"
+                              onChange={(e) => setPayment(e.target.value)}
+                           />
+                           <span>Paypal</span>
+                        </div>
                      </div>
+
+                     {payment === 'Paypal' ? (
+                        <div className={cn('paypal-area')}>
+                           <PayPalScriptProvider>
+                              <PayPalButtons></PayPalButtons>
+                           </PayPalScriptProvider>
+                        </div>
+                     ) : (
+                        <></>
+                     )}
                   </div>
                </div>
 
@@ -328,14 +403,6 @@ function SubmitPay() {
                      Tổng thanh toán:
                      <span className={cn('total-pay-color')}>{currencyFormater.format(total + ship.gia)}</span>
                   </h4>
-
-                  <h4>Ghi chú:</h4>
-                  <textarea
-                     rows="8"
-                     cols="41"
-                     value={orderNote}
-                     onChange={(e) => setOrederNote(e.target.value)}
-                  ></textarea>
 
                   <div className={cn('submit-pay-btn')}>
                      <Button thinfont onClick={handleOrder}>

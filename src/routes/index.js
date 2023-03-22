@@ -31,6 +31,7 @@ export const publicPages = [
    { path: '/brand/:id', component: Brand },
    { path: '/products/:id', component: Products },
    { path: '/orders', component: Orders },
+   { path: '/orders/:order_status', component: Orders },
    { path: '/detail/:ma_sp', component: ProductDetails },
    { path: '/admin', component: Admin, layout: AdminLayout },
    { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },

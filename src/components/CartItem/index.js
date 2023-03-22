@@ -31,6 +31,7 @@ function CartItem({ ma_sp, image, ten_sp, sl_sp, gia_sp, km, deleted, checked, u
          const delete_response = await axios.post('http://localhost:4000/cart_delete', {
             user_id: localStorage.getItem('current_user'),
             ma_sp: ma_sp,
+            sl: sl_sp,
          });
          if (delete_response.data === 'DeleteSuccess') {
             deleted('Deleted');
@@ -62,7 +63,13 @@ function CartItem({ ma_sp, image, ten_sp, sl_sp, gia_sp, km, deleted, checked, u
    };
 
    const handleFeedBack = () => {
-      checked({ status: !totalPrice, gia: current_price * amount, ma_sp: ma_sp, sl: sl_sp, don_gia: current_price });
+      checked({
+         status: !totalPrice,
+         gia: current_price * amount,
+         ma_sp: ma_sp,
+         sl: sl_sp,
+         don_gia: current_price,
+      });
    };
 
    return (
