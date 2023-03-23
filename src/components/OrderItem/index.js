@@ -48,7 +48,9 @@ function OrderItem({ checked }) {
 
                {!checked ? (
                   <div className={cn('check')}>
-                     <Button onlytext>Duyệt</Button>
+                     <Button onlytext thinfont>
+                        Duyệt
+                     </Button>
                   </div>
                ) : (
                   <div className={cn('change-order-status')}>
@@ -60,6 +62,7 @@ function OrderItem({ checked }) {
                   </div>
                )}
             </div>
+
             {showDetail ? (
                <div className={cn('products-list')}>
                   <div className={cn('products-list-header')}>

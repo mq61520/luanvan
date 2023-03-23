@@ -49,6 +49,8 @@ function OrderManager() {
 
             <div className={cn('order-list')}>
                <div className={cn('order-list-header')}>
+                  <h4 className={cn('order-code')}>Ngày đặt</h4>
+
                   <h4 className={cn('order-code')}>Mã đơn hàng</h4>
 
                   <h4 className={cn('customer-name')}>Tên khách hàng</h4>
@@ -60,9 +62,9 @@ function OrderManager() {
                   <h4 className={cn('check')}>Duyệt đơn</h4>
                </div>
 
-               <OrderItem checked />
-               <OrderItem checked />
-               <OrderItem checked />
+               <OrderItem />
+               <OrderItem />
+               <OrderItem />
             </div>
          </div>
       </div>

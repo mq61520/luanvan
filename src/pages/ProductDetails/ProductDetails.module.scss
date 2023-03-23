@@ -85,7 +85,7 @@
 }
 
 .vote-rate {
-   margin-right: 5px;
+   margin: 0 5px;
 }
 
 .vote-icon {
@@ -186,7 +186,7 @@
       display: flex;
       align-items: center;
       height: 45px;
-      background-color: #eee;
+      background-color: lightblue;
       font-size: 2.4rem;
       padding-left: 8px;
    }
@@ -215,6 +215,94 @@
 
    & .btn {
       width: fit-content;
+   }
+}
+
+.product-comments {
+   margin-top: 20px;
+
+   & h3 {
+      display: flex;
+      align-items: center;
+      height: 45px;
+      background-color: lightBlue;
+      font-size: 2.4rem;
+      padding-left: 8px;
+   }
+
+   & .comment-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 0;
+
+      & .comment-left-side {
+         & .comment-input {
+            width: 500px;
+            height: 35px;
+            padding: 0 8px;
+            font-size: 1.8rem;
+            font-weight: 400;
+            border-bottom: 1px solid #999;
+
+            & :focus {
+               border-bottom: 1px solid #555;
+            }
+         }
+
+         & .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+
+            & span {
+               font-size: 2.6rem;
+               font-weight: 400;
+               color: orange;
+               margin-left: 15px;
+            }
+         }
+      }
+
+      & textarea {
+         resize: none;
+         width: 500px;
+         padding: 8px 8px;
+         font-size: 1.8rem;
+         font-weight: 400;
+      }
+   }
+
+   & .comment-action {
+      display: flex;
+      justify-content: flex-end;
+      border-bottom: 1px solid #999;
+      padding: 10px 0;
+
+      & .comment-btn {
+         width: fit-content;
+      }
+   }
+
+   & .comment-list {
+      margin-top: 20px;
+
+      & .comment {
+         padding: 10px;
+         margin: 2px 0;
+         background-color: #eee;
+
+         & .comment-header {
+            display: flex;
+            align-items: center;
+         }
+
+         & h4 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            padding-right: 15px;
+         }
+      }
    }
 }
 

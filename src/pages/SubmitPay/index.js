@@ -17,6 +17,9 @@ const cn = classNames.bind(styles);
 
 function SubmitPay() {
    const current_user_id = localStorage.getItem('current_user');
+   const paypalOptions = {
+      'client-id': 'AZewCHfWcdEwAmM_zOP89cZd6REQ_kqITKzXGQ9e089gv5opcDITpede4e4OhgBbzuNRPom-Hus4b0BV',
+   };
 
    const [listPay, setListPay] = useContext(CartContext);
 
@@ -32,46 +35,50 @@ function SubmitPay() {
    const [phoneNum, setPhoneNum] = useState('');
    const [address, setAddress] = useState('');
    const [orderNote, setOrederNote] = useState('');
-   const [payment, setPayment] = useState('COD');
+   const [payment, setPayment] = useState({ type: 'COD', status: '' });
 
    const handleOrder = async () => {
       try {
-         const order_res = await axios.post('http://localhost:4000/order/add', {
-            user_id: current_user_id,
-            ngay_lap: new Date().toISOString().slice(0, 10),
-            dia_chi: address,
-            sdt: phoneNum,
-            sl_sp: listProducts.length,
-            tong_tien: total + ship.gia,
-            htgh: ship.ten,
-            httt: 'COD',
-            ghi_chu: orderNote,
-            ds_sp: listProducts,
-         });
-
-         if (listPay.listPay[0].location === 'NotCart') {
-            const update_res = await axios.post('http://localhost:4000/product_update_amount', {
-               ma_sp: listPay.listPay[0].ma_sp,
-               sl: listPay.listPay[0].ton_kho,
+         if ((payment.type === 'Paypal' && payment.status === 'Paid') || payment.type === 'COD') {
+            const order_res = await axios.post('http://localhost:4000/order/add', {
+               user_id: current_user_id,
+               ngay_lap: new Date().toISOString().slice(0, 10),
+               dia_chi: address,
+               sdt: phoneNum,
+               sl_sp: listProducts.length,
+               tong_tien: total + ship.gia,
+               htgh: ship.ten,
+               httt: 'COD',
+               ghi_chu: orderNote,
+               ds_sp: listProducts,
             });
 
-            if (update_res.data === 'UpdateAmountSuccess') {
-               console.log('UpdateAmountSuccess');
-            } else {
-               console.log('UpdateAmountFail');
+            if (listPay.listPay[0].location === 'NotCart') {
+               const update_res = await axios.post('http://localhost:4000/product_update_amount', {
+                  ma_sp: listPay.listPay[0].ma_sp,
+                  sl: listPay.listPay[0].ton_kho,
+               });
+
+               if (update_res.data === 'UpdateAmountSuccess') {
+                  console.log('UpdateAmountSuccess');
+               } else {
+                  console.log('UpdateAmountFail');
+               }
+            } else if (listPay.listPay.location === 'Cart') {
             }
-         } else if (listPay.listPay.location === 'Cart') {
-         }
 
-         if (order_res.data === 'InsertSuccess') {
-            setOrderStatus(false);
-            setListPay({
-               ...listPay,
-               cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
-            });
-            toast.success('Đặt hàng thành công!', { position: 'top-center' });
+            if (order_res.data === 'InsertSuccess') {
+               setOrderStatus(false);
+               setListPay({
+                  ...listPay,
+                  cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
+               });
+               toast.success('Đặt hàng thành công!', { position: 'top-center' });
+            } else {
+               toast.success('Đặt hàng không thành công!', { position: 'top-center' });
+            }
          } else {
-            toast.success('Đặt hàng không thành công!', { position: 'top-center' });
+            toast.warn('Hãy thanh toán trước!', { position: 'top-center' });
          }
       } catch (error) {
          console.log(error);
@@ -359,9 +366,9 @@ function SubmitPay() {
                            <input
                               className={cn('choose-payment-radio')}
                               type="radio"
-                              checked={payment === 'COD'}
+                              checked={payment.type === 'COD'}
                               value="COD"
-                              onChange={(e) => setPayment(e.target.value)}
+                              onChange={(e) => setPayment({ ...payment, type: e.target.value })}
                            />
                            <span>Thanh toán khi nhận hàng (COD)</span>
                         </div>
@@ -370,18 +377,40 @@ function SubmitPay() {
                            <input
                               className={cn('choose-payment-radio')}
                               type="radio"
-                              checked={payment === 'Paypal'}
+                              checked={payment.type === 'Paypal'}
                               value="Paypal"
-                              onChange={(e) => setPayment(e.target.value)}
+                              onChange={(e) => setPayment({ ...payment, type: e.target.value })}
                            />
                            <span>Paypal</span>
                         </div>
                      </div>
 
-                     {payment === 'Paypal' ? (
+                     {payment.type === 'Paypal' ? (
                         <div className={cn('paypal-area')}>
-                           <PayPalScriptProvider>
-                              <PayPalButtons></PayPalButtons>
+                           <PayPalScriptProvider options={paypalOptions}>
+                              <PayPalButtons
+                                 createOrder={(data, actions) => {
+                                    var pay_total = (total + ship.gia) * 0.000043;
+
+                                    return actions.order.create({
+                                       purchase_units: [
+                                          {
+                                             amount: {
+                                                value: pay_total.toFixed(2),
+                                             },
+                                          },
+                                       ],
+                                    });
+                                 }}
+                                 onApprove={(data, actions) => {
+                                    return actions.order.capture().then((details) => {
+                                       setPayment({ ...payment, status: 'Paid' });
+                                       toast.success('Thanh toán thành công! Bạn đã có thể đặt hàng.', {
+                                          position: 'top-center',
+                                       });
+                                    });
+                                 }}
+                              />
                            </PayPalScriptProvider>
                         </div>
                      ) : (

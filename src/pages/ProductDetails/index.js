@@ -5,7 +5,8 @@ import { Pagination, Navigation } from 'swiper';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMinus, faPlus, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import ReactModal from 'react-modal';
+// import ReactModal from 'react-modal';
+import ReactStars from 'react-rating-stars-component';
 import { toast } from 'react-toastify';
 
 import 'swiper/scss';
@@ -31,9 +32,13 @@ function ProductDetails() {
    const [moreDetail, setMoreDetail] = useState(false);
    const [showModal, setShowModal] = useState(false);
    const [promotion, setPromotion] = useState('');
+   const [rate, setRate] = useState(0);
+   const [commentName, setCommentName] = useState('');
+   const [commentContent, setCommentContent] = useState('');
 
    const [productInfo, setProductInfo] = useState('');
    const [productImgaes, setProductImages] = useState([]);
+   const [productComments, setProductComments] = useState([]);
 
    const handleGetProductInfo = async () => {
       const product_info = await axios.get('http://localhost:4000/product_id/' + ma_sp);
@@ -45,6 +50,7 @@ function ProductDetails() {
          setProductImages(product_imgaes.data);
 
          handleGetPromotion(product_info.data[0].sp_khuyenmai);
+         handleGetComment(product_info.data[0].sp_ma);
 
          document.title = product_info.data[0].sp_ten;
 
@@ -103,8 +109,34 @@ function ProductDetails() {
 
       setCartAmount({ ...cartAmount, listPay: cartAmount.listPay.concat(list) });
    };
-
    // console.log(cartAmount.listPay);
+
+   const handleComment = async () => {
+      const comment_res = await axios.post('http://localhost:4000/comment/add', {
+         ma_sp: productInfo.sp_ma,
+         nd_ten: commentName,
+         value: rate,
+         noidung: commentContent,
+      });
+
+      if (comment_res.data === 'InsertSuccess') {
+         handleGetComment(ma_sp);
+         toast.success('Bình luận thành công', { position: 'top-center' });
+      }
+      setCommentName('');
+      setCommentContent('');
+      setRate(0);
+   };
+
+   const handleGetComment = async (ma_sp) => {
+      const comment_res = await axios.get('http://localhost:4000/comment/' + ma_sp);
+
+      if (comment_res.data.length > 0) {
+         setProductComments(comment_res.data);
+      } else {
+         console.log('Get comments fail');
+      }
+   };
 
    const handleGetPromotion = async (km_id) => {
       try {
@@ -131,6 +163,18 @@ function ProductDetails() {
 
    const handleShowModal = () => {
       setShowModal(!showModal);
+   };
+
+   const handleRating = (rating_point) => {
+      setRate(rating_point);
+   };
+
+   const handleRenderStar = (sl_star) => {
+      var stars = [];
+      for (let i = 0; i < sl_star; i++) {
+         stars.push(<FontAwesomeIcon className={cn('vote-icon')} icon={faStar} key={i} />);
+      }
+      return stars;
    };
 
    useEffect(() => {
@@ -273,12 +317,14 @@ function ProductDetails() {
                   <h2 className={cn('product-name')}>{productInfo.sp_ten}</h2>
 
                   <div className={cn('product-vote')}>
-                     <span className={cn('vote-rate')}>4.9</span>
+                     <span className={cn('vote-rate')}>{productInfo.sp_rate}</span>
+                     {handleRenderStar(productInfo.sp_rate)}
+
+                     {/* <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
                      <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
                      <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
                      <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
-                     <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
-                     <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
+                     <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} /> */}
                   </div>
 
                   <div className={cn('flex-product-price')}>
@@ -391,6 +437,88 @@ function ProductDetails() {
                   <Button onlytext onClick={handleMoreDetail}>
                      {moreDetail ? 'Thu gọn' : 'Xem thêm'}
                   </Button>
+               </div>
+            </div>
+
+            <div className={cn('product-comments')}>
+               <h3>Đánh giá cho {productInfo.sp_ten}</h3>
+
+               <div className={cn('comment-form')}>
+                  <div className={cn('comment-left-side')}>
+                     <input
+                        className={cn('comment-input')}
+                        placeholder="Tên của bạn (*)"
+                        value={commentName}
+                        onChange={(e) => {
+                           setCommentName(e.target.value);
+                        }}
+                     />
+
+                     <div className={cn('rating')}>
+                        <div>
+                           <ReactStars
+                              className="rating"
+                              count={5}
+                              onChange={handleRating}
+                              size={35}
+                              isHalf={true}
+                              emptyIcon={<i className="far fa-star"></i>}
+                              halfIcon={<i className="fa fa-star-half-alt"></i>}
+                              fullIcon={<i className="fa fa-star"></i>}
+                              activeColor="darkorange"
+                           />
+                        </div>
+                        <span>{rate}/5</span>
+                     </div>
+                  </div>
+
+                  <textarea
+                     className={cn('comment-area')}
+                     rows="5"
+                     placeholder="Nội dung"
+                     value={commentContent}
+                     onChange={(e) => {
+                        setCommentContent(e.target.value);
+                     }}
+                  />
+               </div>
+
+               {rate > 0 && commentName.length > 0 ? (
+                  <div className={cn('comment-action')}>
+                     <div className={cn('comment-btn')}>
+                        <Button thinfont onClick={handleComment}>
+                           Xác nhận
+                        </Button>
+                     </div>
+                  </div>
+               ) : (
+                  <></>
+               )}
+
+               <div className={cn('comment-list')}>
+                  {productComments.length > 0 ? (
+                     productComments.map((comment) => {
+                        return (
+                           <div className={cn('comment')} key={comment.bl_id}>
+                              <div className={cn('comment-header')}>
+                                 <h4>{comment.nd_ten}</h4>
+
+                                 {handleRenderStar(comment.bl_votevalue)}
+                                 {/* <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
+                                 <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
+                                 <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
+                                 <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
+                                 <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} /> */}
+                                 <span className={cn('vote-rate')}>{comment.bl_votevalue}</span>
+                              </div>
+
+                              <p>{comment.bl_noidung}</p>
+                           </div>
+                        );
+                     })
+                  ) : (
+                     <></>
+                  )}
                </div>
             </div>
 
