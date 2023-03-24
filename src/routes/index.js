@@ -35,7 +35,7 @@ export const publicPages = [
    { path: '/detail/:ma_sp', component: ProductDetails },
    { path: '/admin', component: Admin, layout: AdminLayout },
    { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },
-   { path: '/admin/ordermanager', component: OrderManager, layout: AdminLayout },
+   { path: '/admin/ordermanager/:type', component: OrderManager, layout: AdminLayout },
    { path: '/admin/accountsmanager', component: AccountsManager, layout: AdminLayout },
    { path: '/admin/promotion', component: Promotion, layout: AdminLayout },
 ];

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import classNames from 'classnames/bind';
+import { toast } from 'react-toastify';
 
 import styles from './Orders.module.scss';
 import Button from '~/components/Button';
@@ -51,6 +52,39 @@ function Orders() {
             setOrderList(order_list);
          } else {
             console.log('K co don hang');
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const handleCancelOrder = async (ma_dh, slsp, product_list) => {
+      console.log(ma_dh, slsp);
+      try {
+         const cancel_order_res = await axios.post('http://localhost:4000/order/update_status', {
+            ma_dh: ma_dh,
+            trang_thai: 'Cancelled',
+         });
+
+         if (cancel_order_res.data === 'UpdateStatusSuccess') {
+            for (let i = 0; i < slsp; i++) {
+               const update_product_amount_res = await axios.post('http://localhost:4000/product_update_amount_v2', {
+                  ma_sp: product_list[i].product.sp_ma,
+                  type: 'tang',
+                  sl: product_list[i].product.ctdh_sl,
+               });
+
+               if (i + 1 === slsp && update_product_amount_res.data === 'UpdateAmountSuccess') {
+                  handleGetOrderList();
+                  toast.success('Đã hủy đơn hàng' + ma_dh + ' thành công!', {
+                     position: 'top-center',
+                  });
+               }
+            }
+         } else {
+            toast.error('Hủy đơn hàng không thành công!', {
+               position: 'top-center',
+            });
          }
       } catch (error) {
          console.log(error);
@@ -132,7 +166,7 @@ function Orders() {
                      border
                      thinfont
                      onClick={() => {
-                        window.location.pathname = '/orders/Canceled';
+                        window.location.pathname = '/orders/Cancelled';
                      }}
                   >
                      Đã hủy
@@ -191,17 +225,27 @@ function Orders() {
                            </h3>
 
                            <div className={cn('order-actions')}>
-                              <div className={cn('cancel-order-btn')}>
-                                 <Button border thinfont>
-                                    Hủy đơn
-                                 </Button>
-                              </div>
+                              {order.order.dh_trangthai !== 'Cancelled' ? (
+                                 <div className={cn('cancel-order-btn')}>
+                                    <Button
+                                       border
+                                       thinfont
+                                       onClick={() =>
+                                          handleCancelOrder(order.order.dh_ma, order.order.dh_slsp, order.product_list)
+                                       }
+                                    >
+                                       Hủy đơn
+                                    </Button>
+                                 </div>
+                              ) : (
+                                 <></>
+                              )}
                            </div>
                         </div>
                      );
                   })
                ) : (
-                  <></>
+                  <div>Bạn chưa có đơn nào!</div>
                )}
             </div>
          </div>

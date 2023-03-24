@@ -51,8 +51,15 @@
 }
 
 .change-order-status {
-   width: 160px;
-   margin-right: 10px;
+   width: 180px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   & .select-status {
+      height: 30px;
+      font-size: 1.8rem;
+   }
 }
 
 .products-list {

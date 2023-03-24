@@ -5,16 +5,13 @@ import styles from './Account.module.scss';
 
 const cn = classNames.bind(styles);
 
-function Account() {
+function Account({ image, ten_nd }) {
    return (
       <div className={cn('wrapper')}>
          <div className={cn('inner-contents')}>
-            <img
-               src="https://www.otakupt.com/wp-content/uploads/2022/10/Chainsaw-Man-op-screenshot-2.jpg"
-               alt="Avatar"
-            />
+            <img src={'http://localhost:4000/' + image} alt="Avatar" />
 
-            <h3>Nguyen Nguyen Minh</h3>
+            <h3>{ten_nd}</h3>
 
             <div className={cn('acc-btn')}>
                <Button onlytext thinfont>

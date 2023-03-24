@@ -48,7 +48,7 @@ function SubmitPay() {
                sl_sp: listProducts.length,
                tong_tien: total + ship.gia,
                htgh: ship.ten,
-               httt: 'COD',
+               httt: payment.type,
                ghi_chu: orderNote,
                ds_sp: listProducts,
             });
