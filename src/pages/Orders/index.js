@@ -49,7 +49,7 @@ function Orders() {
                order_list.push({ order: order_list_res.data[i], product_list: detail_list });
             }
 
-            setOrderList(order_list);
+            setOrderList(order_list.reverse());
          } else {
             console.log('K co don hang');
          }
@@ -225,7 +225,7 @@ function Orders() {
                            </h3>
 
                            <div className={cn('order-actions')}>
-                              {order.order.dh_trangthai !== 'Cancelled' ? (
+                              {order.order.dh_trangthai === 'Pending' ? (
                                  <div className={cn('cancel-order-btn')}>
                                     <Button
                                        border

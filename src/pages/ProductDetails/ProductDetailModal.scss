@@ -1,4 +1,4 @@
-.overlay-modal {
+.zoom-overlay-modal {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -12,9 +12,13 @@
    background-color: rgba(#ececec, 0.7);
 }
 
-.modal-contents {
-   min-width: fit-content;
+.zoom-modal-contents {
+   width: fit-content;
    height: fit-content;
+
+   position: absolute;
+   top: 0;
+
    background-color: rgb(255, 255, 255);
    border: 1px solid #777 !important;
    border-radius: 5px;

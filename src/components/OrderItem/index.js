@@ -99,23 +99,27 @@ function OrderItem({ checked, order_list, product_list, confirmed, handle_get_or
                   </div>
                ) : (
                   <div className={cn('change-order-status')}>
-                     <select
-                        className={cn('select-status')}
-                        defaultValue={order_list.dh_trangthai}
-                        onChange={(e) => {
-                           handleUpdateStatus(e.target.value);
-                        }}
-                     >
-                        <option className={cn('select-status-item')} value="Preparing">
-                           Chờ lấy hàng
-                        </option>
-                        <option className={cn('select-status-item')} value="Delivering">
-                           Đang giao
-                        </option>
-                        <option className={cn('select-status-item')} value="Delivered">
-                           Đã giao
-                        </option>
-                     </select>
+                     {order_list.dh_trangthai !== 'Cancelled' ? (
+                        <select
+                           className={cn('select-status')}
+                           defaultValue={order_list.dh_trangthai}
+                           onChange={(e) => {
+                              handleUpdateStatus(e.target.value);
+                           }}
+                        >
+                           <option className={cn('select-status-item')} value="Preparing">
+                              Chờ lấy hàng
+                           </option>
+                           <option className={cn('select-status-item')} value="Delivering">
+                              Đang giao
+                           </option>
+                           <option className={cn('select-status-item')} value="Delivered">
+                              Đã giao
+                           </option>
+                        </select>
+                     ) : (
+                        <span>Đã hủy</span>
+                     )}
                   </div>
                )}
             </div>

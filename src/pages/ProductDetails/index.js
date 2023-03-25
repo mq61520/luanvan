@@ -5,7 +5,7 @@ import { Pagination, Navigation } from 'swiper';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faMinus, faPlus, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-// import ReactModal from 'react-modal';
+import ReactModal from 'react-modal';
 import ReactStars from 'react-rating-stars-component';
 import { toast } from 'react-toastify';
 
@@ -154,6 +154,10 @@ function ProductDetails() {
       document.querySelector('#preview-img').src = e.target.src;
    };
 
+   const handlePreviewZoom = (e) => {
+      document.querySelector('#main-image').src = e.target.src;
+   };
+
    const handleMoreDetail = () => {
       if (moreDetail) {
          window.scrollTo(0, 650);
@@ -229,88 +233,54 @@ function ProductDetails() {
                      onClick={handleShowModal}
                   />
 
-                  {/* <div className={cn('zoom-images')}>
-                     <ReactModal
-                        isOpen={showModal}
-                        onRequestClose={handleShowModal}
-                        overlayClassName="overlay-modal"
-                        className="modal-contents"
-                     >
-                        <div className={cn('detail-images')}>
-                           <img
-                              className={cn('main-image')}
-                              id="main-image"
-                              src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                              alt="Ảnh sản phẩm"
-                           />
+                  <ReactModal
+                     isOpen={showModal}
+                     onRequestClose={handleShowModal}
+                     overlayClassName="zoom-overlay-modal"
+                     className="zoom-modal-contents"
+                  >
+                     <div className={cn('detail-images')}>
+                        <img
+                           className={cn('main-image')}
+                           id="main-image"
+                           src={'http://localhost:4000/' + productInfo.sp_image}
+                           alt="Ảnh sản phẩm"
+                        />
 
-                           <div className={cn('slide-detail-images')}>
-                              <Swiper
-                                 slidesPerView={4}
-                                 spaceBetween={7}
-                                 loop={true}
-                                 pagination={{
-                                    clickable: true,
-                                    enabled: false,
-                                 }}
-                                 navigation={true}
-                                 modules={[Pagination, Navigation]}
-                                 className="preview-detail-swiper"
-                              >
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                                 <SwiperSlide>
-                                    <img
-                                       className={cn('preview-slide-image')}
-                                       src="https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/02/kinh-mat-coach-fashion-men-s-matte-black-sunglasses-hc7121-93806g-58-mau-den-63e35fe29a59e-08022023154002.jpg"
-                                       alt="Ảnh sản phẩm"
-                                    />
-                                 </SwiperSlide>
-                              </Swiper>
-                           </div>
+                        <div className={cn('slide-detail-images')}>
+                           <Swiper
+                              direction={'vertical'}
+                              slidesPerView={6}
+                              spaceBetween={5}
+                              loop={true}
+                              pagination={{
+                                 clickable: true,
+                                 enabled: false,
+                              }}
+                              navigation={true}
+                              modules={[Pagination, Navigation]}
+                              className="preview-detail-swiper"
+                           >
+                              {productImgaes.length > 0 ? (
+                                 productImgaes.map((image) => {
+                                    return (
+                                       <SwiperSlide key={image.ha_id}>
+                                          <img
+                                             className={cn('preview-slide-image')}
+                                             src={'http://localhost:4000/' + image.ha_ten}
+                                             alt="Hình ảnh sản phẩm"
+                                             onClick={handlePreviewZoom}
+                                          />
+                                       </SwiperSlide>
+                                    );
+                                 })
+                              ) : (
+                                 <></>
+                              )}
+                           </Swiper>
                         </div>
-                     </ReactModal>
-                  </div> */}
+                     </div>
+                  </ReactModal>
                </div>
 
                <div className={cn('product-info')}>
