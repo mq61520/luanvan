@@ -57,6 +57,15 @@ function Header() {
                   <span>Trang chủ</span>
                </div>
 
+               <div
+                  className={cn('nav-item')}
+                  onClick={() => {
+                     window.open('http://localhost:3000/all_product', '_self');
+                  }}
+               >
+                  <span>Sản phẩm</span>
+               </div>
+
                <Tippy
                   interactive
                   render={(attrs) => (
@@ -118,7 +127,7 @@ function Header() {
                         window.open('http://localhost:3000/products/all', '_self');
                      }}
                   >
-                     <span>Sản phẩm</span>
+                     <span>Danh mục</span>
                   </div>
                </Tippy>
 
