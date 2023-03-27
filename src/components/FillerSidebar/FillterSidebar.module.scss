@@ -1,0 +1,55 @@
+.wrapper {
+   min-width: 300px;
+   height: fit-content;
+
+   & .inner-contents {
+      & h4 {
+         font-size: 2rem;
+         font-weight: 700;
+         padding: 5px 5px;
+      }
+
+      & .fillter-type {
+         & h4 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            background-color: lightblue;
+            padding: 5px 5px;
+         }
+
+         & .fillter-list {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+
+            & .fillter-item {
+               display: flex;
+               align-items: center;
+               padding: 5px 0;
+            }
+
+            & input {
+               width: 20px;
+               height: 20px;
+               margin-left: 5px;
+            }
+
+            & span {
+               font-size: 1.8rem;
+               font-weight: 400;
+               padding: 0 5px;
+            }
+         }
+      }
+
+      & .range {
+         width: 300px;
+         margin-top: 10px;
+      }
+
+      & .filter-btn {
+         width: fit-content;
+         margin-top: 20px;
+      }
+   }
+}

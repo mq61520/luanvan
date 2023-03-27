@@ -60,7 +60,7 @@ function Header() {
                <div
                   className={cn('nav-item')}
                   onClick={() => {
-                     window.open('http://localhost:3000/all_product', '_self');
+                     window.open('http://localhost:3000/all_product/all', '_self');
                   }}
                >
                   <span>Sản phẩm</span>
