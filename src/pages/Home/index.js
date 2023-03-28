@@ -9,6 +9,7 @@ import 'swiper/scss/navigation';
 import styles from './Home.module.scss';
 import './Home.scss';
 import Product from '~/components/Product/index';
+import Button from '~/components/Button/index';
 
 const cn = classNames.bind(styles);
 
@@ -91,6 +92,29 @@ function Home() {
                   <Product />
                </div>
             </div> */}
+
+            <div className={cn('recommend-product')}>
+               <div>
+                  <h1>Tìm kiếm gọng kính phù hợp với gương mặt của bạn</h1>
+
+                  <p>
+                     Sẽ dễ dàng để tìm kiếm một chiếc kính phù hợp khi bạn biết hình dạng gương mặt của mình. Nhấn{' '}
+                     <b>Bắt đầu</b> để tiến hành.
+                  </p>
+               </div>
+
+               <div className={cn('recommend-btn')}>
+                  <Button
+                     thinfont
+                     border
+                     onClick={() => {
+                        window.open('http://localhost:3000/recommend-glasses', '_self');
+                     }}
+                  >
+                     Bắt đầu
+                  </Button>
+               </div>
+            </div>
 
             <div className={cn('hot-products')}>
                <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>

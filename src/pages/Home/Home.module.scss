@@ -63,6 +63,33 @@
    gap: 15px;
 }
 
+.recommend-product {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   margin-top: 50px;
+   padding: 20px 20px;
+   background-color: lightblue;
+
+   & h1 {
+      font-size: 4rem;
+      font-weight: 400;
+      padding: 10px 0;
+   }
+
+   & p {
+      width: 600px;
+      margin-top: 5px;
+      font-size: 1.8rem;
+   }
+
+   & .recommend-btn {
+      width: fit-content;
+      margin-top: 50px;
+   }
+}
+
 .hot-products {
    width: 1245px;
 }

@@ -12,6 +12,7 @@ import Brand from '~/pages/Brand';
 import Products from '~/pages/Products';
 import Promotion from '~/pages/Promotion/index';
 import AllProduct from '~/pages/AllProduct/index';
+import Recommend from '~/pages/Recommend/index';
 
 //admin
 import Admin from '~/pages/Admin';
@@ -36,6 +37,7 @@ export const publicPages = [
    { path: '/orders', component: Orders },
    { path: '/orders/:order_status', component: Orders },
    { path: '/detail/:ma_sp', component: ProductDetails },
+   { path: '/recommend-glasses', component: Recommend },
    { path: '/admin', component: Admin, layout: AdminLayout },
    { path: '/admin/productsmanager', component: ProductsManager, layout: AdminLayout },
    { path: '/admin/ordermanager/:type', component: OrderManager, layout: AdminLayout },
