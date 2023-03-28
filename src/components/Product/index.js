@@ -24,7 +24,9 @@ function Product({ ma_sp, img, name, price, km }) {
                <></>
             )}
 
-            <img src={newimg} alt="Product imgae" />
+            <div className={cn('product-image')}>
+               <img src={newimg} alt="Product imgae" />
+            </div>
 
             <div className={cn('product-title')}>
                <h3>{name}</h3>

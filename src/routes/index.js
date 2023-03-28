@@ -32,7 +32,7 @@ export const publicPages = [
    { path: '/pay', component: SubmitPay },
    { path: '/brand/:id', component: Brand },
    { path: '/products/:id', component: Products },
-   { path: '/all_product/:conditions', component: AllProduct, layout: FilterLayout },
+   { path: '/all_product/:conditions', component: AllProduct },
    { path: '/orders', component: Orders },
    { path: '/orders/:order_status', component: Orders },
    { path: '/detail/:ma_sp', component: ProductDetails },
