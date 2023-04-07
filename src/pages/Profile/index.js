@@ -59,6 +59,8 @@ function Profile() {
          console.log('No image');
          await toast.error('No image', { position: 'top-center' });
          return;
+      } else {
+         handleLoadInfo();
       }
    };
 
@@ -116,30 +118,28 @@ function Profile() {
                />
 
                <section>
-                  <form onSubmit={handleUploadAvatar}>
-                     <span>Cập nhật ảnh đại diện</span>
+                  <span>Cập nhật ảnh đại diện</span>
 
-                     <input
-                        className={cn('change-avatar-btn')}
-                        type="file"
-                        accept=".jpg, .jpeg, .png"
-                        onChange={(e) => {
-                           setAvatarUpload(e.target.files);
-                        }}
-                     />
+                  <input
+                     className={cn('change-avatar-btn')}
+                     type="file"
+                     accept=".jpg, .jpeg, .png"
+                     onChange={(e) => {
+                        setAvatarUpload(e.target.files);
+                     }}
+                  />
 
-                     {/* <button type="button">Upload</button> */}
+                  {/* <button type="button">Upload</button> */}
 
-                     {/* {avatarUpload ? ( */}
-                     {/* <div className={cn('upload-btn')}>
-                        <Button thinfont border>
-                           Cập nhật
-                        </Button>
-                     </div> */}
-                     {/* ) : (
+                  {/* {avatarUpload ? ( */}
+                  <div className={cn('upload-btn')}>
+                     <Button thinfont border onClick={handleUploadAvatar}>
+                        Cập nhật
+                     </Button>
+                  </div>
+                  {/* ) : (
                         <></>
                      )} */}
-                  </form>
                </section>
             </div>
 
