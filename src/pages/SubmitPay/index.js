@@ -39,7 +39,7 @@ function SubmitPay() {
 
    const handleOrder = async () => {
       try {
-         if (address.length < 0 || phoneNum.length < 0) {
+         if (address.length < 0 && phoneNum.length < 0) {
             toast.warn('Bạn cần cập nhật địa chỉ và số điện thoại.', { position: 'top-center' });
          } else {
             if ((payment.type === 'Paypal' && payment.status === 'Paid') || payment.type === 'COD') {
@@ -77,6 +77,8 @@ function SubmitPay() {
                      cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
                   });
                   toast.success('Đặt hàng thành công!', { position: 'top-center' });
+
+                  handleAddPurchase();
                } else {
                   toast.success('Đặt hàng không thành công!', { position: 'top-center' });
                }
@@ -84,6 +86,18 @@ function SubmitPay() {
                toast.warn('Hãy thanh toán trước!', { position: 'top-center' });
             }
          }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const handleAddPurchase = async () => {
+      try {
+         await axios.post('http://localhost:4000/recombee/add_purchase', {
+            itemsId: listProducts,
+            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+            timestamp: new Date(new Date().getTime()).toLocaleString('en-US'),
+         });
       } catch (error) {
          console.log(error);
       }

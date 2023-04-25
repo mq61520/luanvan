@@ -161,7 +161,7 @@ function AllProduct() {
                         <div className={cn('fillter-item')}>
                            <input
                               type="checkbox"
-                              value="kinh-nam"
+                              value="Kính nam"
                               onChange={(e) => handleCheckCategory(e.target.value)}
                            />
                            <span>Kính nam</span>
@@ -169,7 +169,7 @@ function AllProduct() {
                         <div className={cn('fillter-item')}>
                            <input
                               type="checkbox"
-                              value="kinh-nu"
+                              value="Kính nữ"
                               onChange={(e) => handleCheckCategory(e.target.value)}
                            />
                            <span>Kính nữ</span>
@@ -177,7 +177,7 @@ function AllProduct() {
                         <div className={cn('fillter-item')}>
                            <input
                               type="checkbox"
-                              value="unisex"
+                              value="Kính unisex"
                               onChange={(e) => handleCheckCategory(e.target.value)}
                            />
                            <span>Kính Unisex</span>
@@ -185,7 +185,7 @@ function AllProduct() {
                         <div className={cn('fillter-item')}>
                            <input
                               type="checkbox"
-                              value="kinh-tre-em"
+                              value="Kính trẻ em"
                               onChange={(e) => handleCheckCategory(e.target.value)}
                            />
                            <span>Kính trẻ em</span>
@@ -228,9 +228,10 @@ function AllProduct() {
             <div>
                {msg.length > 0 ? <div className={cn('message')}>{msg}</div> : <></>}
 
-               <h2 style={{ marginBottom: '10px', fontSize: '1.8rem', fontWeight: '400' }}>
+               {/* <h2 style={{ marginBottom: '10px', fontSize: '1.8rem', fontWeight: '400' }}>
                   Có {products.length} sản phẩm
-               </h2>
+               </h2> */}
+
                <div className={cn('products-list')}>
                   {productsFilter.length > 0
                      ? productsFilter.map((product) => {
