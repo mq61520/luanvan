@@ -228,6 +228,9 @@ function AllProduct() {
             <div>
                {msg.length > 0 ? <div className={cn('message')}>{msg}</div> : <></>}
 
+               <h2 style={{ marginBottom: '10px', fontSize: '1.8rem', fontWeight: '400' }}>
+                  Có {products.length} sản phẩm
+               </h2>
                <div className={cn('products-list')}>
                   {productsFilter.length > 0
                      ? productsFilter.map((product) => {

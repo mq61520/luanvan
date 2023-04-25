@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import axios from 'axios';
 import classNames from 'classnames/bind';
 
@@ -12,6 +12,18 @@ function Product({ ma_sp, img, name, price, km }) {
    if (img) {
       var newimg = 'http://localhost:4000/' + img;
    }
+
+   const handleAddViewDetail = async () => {
+      try {
+         await axios.post('http://localhost:4000/recombee/add_detail_view', {
+            itemId: ma_sp,
+            userId: localStorage.getItem('user_name'),
+            timestamp: new Date(new Date().getTime()).toLocaleString('en-US'),
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
    return (
       <div className={cn('wrapper')}>
@@ -43,6 +55,7 @@ function Product({ ma_sp, img, name, price, km }) {
                   thinfont
                   onClick={() => {
                      window.location.pathname = `/detail/${ma_sp}`;
+                     handleAddViewDetail();
                   }}
                >
                   Chi tiết

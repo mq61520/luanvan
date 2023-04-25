@@ -17,6 +17,10 @@
    & .item {
       width: fit-content;
       padding: 5px;
+
+      & :hover {
+         cursor: pointer;
+      }
    }
 }
 

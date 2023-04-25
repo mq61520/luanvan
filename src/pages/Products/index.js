@@ -9,6 +9,7 @@ import Product from '~/components/Product';
 const cn = classNames.bind(styles);
 
 function Products() {
+   document.title = 'Tìm sản phẩm';
    var type_product = window.location.pathname.slice(10).toString();
 
    const [products, setProducts] = useState([]);

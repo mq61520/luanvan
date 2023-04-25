@@ -39,46 +39,50 @@ function SubmitPay() {
 
    const handleOrder = async () => {
       try {
-         if ((payment.type === 'Paypal' && payment.status === 'Paid') || payment.type === 'COD') {
-            const order_res = await axios.post('http://localhost:4000/order/add', {
-               user_id: current_user_id,
-               ngay_lap: new Date().toISOString().slice(0, 10),
-               dia_chi: address,
-               sdt: phoneNum,
-               sl_sp: listProducts.length,
-               tong_tien: total + ship.gia,
-               htgh: ship.ten,
-               httt: payment.type,
-               ghi_chu: orderNote,
-               ds_sp: listProducts,
-            });
-
-            if (listPay.listPay[0].location === 'NotCart') {
-               const update_res = await axios.post('http://localhost:4000/product_update_amount', {
-                  ma_sp: listPay.listPay[0].ma_sp,
-                  sl: listPay.listPay[0].ton_kho,
-               });
-
-               if (update_res.data === 'UpdateAmountSuccess') {
-                  console.log('UpdateAmountSuccess');
-               } else {
-                  console.log('UpdateAmountFail');
-               }
-            } else if (listPay.listPay.location === 'Cart') {
-            }
-
-            if (order_res.data === 'InsertSuccess') {
-               setOrderStatus(false);
-               setListPay({
-                  ...listPay,
-                  cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
-               });
-               toast.success('Đặt hàng thành công!', { position: 'top-center' });
-            } else {
-               toast.success('Đặt hàng không thành công!', { position: 'top-center' });
-            }
+         if (address.length < 0 || phoneNum.length < 0) {
+            toast.warn('Bạn cần cập nhật địa chỉ và số điện thoại.', { position: 'top-center' });
          } else {
-            toast.warn('Hãy thanh toán trước!', { position: 'top-center' });
+            if ((payment.type === 'Paypal' && payment.status === 'Paid') || payment.type === 'COD') {
+               const order_res = await axios.post('http://localhost:4000/order/add', {
+                  user_id: current_user_id,
+                  ngay_lap: new Date().toISOString().slice(0, 10),
+                  dia_chi: address,
+                  sdt: phoneNum,
+                  sl_sp: listProducts.length,
+                  tong_tien: total + ship.gia,
+                  htgh: ship.ten,
+                  httt: payment.type,
+                  ghi_chu: orderNote,
+                  ds_sp: listProducts,
+               });
+
+               if (listPay.listPay[0].location === 'NotCart') {
+                  const update_res = await axios.post('http://localhost:4000/product_update_amount', {
+                     ma_sp: listPay.listPay[0].ma_sp,
+                     sl: listPay.listPay[0].ton_kho,
+                  });
+
+                  if (update_res.data === 'UpdateAmountSuccess') {
+                     console.log('UpdateAmountSuccess');
+                  } else {
+                     console.log('UpdateAmountFail');
+                  }
+               } else if (listPay.listPay.location === 'Cart') {
+               }
+
+               if (order_res.data === 'InsertSuccess') {
+                  setOrderStatus(false);
+                  setListPay({
+                     ...listPay,
+                     cartCount: listPay.cartCount === 0 ? 0 : listPay.cartCount - listPay.listPay.length,
+                  });
+                  toast.success('Đặt hàng thành công!', { position: 'top-center' });
+               } else {
+                  toast.success('Đặt hàng không thành công!', { position: 'top-center' });
+               }
+            } else {
+               toast.warn('Hãy thanh toán trước!', { position: 'top-center' });
+            }
          }
       } catch (error) {
          console.log(error);

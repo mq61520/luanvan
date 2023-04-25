@@ -9,6 +9,7 @@ import OrderItem from '~/components/OrderItem/index';
 const cn = classNames.bind(styles);
 
 function Admin() {
+   document.title = 'Trang chủ';
    const [orderList, setOrderList] = useState([]);
 
    const handleGetOrderList = async () => {

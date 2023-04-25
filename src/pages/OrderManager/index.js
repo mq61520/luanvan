@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 const cn = classNames.bind(styles);
 
 function OrderManager() {
+   document.title = 'Quản lý đơn hàng';
    const [orderList, setOrderList] = useState([]);
 
    const handleGetOrderList = async () => {

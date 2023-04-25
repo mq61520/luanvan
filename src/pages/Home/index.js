@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames/bind';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper';
@@ -9,12 +11,55 @@ import 'swiper/scss/navigation';
 import styles from './Home.module.scss';
 import './Home.scss';
 import Product from '~/components/Product/index';
-import Button from '~/components/Button/index';
+// import Button from '~/components/Button/index';
 
 const cn = classNames.bind(styles);
 
 function Home() {
    document.title = 'Store';
+
+   const [productList, setProductList] = useState([]);
+
+   const handleGetRecommend = async () => {
+      try {
+         const recomms_res = await axios.post('http://localhost:4000/recombee/get_items_for_user', {
+            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+         });
+         console.log(recomms_res);
+
+         if (recomms_res.data.length > 0) {
+            var list = [];
+            for (let i = 0; i < recomms_res.data.length; i++) {
+               const get_product_res = await axios.get('http://localhost:4000/product_id/' + recomms_res.data[i].id);
+
+               if (get_product_res.data.length > 0) {
+                  const get_km_res = await axios.get(
+                     'http://localhost:4000/promotion_id/' + get_product_res.data[0].sp_khuyenmai,
+                  );
+
+                  if (get_km_res.data.length > 0) {
+                     list.push({ km: get_km_res.data[0].km_value, product: get_product_res.data[0] });
+                  } else {
+                     list.push({ km: null, product: get_product_res.data[0] });
+                  }
+                  console.log(list);
+               } else {
+                  console.log('Load fail');
+               }
+            }
+
+            setProductList(list);
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   useEffect(() => {
+      handleGetRecommend();
+   }, []);
+
+   console.log(productList);
 
    return (
       <div className={cn('wrapper')}>
@@ -93,7 +138,7 @@ function Home() {
                </div>
             </div> */}
 
-            <div className={cn('recommend-product')}>
+            {/* <div className={cn('recommend-product')}>
                <div>
                   <h1>Tìm kiếm gọng kính phù hợp với gương mặt của bạn</h1>
 
@@ -114,7 +159,7 @@ function Home() {
                      Bắt đầu
                   </Button>
                </div>
-            </div>
+            </div> */}
 
             <div className={cn('hot-products')}>
                <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>
@@ -129,32 +174,28 @@ function Home() {
                      modules={[Pagination, Navigation]}
                      className="hot-product-list-swiper"
                   >
-                     <SwiperSlide>
-                        <Product sale />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product sale />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
+                     {productList.length > 0 ? (
+                        productList.map((product) => {
+                           return (
+                              <SwiperSlide key={product.product.sp_ma}>
+                                 <Product
+                                    ma_sp={product.product.sp_ma}
+                                    img={product.product.sp_image}
+                                    name={product.product.sp_ten}
+                                    price={product.product.sp_gia}
+                                    km={product.km}
+                                 />
+                              </SwiperSlide>
+                           );
+                        })
+                     ) : (
+                        <></>
+                     )}
                   </Swiper>
                </div>
             </div>
 
-            <div className={cn('viewed-products')}>
+            {/* <div className={cn('viewed-products')}>
                <h1 className={cn('title-list')}>Sản phẩm đã xem</h1>
 
                <div className={cn('viewed-products-list')}>
@@ -193,7 +234,7 @@ function Home() {
                      </SwiperSlide>
                   </Swiper>
                </div>
-            </div>
+            </div> */}
          </div>
       </div>
    );

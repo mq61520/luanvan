@@ -32,14 +32,14 @@ function Sidebar() {
                      Khuyến mãi
                   </Button>
                </div>
-               <div className={cn('category-item')}>
+               {/* <div className={cn('category-item')}>
                   <Button border to={'/admin/accountsmanager'}>
                      Quản lý tài khoản
                   </Button>
                </div>
                <div className={cn('category-item')}>
                   <Button border>Thống kê hàng hóa</Button>
-               </div>
+               </div> */}
             </div>
          </div>
       </div>

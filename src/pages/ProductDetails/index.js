@@ -39,6 +39,7 @@ function ProductDetails() {
    const [productInfo, setProductInfo] = useState('');
    const [productImgaes, setProductImages] = useState([]);
    const [productComments, setProductComments] = useState([]);
+   const [productList, setProductList] = useState([]);
 
    const handleGetProductInfo = async () => {
       const product_info = await axios.get('http://localhost:4000/product_id/' + ma_sp);
@@ -150,6 +151,39 @@ function ProductDetails() {
       }
    };
 
+   const handleGetRecommend = async () => {
+      try {
+         const recomms_res = await axios.post('http://localhost:4000/recombee/get_items_for_item', {
+            itemId: ma_sp,
+            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+         });
+         // console.log(recomms_res);
+
+         if (recomms_res.data.length > 0) {
+            var list = [];
+            for (let i = 0; i < recomms_res.data.length; i++) {
+               const get_product_res = await axios.get('http://localhost:4000/product_id/' + recomms_res.data[i].id);
+
+               if (get_product_res.data.length > 0) {
+                  const get_km_res = await axios.get(
+                     'http://localhost:4000/promotion_id/' + get_product_res.data[0].sp_khuyenmai,
+                  );
+
+                  if (get_km_res.data.length > 0) {
+                     list.push({ km: get_km_res.data[0].km_value, product: get_product_res.data[0] });
+                  } else {
+                     list.push({ km: null, product: get_product_res.data[0] });
+                  }
+               }
+            }
+
+            setProductList(list);
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    const handlePreview = (e) => {
       document.querySelector('#preview-img').src = e.target.src;
    };
@@ -185,7 +219,10 @@ function ProductDetails() {
       window.scrollTo(0, 0);
       handleGetProductInfo();
       setCartAmount({ ...cartAmount, listPay: [] });
+      handleGetRecommend();
    }, []);
+
+   console.log(productList);
 
    return (
       <div className={cn('wrapper')}>
@@ -284,10 +321,20 @@ function ProductDetails() {
                </div>
 
                <div className={cn('product-info')}>
+                  {productInfo ? (
+                     <h2 style={{ marginBottom: '10px', fontSize: '2.2rem', fontWeight: '500' }}>
+                        {productInfo.sp_thuonghieu.toUpperCase()}
+                     </h2>
+                  ) : (
+                     <></>
+                  )}
+
                   <h2 className={cn('product-name')}>{productInfo.sp_ten}</h2>
 
                   <div className={cn('product-vote')}>
-                     <span className={cn('vote-rate')}>{productInfo.sp_rate}</span>
+                     <span className={cn('vote-rate')}>
+                        Đánh giá: {productInfo.sp_rate === 0 ? 'Chưa đánh giá' : productInfo.sp_rate}
+                     </span>
                      {handleRenderStar(productInfo.sp_rate)}
 
                      {/* <FontAwesomeIcon className={cn('vote-icon')} icon={faStar} />
@@ -298,12 +345,20 @@ function ProductDetails() {
                   </div>
 
                   <div className={cn('flex-product-price')}>
-                     <h2 className={cn('product-discount')}>{currencyFormater.format(productInfo.sp_gia)}</h2>
-                     <h2 className={cn('product-price')}>
-                        {currencyFormater.format(productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100)}
-                     </h2>
+                     {productInfo.sp_khuyenmai !== null ? (
+                        <>
+                           <h2 className={cn('product-discount')}>{currencyFormater.format(productInfo.sp_gia)}</h2>
+                           <h2 className={cn('product-price')}>
+                              {currencyFormater.format(productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100)}
+                           </h2>
+                        </>
+                     ) : (
+                        <h2 className={cn('product-price')}>
+                           {currencyFormater.format(productInfo.sp_gia - (productInfo.sp_gia * promotion) / 100)}
+                        </h2>
+                     )}
 
-                     {promotion ? (
+                     {productInfo.sp_khuyenmai !== null ? (
                         <div className={cn('discount-flag')}>
                            <span>giảm {promotion}%</span>
                         </div>
@@ -342,7 +397,7 @@ function ProductDetails() {
 
                      <div className={cn('product-instock')}>
                         <span>Tồn kho: </span>
-                        {productInfo.sp_trangthai > 0 ? (
+                        {productInfo.sp_tonkho > 0 ? (
                            <span className={cn('stocking')}>{productInfo.sp_tonkho}</span>
                         ) : (
                            <></>
@@ -508,27 +563,23 @@ function ProductDetails() {
                      modules={[Pagination, Navigation]}
                      className="hot-product-list-swiper"
                   >
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
-                     <SwiperSlide>
-                        <Product />
-                     </SwiperSlide>
+                     {productList.length > 0 ? (
+                        productList.map((product) => {
+                           return (
+                              <SwiperSlide key={product.product.sp_ma}>
+                                 <Product
+                                    ma_sp={product.product.sp_ma}
+                                    img={product.product.sp_image}
+                                    name={product.product.sp_ten}
+                                    price={product.product.sp_gia}
+                                    km={product.km}
+                                 />
+                              </SwiperSlide>
+                           );
+                        })
+                     ) : (
+                        <></>
+                     )}
                   </Swiper>
                </div>
             </div>

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import * as faceapi from 'face-api.js';
 import classNames from 'classnames/bind';
-import { toast } from 'react-toastify';
 
 import styles from './Recommend.module.scss';
 import Button from '~/components/Button/index';
@@ -18,11 +17,7 @@ function Recommend() {
    const [img, setImg] = useState('');
 
    const handleDetection = async () => {
-      const detection = await faceapi
-         .detectAllFaces(imgRef.current)
-         .withFaceLandmarks()
-         .withFaceDescriptors()
-         .withAgeAndGender();
+      const detection = await faceapi.detectAllFaces(imgRef.current).withFaceLandmarks().withFaceDescriptors();
 
       canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
 
@@ -52,10 +47,7 @@ function Recommend() {
          Promise.all([
             faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
             faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-            faceapi.nets.ageGenderNet.loadFromUri('/models'),
             faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-            // faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-            // faceapi.nets.faceExpressionNet.loadFromUri("/models"),
          ])
             .then(() => {
                console.log('Loaded models');

@@ -10,6 +10,8 @@ import currencyFormater from '~/common/formatCurrency';
 const cn = classNames.bind(styles);
 
 function Orders() {
+   document.title = 'Đơn hàng';
+
    var user_id = localStorage.getItem('current_user');
 
    const [orderList, setOrderList] = useState([]);
@@ -107,6 +109,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/all';
+                        document.title = 'Tất cả đơn hàng';
                      }}
                   >
                      Tất cả
@@ -119,6 +122,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/Pending';
+                        document.title = 'Đơn hàng chờ xác nhận';
                      }}
                   >
                      Chờ xác nhận
@@ -131,6 +135,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/Preparing';
+                        document.title = 'Đơn hàng đang chuẩn bị';
                      }}
                   >
                      Chuẩn bị hàng
@@ -143,6 +148,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/Delivering';
+                        document.title = 'Đơn hàng đang giao';
                      }}
                   >
                      Đang giao
@@ -155,6 +161,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/Delivered';
+                        document.title = 'Đơn hàng đã giao';
                      }}
                   >
                      Đã giao
@@ -167,6 +174,7 @@ function Orders() {
                      thinfont
                      onClick={() => {
                         window.location.pathname = '/orders/Cancelled';
+                        document.title = 'Đơn hàng đã hủy';
                      }}
                   >
                      Đã hủy
