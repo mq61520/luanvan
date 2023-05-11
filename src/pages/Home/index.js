@@ -23,7 +23,7 @@ function Home() {
    const handleGetRecommend = async () => {
       try {
          const recomms_res = await axios.post('http://localhost:4000/recombee/get_items_for_user', {
-            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+            userId: localStorage.getItem('current_user') === null ? 'unknown' : localStorage.getItem('current_user'),
          });
          console.log(recomms_res);
 
@@ -49,6 +49,8 @@ function Home() {
             }
 
             setProductList(list);
+         } else {
+            console.log(' k có sp recom');
          }
       } catch (error) {
          console.log(error);
@@ -162,7 +164,7 @@ function Home() {
             </div> */}
 
             <div className={cn('hot-products')}>
-               <h1 className={cn('title-list')}>Sản phẩm nổi bật</h1>
+               <h1 className={cn('title-list')}>Sản phẩm bạn có thể quan tâm</h1>
 
                <div className={cn('hot-products-list')}>
                   <Swiper

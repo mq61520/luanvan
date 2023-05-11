@@ -7,6 +7,7 @@ import currencyFormater from '~/common/formatCurrency';
 import CartItem from '~/components/CartItem/index';
 import Button from '~/components/Button/index';
 import { CartContext } from '~/globalState/Context';
+import { toast } from 'react-toastify';
 
 const cn = classNames.bind(styles);
 

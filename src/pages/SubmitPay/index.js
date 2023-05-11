@@ -18,7 +18,7 @@ const cn = classNames.bind(styles);
 function SubmitPay() {
    const current_user_id = localStorage.getItem('current_user');
    const paypalOptions = {
-      'client-id': 'AZewCHfWcdEwAmM_zOP89cZd6REQ_kqITKzXGQ9e089gv5opcDITpede4e4OhgBbzuNRPom-Hus4b0BV',
+      'client-id': 'AYyRYx-U9NtmJnlgAdILj9GM9l9GPW9LYRmFoeJ4J9JITKkKq_18zyGjujIxIYpdXyAgEzg8urAL2v2D',
    };
 
    const [listPay, setListPay] = useContext(CartContext);
@@ -39,7 +39,7 @@ function SubmitPay() {
 
    const handleOrder = async () => {
       try {
-         if (address.length < 0 && phoneNum.length < 0) {
+         if (address.length <= 0 && phoneNum.length <= 0) {
             toast.warn('Bạn cần cập nhật địa chỉ và số điện thoại.', { position: 'top-center' });
          } else {
             if ((payment.type === 'Paypal' && payment.status === 'Paid') || payment.type === 'COD') {
@@ -95,7 +95,7 @@ function SubmitPay() {
       try {
          await axios.post('http://localhost:4000/recombee/add_purchase', {
             itemsId: listProducts,
-            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+            userId: localStorage.getItem('current_user') === null ? 'unknown' : localStorage.getItem('current_user'),
             timestamp: new Date(new Date().getTime()).toLocaleString('en-US'),
          });
       } catch (error) {

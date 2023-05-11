@@ -126,7 +126,7 @@ function Brand() {
                      );
                   })
                ) : (
-                  <div style={{ fontSize: '1.8rem' }}>Không có sản phẩm</div>
+                  <></>
                )}
             </div>
          </div>

@@ -100,8 +100,8 @@ function CartItem({ ma_sp, image, ten_sp, sl_sp, gia_sp, km, deleted, checked, u
                   className={cn('minus-product')}
                   icon={faMinus}
                   onClick={() => {
-                     if (amount === 0) {
-                        toast.warn('Không thể giảm dưới 0!', { position: 'top-center' });
+                     if (amount === 1) {
+                        toast.warn('Không thể giảm thêm!', { position: 'top-center' });
                         return;
                      } else {
                         setAmount(amount - 1);

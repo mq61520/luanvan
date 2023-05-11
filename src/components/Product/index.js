@@ -17,7 +17,7 @@ function Product({ ma_sp, img, name, price, km }) {
       try {
          await axios.post('http://localhost:4000/recombee/add_detail_view', {
             itemId: ma_sp,
-            userId: localStorage.getItem('user_name'),
+            userId: localStorage.getItem('current_user'),
             timestamp: new Date(new Date().getTime()).toLocaleString('en-US'),
          });
       } catch (error) {

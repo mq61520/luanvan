@@ -75,7 +75,7 @@ function Products() {
                      border
                      thinfont
                      onClick={() => {
-                        window.location.pathname = '/products/kinh-nam';
+                        window.location.pathname = '/products/Kính nam';
                      }}
                   >
                      Kính nam
@@ -86,7 +86,7 @@ function Products() {
                      border
                      thinfont
                      onClick={() => {
-                        window.location.pathname = '/products/kinh-nu';
+                        window.location.pathname = '/products/Kính nữ';
                      }}
                   >
                      Kính nữ
@@ -97,7 +97,7 @@ function Products() {
                      border
                      thinfont
                      onClick={() => {
-                        window.location.pathname = '/products/unisex';
+                        window.location.pathname = '/products/Kính unisex';
                      }}
                   >
                      Kính unisex
@@ -108,7 +108,7 @@ function Products() {
                      border
                      thinfont
                      onClick={() => {
-                        window.location.pathname = '/products/tre-em';
+                        window.location.pathname = '/products/Kính trẻ em';
                      }}
                   >
                      Kính trẻ em
@@ -132,7 +132,7 @@ function Products() {
                      );
                   })
                ) : (
-                  <div style={{ fontSize: '1.8rem' }}>Không có sản phẩm</div>
+                  <></>
                )}
             </div>
          </div>

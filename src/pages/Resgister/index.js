@@ -26,7 +26,13 @@ function Resgister() {
 
       if (repwd !== pwd) {
          // setErrMsg('Password not match');
-         toast.warn('Password not match', { position: 'top-center' });
+         toast.warn('Mật khẩu không khớp', { position: 'top-center' });
+         return;
+      }
+
+      if (pwd.length <= 8) {
+         // setErrMsg('Password not match');
+         toast.warn('Mật khẩu phải dài hơn 8 ký tự', { position: 'top-center' });
          return;
       }
 
@@ -38,7 +44,7 @@ function Resgister() {
          });
 
          if (response.data === 'Success') {
-            toast.success('Register successful!', { position: 'top-center' });
+            toast.success('Đăng ký thành công', { position: 'top-center' });
             // setErrMsg('Register successful');
             setUserName('');
             setLoginName('');
@@ -46,10 +52,10 @@ function Resgister() {
             setRePwd('');
          } else if (response.data === 'Username available') {
             // setErrMsg('Username available');
-            toast.warn('Username available', { position: 'top-center' });
+            toast.warn('Tên đăng nhập không khả dụng', { position: 'top-center' });
          } else {
             // setErrMsg('Register failure');
-            toast.warn('Register failure', { position: 'top-center' });
+            toast.warn('Đăng ký không thành công', { position: 'top-center' });
          }
       } catch (err) {
          console.log(err);
@@ -72,14 +78,14 @@ function Resgister() {
                   )} */}
 
                   <div className={cn('title')}>
-                     <span>Resgister</span>
+                     <span>Đăng ký</span>
                   </div>
 
                   <div className={cn('form')}>
                      <form onSubmit={handlerRegister}>
                         <div className={cn('input-field')}>
                            <div className={cn('input-field-item')}>
-                              <label className={cn('label')}>User name</label>
+                              <label className={cn('label')}>Tên người dùng</label>
                               <input
                                  className={cn('input-txt')}
                                  onChange={(e) => setUserName(e.target.value)}
@@ -89,7 +95,7 @@ function Resgister() {
                            </div>
 
                            <div className={cn('input-field-item')}>
-                              <label className={cn('label')}>Login name</label>
+                              <label className={cn('label')}>Tên đăng nhập</label>
                               <input
                                  className={cn('input-txt')}
                                  onChange={(e) => setLoginName(e.target.value)}
@@ -99,7 +105,7 @@ function Resgister() {
                            </div>
 
                            <div className={cn('input-field-item')}>
-                              <label className={cn('label')}>Password</label>
+                              <label className={cn('label')}>Mật khẩu đăng nhập</label>
                               <input
                                  className={cn('input-txt')}
                                  type="password"
@@ -110,7 +116,7 @@ function Resgister() {
                            </div>
 
                            <div className={cn('input-field-item')}>
-                              <label className={cn('label')}>Rewrite-password</label>
+                              <label className={cn('label')}>Nhập lại mật khẩu</label>
                               <input
                                  className={cn('input-txt')}
                                  type="password"
@@ -122,15 +128,20 @@ function Resgister() {
                         </div>
 
                         <div className={cn('actions')}>
-                           <Button border>Resgister</Button>
+                           <Button border>Đăng ký</Button>
                         </div>
                      </form>
 
                      <div className={cn('to-sign-in')}>
-                        <span>or</span>
+                        <div>
+                           <Button to={'/'} onlytext>
+                              Trang chủ
+                           </Button>
+                        </div>
+                        <span>|</span>
                         <div>
                            <Button to={'/login'} onlytext>
-                              Sign in
+                              Đăng nhập
                            </Button>
                         </div>
                      </div>

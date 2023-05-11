@@ -86,7 +86,7 @@ function Login() {
                )} */}
 
                <div className={cn('title')}>
-                  <span>Login</span>
+                  <span>Đăng nhập</span>
                </div>
 
                <div className={cn('form')}>
@@ -98,7 +98,7 @@ function Login() {
                               <input
                                  ref={loginNameRef}
                                  className={cn('input-txt')}
-                                 placeholder="Login name"
+                                 placeholder="Tên đăng nhập"
                                  onChange={(e) => setLoginName(e.target.value)}
                                  value={loginName}
                               />
@@ -109,7 +109,7 @@ function Login() {
                               <input
                                  className={cn('input-txt')}
                                  type={showPwd}
-                                 placeholder="Password"
+                                 placeholder="Mật khẩu"
                                  onChange={(e) => setPwd(e.target.value)}
                                  value={pwd}
                               />
@@ -129,16 +129,21 @@ function Login() {
                         </div> */}
 
                         <div className={cn('actions')}>
-                           <Button border>Sign in</Button>
+                           <Button border>Đăng nhập</Button>
                         </div>
                      </form>
                   </section>
 
                   <div className={cn('to-sign-up')}>
-                     <span>or</span>
+                     <div>
+                        <Button to={'/'} onlytext>
+                           Trang chủ
+                        </Button>
+                     </div>
+                     <span>|</span>
                      <div>
                         <Button to={'/register'} onlytext>
-                           Sign up
+                           Đăng ký
                         </Button>
                      </div>
                   </div>

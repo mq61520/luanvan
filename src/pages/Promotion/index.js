@@ -85,7 +85,7 @@ function Promotion() {
                            </Button>
                         </div> */}
 
-                        <h4 className={cn('title-form')}>Thêm khuyễn mãi</h4>
+                        <h4 className={cn('title-form')}>Thêm khuyến mại</h4>
                      </div>
 
                      <div className={cn('promotion-modal-body')}>
@@ -159,7 +159,7 @@ function Promotion() {
                   <h4 className={cn('value')}>Giá trị</h4>
                   <h4 className={cn('date-start')}>Ngày bắt đầu</h4>
                   <h4 className={cn('date-end')}>Ngày kết thúc</h4>
-                  <h4 className={cn('aplly-for')}>Áp dụng cho</h4>
+                  {/* <h4 className={cn('aplly-for')}>Áp dụng cho</h4> */}
                   <h4 className={cn('operation')}>Thao tác</h4>
                </div>
 
@@ -177,7 +177,7 @@ function Promotion() {
 
                               <h4 className={cn('promotion-date-end')}>{promotion.ngayketthuc.substring(0, 10)}</h4>
 
-                              <div className={cn('promotion-list-product')}>
+                              {/* <div className={cn('promotion-list-product')}>
                                  <div className={cn('promotion-operation-btn')}>
                                     <Button onlytext onClick={handleOpenListProduct}>
                                        <FontAwesomeIcon icon={faList} />
@@ -259,7 +259,7 @@ function Promotion() {
                                        </div>
                                     </div>
                                  </ReactModal>
-                              </div>
+                              </div> */}
 
                               <div className={cn('promotion-operation')}>
                                  <div className={cn('promotion-operation-btn')}>

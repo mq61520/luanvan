@@ -77,7 +77,7 @@ function Header() {
                                     onlytext
                                     thinfont
                                     onClick={() => {
-                                       window.open('http://localhost:3000/products/kinh-nam', '_self');
+                                       window.open('http://localhost:3000/products/Kính nam', '_self');
                                     }}
                                  >
                                     Kính nam
@@ -88,7 +88,7 @@ function Header() {
                                     onlytext
                                     thinfont
                                     onClick={() => {
-                                       window.open('http://localhost:3000/products/kinh-nu', '_self');
+                                       window.open('http://localhost:3000/products/Kính nữ', '_self');
                                     }}
                                  >
                                     Kính nữ
@@ -99,7 +99,7 @@ function Header() {
                                     onlytext
                                     thinfont
                                     onClick={() => {
-                                       window.open('http://localhost:3000/products/unisex', '_self');
+                                       window.open('http://localhost:3000/products/Kính unisex', '_self');
                                     }}
                                  >
                                     Unisex
@@ -110,7 +110,7 @@ function Header() {
                                     onlytext
                                     thinfont
                                     onClick={() => {
-                                       window.open('http://localhost:3000/products/kinh-tre-em', '_self');
+                                       window.open('http://localhost:3000/products/Kính trẻ em', '_self');
                                     }}
                                  >
                                     Trẻ em

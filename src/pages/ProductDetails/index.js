@@ -63,35 +63,39 @@ function ProductDetails() {
    };
 
    const handleAddCart = async () => {
-      try {
-         const add_cart_response = await axios.post('http://localhost:4000/cart', {
-            user_id: localStorage.getItem('current_user'),
-            ma_sp: productInfo.sp_ma,
-            sl_sp: amount,
-         });
+      if (!localStorage.getItem('current_user')) {
+         toast.warn('Bạn phải đăng nhập!', { position: 'top-center' });
+      } else {
+         try {
+            const add_cart_response = await axios.post('http://localhost:4000/cart', {
+               user_id: localStorage.getItem('current_user'),
+               ma_sp: productInfo.sp_ma,
+               sl_sp: amount,
+            });
 
-         const update_product_amount_response = await axios.post('http://localhost:4000/product_update_amount', {
-            ma_sp: productInfo.sp_ma,
-            sl: productInfo.sp_tonkho - amount,
-         });
+            const update_product_amount_response = await axios.post('http://localhost:4000/product_update_amount', {
+               ma_sp: productInfo.sp_ma,
+               sl: productInfo.sp_tonkho - amount,
+            });
 
-         console.log(add_cart_response.data.status, add_cart_response.data.type);
+            console.log(add_cart_response.data.status, add_cart_response.data.type);
 
-         if (
-            add_cart_response.data.status === 'Add success' &&
-            update_product_amount_response.data === 'UpdateAmountSuccess'
-         ) {
-            if (add_cart_response.data.type === 'New') {
-               setCartAmount({ ...cartAmount, cartCount: cartAmount.cartCount + 1 });
-            } else if (add_cart_response.data.type === 'Update') {
+            if (
+               add_cart_response.data.status === 'Add success' &&
+               update_product_amount_response.data === 'UpdateAmountSuccess'
+            ) {
+               if (add_cart_response.data.type === 'New') {
+                  setCartAmount({ ...cartAmount, cartCount: cartAmount.cartCount + 1 });
+               } else if (add_cart_response.data.type === 'Update') {
+               }
+
+               toast.success('Thêm thành công', { position: 'top-center' });
+            } else {
+               console.log('Them khong thanh cong');
             }
-
-            toast.success('Thêm thành công', { position: 'top-center' });
-         } else {
-            console.log('Them khong thanh cong');
+         } catch (error) {
+            console.log(error);
          }
-      } catch (error) {
-         console.log(error);
       }
    };
 
@@ -155,7 +159,7 @@ function ProductDetails() {
       try {
          const recomms_res = await axios.post('http://localhost:4000/recombee/get_items_for_item', {
             itemId: ma_sp,
-            userId: localStorage.getItem('user_name') === null ? 'unknown' : localStorage.getItem('user_name'),
+            userId: localStorage.getItem('current_user') === null ? 'unknown' : localStorage.getItem('current_user'),
          });
          // console.log(recomms_res);
 
@@ -418,9 +422,15 @@ function ProductDetails() {
                      </div>
 
                      <div className={cn('buy-now-btn')}>
-                        <Button borderfill thinfont to={'/pay'} onClick={handleOrderNow}>
-                           Mua ngay
-                        </Button>
+                        {localStorage.getItem('current_user') ? (
+                           <Button borderfill thinfont to={'/pay'} onClick={handleOrderNow}>
+                              Mua ngay
+                           </Button>
+                        ) : (
+                           <Button disable borderfill thinfont to={'/pay'} onClick={handleOrderNow}>
+                              Mua ngay
+                           </Button>
+                        )}
                      </div>
                   </div>
                </div>
